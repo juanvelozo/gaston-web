@@ -13,6 +13,10 @@ export const useLogin = () => {
   async function signIn(body: ILoginRequest) {
     await call(body);
     const token = data?.access_token;
+    const refreshToken = data?.refresh_token;
+    if (refreshToken) {
+      localStorage.setItem("refresh_token", refreshToken);
+    }
     if (token) {
       console.log("Guardando token de acceso...");
 
@@ -21,9 +25,6 @@ export const useLogin = () => {
       console.log("Token de acceso guardado exitosamente");
 
       navigate("/");
-    } else {
-      console.log("Eliminando token de acceso...");
-      localStorage.removeItem("access_token");
     }
   }
 
