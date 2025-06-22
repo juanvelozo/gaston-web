@@ -12,8 +12,14 @@ export const useLogin = () => {
 
   async function signIn(body: ILoginRequest) {
     await call(body);
-    const token = data?.access_token;
-    const refreshToken = data?.refresh_token;
+    const token = data?.tokens.access_token;
+    const refreshToken = data?.tokens.refresh_token;
+    const userId = data?.user.id;
+
+    if (userId) {
+      localStorage.setItem("user_id", userId.toString());
+    }
+
     if (refreshToken) {
       localStorage.setItem("refresh_token", refreshToken);
     }
@@ -24,7 +30,7 @@ export const useLogin = () => {
 
       console.log("Token de acceso guardado exitosamente");
 
-      navigate("/");
+      navigate("/", { replace: true });
     }
   }
 
