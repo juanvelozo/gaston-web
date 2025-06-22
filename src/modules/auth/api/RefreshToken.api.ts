@@ -1,11 +1,11 @@
 import api from "../../../api/api";
-import { ITokens } from "../model/auth.model";
+import { IRefreshTokenResponse } from "../model/auth.controller";
 
-export async function postRefreshToken(userId: number, refreshToken: string): Promise<ITokens> {
+export async function postRefreshToken(userId: number, refreshToken: string): Promise<IRefreshTokenResponse> {
   try {
     console.log("Actualizando token...");
 
-    const response = await api.post<ITokens>("/auth/refresh", { userId, refreshToken });
+    const response = await api.post<IRefreshTokenResponse>("/auth/refresh", { userId, refreshToken });
 
     console.log("Token actualizado exitosamente");
     return response.data;

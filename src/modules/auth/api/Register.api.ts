@@ -1,12 +1,12 @@
 import api from "../../../api/api";
-import { IAuthResponse } from "../model/auth.controller";
+import { ILoginResponse } from "../model/auth.controller";
 import { IRegisterRequest } from "../model/auth.model";
 
-export async function postRegister(body: IRegisterRequest): Promise<IAuthResponse> {
+export async function postRegister(body: IRegisterRequest): Promise<ILoginResponse> {
   try {
     console.log("Registrando usuario...", { body });
 
-    const response = await api.post<IAuthResponse>("/auth/signup", body);
+    const response = await api.post<ILoginResponse>("/auth/signup", body);
 
     console.log("Usuario registrado exitosamente", { response });
     return response.data;

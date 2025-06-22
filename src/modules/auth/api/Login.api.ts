@@ -1,12 +1,12 @@
 import api from "../../../api/api";
-import { IAuthResponse } from "../model/auth.controller";
+import { ILoginResponse } from "../model/auth.controller";
 import { ILoginRequest } from "../model/auth.model";
 
-export async function postLogin(body: ILoginRequest): Promise<IAuthResponse> {
+export async function postLogin(body: ILoginRequest): Promise<ILoginResponse> {
   try {
     console.log("Iniciando sesión...");
 
-    const response = await api.post<IAuthResponse>("/auth/signin", body);
+    const response = await api.post<ILoginResponse>("/auth/signin", body);
 
     console.log("Sesión iniciada exitosamente", { response });
     return response.data;
