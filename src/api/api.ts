@@ -45,12 +45,12 @@ api.interceptors.response.use(
 
       const response = await postRefreshToken(Number(userId), refreshToken);
 
-      if (response.access_token) {
+      if (response.data.access_token) {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
 
-        const newAccessToken = response.access_token;
-        const newRefreshToken = response.refresh_token;
+        const newAccessToken = response.data.access_token;
+        const newRefreshToken = response.data.refresh_token;
 
         localStorage.setItem("refresh_token", newRefreshToken);
         localStorage.setItem("access_token", newAccessToken);
@@ -63,6 +63,8 @@ api.interceptors.response.use(
         return api(originalRequest!);
       } else {
         localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("user_id");
         console.log("No se pudo actualizar el token");
       }
     }
