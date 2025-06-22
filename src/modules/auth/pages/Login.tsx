@@ -34,6 +34,5 @@ const LoginScreen = (): React.JSX.Element => {
     </div>
   );
 };
-interface ILoginScreen {}
 
 export default LoginScreen;
