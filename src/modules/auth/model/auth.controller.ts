@@ -1,4 +1,6 @@
+import { ITokens, IUser } from "./auth.model";
+
 export interface IAuthResponse {
-  access_token: string;
-  refresh_token: string;
+  tokens: ITokens;
+  user: IUser;
 }
