@@ -11,7 +11,12 @@ export type GetAllCategoryData = ICategory[];
 /**
  * Create category
  */
-export interface ICreateCategoryDto {}
+export interface ICreateCategoryDto {
+  name: string;
+  description?: string;
+  color: string;
+  icon: string;
+}
 
 export type ICreateCategoryData = ICategory;
 
