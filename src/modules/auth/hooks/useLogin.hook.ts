@@ -19,7 +19,6 @@ export const useLogin = () => {
       const token = data?.data.tokens.access_token;
       const refreshToken = data?.data.tokens.refresh_token;
       const userId = data?.data.user.id;
-      console.log({ refreshToken });
 
       if (userId) {
         localStorage.setItem("user_id", userId.toString());
