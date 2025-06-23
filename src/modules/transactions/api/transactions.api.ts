@@ -1,5 +1,5 @@
 import api from "../../../api/api";
-import { ICreateTransactionDto, ICreateTransactionResponse, IGetAllTransactionsResponse } from "../model/transaction.controller";
+import { ICreateTransactionDto, ICreateTransactionResponse, IGetAllTransactionsResponse, IUpdateTransactionDto } from "../model/transaction.controller";
 
 export async function fetchAllTransactions() {
   try {
@@ -17,7 +17,7 @@ export async function fetchAllTransactions() {
 export async function createTransaction(body: ICreateTransactionDto) {
   try {
     console.log("Creando transaccion...");
-    const response = await api.post<ICreateTransactionResponse>("/transactions");
+    const response = await api.post<ICreateTransactionResponse>("/transactions", body);
 
     console.log("Transaccion creada exitosamente");
     return response.data;
@@ -27,10 +27,10 @@ export async function createTransaction(body: ICreateTransactionDto) {
   }
 }
 
-export async function deleteTransaction() {
+export async function deleteTransaction(id: number) {
   try {
     console.log("Eliminando transaccion...");
-    const response = await api.delete("/transactions");
+    const response = await api.delete(`/transactions/${id}`);
 
     console.log("Transaccion eliminada exitosamente");
     return response.data;
@@ -40,10 +40,10 @@ export async function deleteTransaction() {
   }
 }
 
-export async function updateTransaction() {
+export async function updateTransaction(id: number, body: IUpdateTransactionDto) {
   try {
-    console.log("Actualizando transaccion...");
-    const response = await api.put("/transactions");
+    console.log("Actualizando transaccion...", body);
+    const response = await api.patch(`/transactions/${id}`, body);
 
     console.log("Transaccion actualizada exitosamente");
     return response.data;
@@ -53,10 +53,10 @@ export async function updateTransaction() {
   }
 }
 
-export async function getTransactionById() {
+export async function getTransactionById(id: number) {
   try {
     console.log("Obteniendo transaccion...");
-    const response = await api.get("/transactions");
+    const response = await api.get(`/transactions/${id}`);
 
     console.log("Transaccion obtenida exitosamente");
     return response.data;
