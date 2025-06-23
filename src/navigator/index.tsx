@@ -12,6 +12,7 @@ import ForgotPasswordScreen from '../modules/auth/pages/ForgotPassword';
 import LoginScreen from '../modules/auth/pages/Login';
 import CreateTransationPage from '../modules/transactions/pages/CreateTransaccion';
 import TransactionDetailPage from '../modules/transactions/pages/TransactionDetail';
+import TransactionsPage from '../modules/transactions/pages';
 
 const AppRouter = () => {
   return (
@@ -29,6 +30,7 @@ const AppRouter = () => {
           <Route path="/" element={<Dashboard />} />
 
           {/* transactions */}
+          <Route path="/transactions" element={<TransactionsPage />} />
           <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           <Route path="/transactions/create" element={<CreateTransationPage />} />
         </Route>
