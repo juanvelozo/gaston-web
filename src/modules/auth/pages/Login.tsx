@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin.hook";
 import { ILoginRequest } from "../model/auth.model";
+import { Link } from "react-router-dom";
 
 const LoginScreen = (): React.JSX.Element => {
   const { signIn } = useLogin();
@@ -31,6 +32,8 @@ const LoginScreen = (): React.JSX.Element => {
         <br />
         <button type="submit">Iniciar sesión</button>
       </form>
+      <br />
+      <Link to="/register">Registrarme</Link>
     </div>
   );
 };
