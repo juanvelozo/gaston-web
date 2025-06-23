@@ -1,18 +1,16 @@
-import { useState } from "react";
-import { useTransactions } from "../hooks/useTransactions.hook";
-import { ICreateTransactionDto } from "../model/transaction.controller";
-import { TransactionType } from "../model/transactions.model";
+import { useState } from 'react';
+import { useTransactions } from '../hooks/useTransactions.hook';
+import { ICreateTransactionDto } from '../model/transaction.controller';
+import { TransactionType } from '../model/transactions.model';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
-    type: "INCOME",
+    type: 'INCOME',
     amount: 0,
-    title: "",
-    description: "",
+    title: '',
+    description: '',
     categoryId: 0,
   });
-
-  console.log({ formData });
 
   const { crear } = useTransactions();
 
@@ -28,7 +26,13 @@ const CreateTransationPage = (): React.JSX.Element => {
         }}
       >
         <label>Tipo:</label>
-        <select id="type" name="type" required value={formData.type} onChange={(e) => setFormData({ ...formData, type: e.target.value as TransactionType })}>
+        <select
+          id="type"
+          name="type"
+          required
+          value={formData.type}
+          onChange={(e) => setFormData({ ...formData, type: e.target.value as TransactionType })}
+        >
           <option value="INCOME">Ingreso</option>
           <option value="EXPENSE">Gasto</option>
           <option value="SAVING">Ahorro</option>
@@ -48,7 +52,14 @@ const CreateTransationPage = (): React.JSX.Element => {
         <br />
 
         <label>Título:</label>
-        <input type="text" id="title" name="title" required value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        />
         <br />
 
         <label>Descripción (opcional):</label>
