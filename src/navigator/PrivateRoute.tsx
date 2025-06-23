@@ -1,18 +1,17 @@
 // src/navigator/PrivateRoute.tsx
-import { Navigate, Outlet, useNavigationType } from 'react-router-dom';
-import { useGoBack } from '../hooks/useGoBack';
+import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 
 const PrivateRoute = () => {
   const token = localStorage.getItem('access_token');
-  const navigationType = useNavigationType();
-  const { goBack } = useGoBack();
-
-  // PUSH y REPLACE indican que hay una navegación previa posible
-  const canGoBack = navigationType === 'PUSH' || navigationType === 'REPLACE';
-
+  const navigate = useNavigate();
   return token ? (
     <header>
-      {canGoBack && <button onClick={() => goBack(1)}>Atrás</button>}
+      {/* {canGoBack && <button onClick={() => goBack(1)}>Atrás</button>} */}
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        <button onClick={() => navigate('/')}>Home</button>
+        <button onClick={() => navigate('/transactions')}>Transacciones</button>
+        <button onClick={() => navigate('/category')}>Categorías</button>
+      </div>
       <Outlet />
     </header>
   ) : (
