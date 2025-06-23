@@ -13,7 +13,7 @@ const PrivateRoute = () => {
       <div style={{ display: 'flex', gap: '1rem' }}>
         <button onClick={() => navigate('/')}>Home</button>
         <button onClick={() => navigate('/transactions')}>Transacciones</button>
-        <button onClick={() => navigate('/category')}>Categorías</button>
+        <button onClick={() => navigate('/categories')}>Categorías</button>
         <button onClick={() => cerrarSesion()}>Cerrar sesión</button>
       </div>
       <Outlet />
