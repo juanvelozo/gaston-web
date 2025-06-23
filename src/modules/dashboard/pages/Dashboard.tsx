@@ -57,6 +57,7 @@ const DashboardPages = (): React.JSX.Element => {
               </div>
             ))}
           </div>
+          <Link to="/transactions">Ver todas</Link>
         </div>
       </div>
     </div>
