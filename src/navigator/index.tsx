@@ -10,6 +10,7 @@ import Dashboard from "../modules/dashboard/pages/Dashboard";
 import RegisterScreen from "../modules/auth/pages/Register";
 import ForgotPasswordScreen from "../modules/auth/pages/ForgotPassword";
 import LoginScreen from "../modules/auth/pages/Login";
+import CreateTransationPage from "../modules/transactions/pages/CreateTransaccion";
 
 const AppRouter = () => {
   return (
@@ -25,7 +26,7 @@ const AppRouter = () => {
         {/* Rutas protegidas */}
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
-          {/* Aquí podés agregar más rutas privadas */}
+          <Route path="/transactions/create" element={<CreateTransationPage />} />
         </Route>
 
         {/* Ruta 404 opcional */}
