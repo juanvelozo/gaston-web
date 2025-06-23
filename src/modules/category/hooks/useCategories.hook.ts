@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useEndpoint } from '../../../hooks/useEndpoint';
 import {
   createCategory,
@@ -9,6 +10,7 @@ import {
 import { ICreateCategoryDto, IUpdateCategoryDto } from '../model/category.controller';
 
 export const useCategories = () => {
+  const navigate = useNavigate();
   const fetchAll = useEndpoint({ endpoint: fetchAllCategories, immediate: true });
   const create = useEndpoint({ endpoint: createCategory });
   const update = useEndpoint({ endpoint: updateCategory });
@@ -16,10 +18,12 @@ export const useCategories = () => {
   const search = useEndpoint({ endpoint: getCategoryById });
 
   async function crear(arg: ICreateCategoryDto) {
-    await create.call(arg).then(() => fetchAll.refetch());
+    await create.call(arg).then(() => {
+      navigate('/categories', { replace: true });
+    });
   }
   async function editar(id: number, arg: IUpdateCategoryDto) {
-    await update.call(id, arg).then(() => fetchAll.refetch());
+    await update.call(id, arg);
   }
   async function borrar(id: number) {
     await eliminate.call(id).then(() => fetchAll.refetch());
