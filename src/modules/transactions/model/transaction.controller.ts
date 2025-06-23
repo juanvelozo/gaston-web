@@ -1,5 +1,5 @@
-import { IBaseResponse } from "../../../types/proyect.model";
-import { ITransaction, TransactionType } from "./transactions.model";
+import { IBaseResponse } from '../../../types/proyect.model';
+import { ITransaction, TransactionType } from './transactions.model';
 
 export type IGetAllTransactionsResponse = IBaseResponse<GetAllTransactionsData>;
 
@@ -18,3 +18,7 @@ export interface IUpdateTransactionDto extends Partial<ICreateTransactionDto> {}
 export type CreateTransactionData = ITransaction;
 
 export type ICreateTransactionResponse = IBaseResponse<CreateTransactionData>;
+
+export type IDeleteTransactionResponse = IBaseResponse<null>;
+
+export type IGetTransactionResponse = IBaseResponse<ITransaction>;
