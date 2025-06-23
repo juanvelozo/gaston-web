@@ -5,3 +5,9 @@ export interface IBaseResponse<T> {
   status: number;
   data: T;
 }
+
+export interface ICustomError {
+  message: string | string[];
+  error: string | string[];
+  statusCode: number;
+}
