@@ -11,6 +11,7 @@ import RegisterScreen from "../modules/auth/pages/Register";
 import ForgotPasswordScreen from "../modules/auth/pages/ForgotPassword";
 import LoginScreen from "../modules/auth/pages/Login";
 import CreateTransationPage from "../modules/transactions/pages/CreateTransaccion";
+import TransactionDetailPage from "../modules/transactions/pages/TransactionDetail";
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,9 @@ const AppRouter = () => {
         {/* Rutas protegidas */}
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
+
+          {/* transactions */}
+          <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           <Route path="/transactions/create" element={<CreateTransationPage />} />
         </Route>
 
