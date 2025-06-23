@@ -8,7 +8,7 @@ const ProfileChangePasswordPage = (): React.JSX.Element => {
     newPassword: '',
   });
 
-  const { cambiarContraseña, errorAlCambiarContraseña } = useProfile();
+  const { cambiarContraseña } = useProfile();
   return (
     <form
       onSubmit={(e) => {
@@ -16,7 +16,6 @@ const ProfileChangePasswordPage = (): React.JSX.Element => {
         cambiarContraseña(formData);
       }}
     >
-      {errorAlCambiarContraseña && <p>{errorAlCambiarContraseña}</p>}
       <label>
         Current Password:
         <input
