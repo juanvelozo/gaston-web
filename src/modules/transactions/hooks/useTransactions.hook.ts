@@ -1,21 +1,31 @@
+import { useNavigate } from "react-router-dom";
 import { useEndpoint } from "../../../hooks/useEndpoint";
 import { createTransaction, deleteTransaction, fetchAllTransactions, getTransactionById, updateTransaction } from "../api/transactions.api";
+import { ICreateTransactionDto, IUpdateTransactionDto } from "../model/transaction.controller";
 
 export const useTransactions = () => {
+  const navigate = useNavigate();
   const allTransactions = useEndpoint({ endpoint: fetchAllTransactions, immediate: true });
   const create = useEndpoint({ endpoint: createTransaction });
-
   const update = useEndpoint({ endpoint: updateTransaction });
-
   const search = useEndpoint({ endpoint: getTransactionById });
-
   const eliminate = useEndpoint({ endpoint: deleteTransaction });
+
+  async function crear(transaction: ICreateTransactionDto) {
+    await create.call(transaction).then(() => navigate("/", { replace: true }));
+  }
+  async function editar(id: number, transaction: IUpdateTransactionDto) {
+    await update.call(id, transaction).then(() => navigate("/", { replace: true }));
+  }
+  async function borrar(id: number) {
+    await eliminate.call(id).then(() => navigate("/", { replace: true }));
+  }
 
   return {
     allTransactions,
-    create,
-    update,
+    crear,
+    editar,
     search,
-    eliminate,
+    borrar,
   };
 };
