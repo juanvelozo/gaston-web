@@ -13,6 +13,9 @@ import LoginScreen from '../modules/auth/pages/Login';
 import CreateTransationPage from '../modules/transactions/pages/CreateTransaccion';
 import TransactionDetailPage from '../modules/transactions/pages/TransactionDetail';
 import TransactionsPage from '../modules/transactions/pages';
+import CategoriesPage from '../modules/category/pages';
+import CategoryDetailPage from '../modules/category/pages/CategoryDetail';
+import CreateCategoryPage from '../modules/category/pages/CreateCategory';
 
 const AppRouter = () => {
   return (
@@ -33,6 +36,11 @@ const AppRouter = () => {
           <Route path="/transactions" element={<TransactionsPage />} />
           <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           <Route path="/transactions/create" element={<CreateTransationPage />} />
+
+          {/* categories */}
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/categories/:id" element={<CategoryDetailPage />} />
+          <Route path="/categories/create" element={<CreateCategoryPage />} />
         </Route>
 
         {/* Ruta 404 opcional */}
