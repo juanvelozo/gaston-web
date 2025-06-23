@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
 import { TransactionType } from '../model/transactions.model';
+import { useCategories } from '../../category/hooks/useCategories.hook';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
@@ -9,9 +10,10 @@ const CreateTransationPage = (): React.JSX.Element => {
     amount: 0,
     title: '',
     description: '',
-    categoryId: 0,
+    categoryId: 1,
   });
 
+  const { fetchAll: allCategories } = useCategories();
   const { crear } = useTransactions();
 
   return (
@@ -73,14 +75,20 @@ const CreateTransationPage = (): React.JSX.Element => {
         <br />
 
         <label>Categoría:</label>
-        <input
-          type="number"
+        <select
           id="categoryId"
           name="categoryId"
           required
           value={formData.categoryId}
-          onChange={(e) => setFormData({ ...formData, categoryId: parseInt(e.target.value, 10) })}
-        />
+          defaultValue={allCategories.data?.data[0].id}
+          onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
+        >
+          {allCategories.data?.data.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
         <br />
 
         <button type="submit">Crear Transacción</button>
