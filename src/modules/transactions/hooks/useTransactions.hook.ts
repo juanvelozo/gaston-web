@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEndpoint } from "../../../hooks/useEndpoint";
 import { createTransaction, deleteTransaction, fetchAllTransactions, getTransactionById, updateTransaction } from "../api/transactions.api";
 import { ICreateTransactionDto, IUpdateTransactionDto } from "../model/transaction.controller";
 
 export const useTransactions = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const allTransactions = useEndpoint({ endpoint: fetchAllTransactions, immediate: true });
   const create = useEndpoint({ endpoint: createTransaction });
   const update = useEndpoint({ endpoint: updateTransaction });
@@ -18,7 +19,12 @@ export const useTransactions = () => {
     await update.call(id, transaction).then(() => navigate("/", { replace: true }));
   }
   async function borrar(id: number) {
-    await eliminate.call(id).then(() => navigate("/", { replace: true }));
+    await eliminate.call(id).then(async () => {
+      if (pathname !== "/") {
+        navigate("/", { replace: true });
+      }
+      await allTransactions.refetch();
+    });
   }
 
   return {
