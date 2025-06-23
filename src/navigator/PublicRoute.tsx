@@ -1,7 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from 'react-router-dom';
 
 const PublicRoute = () => {
-  const token = localStorage.getItem("access_token");
+  const token = localStorage.getItem('access_token');
 
   return token ? <Navigate to="/" /> : <Outlet />;
 };

@@ -1,17 +1,17 @@
 // src/navigator/index.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
-import PublicRoute from "./PublicRoute";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 // Auth pages
 
 // Página protegida (ejemplo)
-import Dashboard from "../modules/dashboard/pages/Dashboard";
-import RegisterScreen from "../modules/auth/pages/Register";
-import ForgotPasswordScreen from "../modules/auth/pages/ForgotPassword";
-import LoginScreen from "../modules/auth/pages/Login";
-import CreateTransationPage from "../modules/transactions/pages/CreateTransaccion";
-import TransactionDetailPage from "../modules/transactions/pages/TransactionDetail";
+import Dashboard from '../modules/dashboard/pages/Dashboard';
+import RegisterScreen from '../modules/auth/pages/Register';
+import ForgotPasswordScreen from '../modules/auth/pages/ForgotPassword';
+import LoginScreen from '../modules/auth/pages/Login';
+import CreateTransationPage from '../modules/transactions/pages/CreateTransaccion';
+import TransactionDetailPage from '../modules/transactions/pages/TransactionDetail';
 
 const AppRouter = () => {
   return (
