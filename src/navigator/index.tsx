@@ -16,6 +16,9 @@ import TransactionsPage from '../modules/transactions/pages';
 import CategoriesPage from '../modules/category/pages';
 import CategoryDetailPage from '../modules/category/pages/CategoryDetail';
 import CreateCategoryPage from '../modules/category/pages/CreateCategory';
+import ProfilePage from '../modules/profile/pages';
+import EditProfilePage from '../modules/profile/pages/EditProfile';
+import ProfileChangePasswordPage from '../modules/profile/pages/ChangePassword';
 
 const AppRouter = () => {
   return (
@@ -41,6 +44,11 @@ const AppRouter = () => {
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/categories/:id" element={<CategoryDetailPage />} />
           <Route path="/categories/create" element={<CreateCategoryPage />} />
+
+          {/* profile */}
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/edit" element={<EditProfilePage />} />
+          <Route path="/profile/change-password" element={<ProfileChangePasswordPage />} />
         </Route>
 
         {/* Ruta 404 opcional */}
