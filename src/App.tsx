@@ -7,10 +7,10 @@ function App() {
 export default App;
 
 /**
- * - Consumir servicio de Resumen
- * - Probar lógica de refresh token
- * - Consumir crud de movimiento
- * - Consumir crud de categoria
+ * - Consumir servicio de Resumen✅
+ * - Probar lógica de refresh token✅
+ * - Consumir crud de movimiento✅
+ * - Consumir crud de categoria✅
  * - Integrar endpoints de perfil
  * - Agregar assets para foto de perfil de usuario (Tal vez hacerla con IA?)
  * - Integrar endpoints de cambiar contraseña
