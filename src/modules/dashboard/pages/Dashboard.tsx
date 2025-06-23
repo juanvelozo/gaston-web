@@ -1,5 +1,4 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useLogout } from '../../auth/hooks/useLogout.hook';
 import { useTransactions } from '../../transactions/hooks/useTransactions.hook';
 import { useSummary } from '../hooks/useSummary.hook';
 import { useEffect } from 'react';
@@ -12,7 +11,6 @@ const DashboardPages = (): React.JSX.Element => {
     allTransactions: { data },
     borrar,
   } = useTransactions();
-  const { cerrarSesion } = useLogout();
 
   useEffect(() => {
     async function reloadSummary() {
@@ -24,7 +22,6 @@ const DashboardPages = (): React.JSX.Element => {
 
   return (
     <div>
-      <button onClick={() => cerrarSesion()}>Cerrar sesión</button>
       <div>
         <h2>Resumen</h2>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
