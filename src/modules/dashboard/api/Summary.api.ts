@@ -1,10 +1,11 @@
 import api from "../../../api/api";
+import { IGetSummaryResponse } from "../model/dashboard.controller";
 
-export async function getSummary(): Promise<any> {
+export async function getSummary(): Promise<IGetSummaryResponse> {
   try {
     console.log("Obteniendo resumen...");
 
-    const response = await api.get<any>("/transactions/summary");
+    const response = await api.get<IGetSummaryResponse>("/transactions/summary");
 
     console.log("Resumen obtenido.");
     return response.data;
