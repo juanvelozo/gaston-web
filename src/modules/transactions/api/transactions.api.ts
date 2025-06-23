@@ -16,7 +16,7 @@ export async function fetchAllTransactions() {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al obtener la lista de transacciones', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -29,7 +29,7 @@ export async function createTransaction(body: ICreateTransactionDto) {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al crear la transaccion', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -42,7 +42,7 @@ export async function deleteTransaction(id: number) {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al eliminar la transaccion', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -55,7 +55,7 @@ export async function updateTransaction(id: number, body: IUpdateTransactionDto)
     return response.data;
   } catch (error) {
     console.error('Hubo un error al actualizar la transaccion', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -68,6 +68,6 @@ export async function getTransactionById(id: number): Promise<IGetTransactionRes
     return response.data;
   } catch (error) {
     console.error('Hubo un error al obtener la transaccion', error);
-    Promise.reject(error);
+    throw error;
   }
 }

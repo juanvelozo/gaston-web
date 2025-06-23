@@ -17,7 +17,7 @@ export async function fetchAllCategories(): Promise<IGetAllCategoriesResponse | 
     return response.data;
   } catch (error) {
     console.error('Hubo un error al obtener la lista de categorias', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -32,7 +32,7 @@ export async function createCategory(
     return response.data;
   } catch (error) {
     console.error('Hubo un error al crear la categoria', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -45,7 +45,7 @@ export async function deleteCategory(id: number): Promise<IDeleteCategoryRespons
     return response.data;
   } catch (error) {
     console.error('Hubo un error al eliminar la categoria', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -58,7 +58,7 @@ export async function updateCategory(id: number, body: IUpdateCategoryDto) {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al actualizar la categoria', error);
-    Promise.reject(error);
+    throw error;
   }
 }
 
@@ -71,6 +71,6 @@ export async function getCategoryById(id: number): Promise<IGetCategoryResponse 
     return response.data;
   } catch (error) {
     console.error('Hubo un error al obtener la categoria', error);
-    Promise.reject(error);
+    throw error;
   }
 }
