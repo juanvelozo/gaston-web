@@ -14,6 +14,7 @@ const PrivateRoute = () => {
         <button onClick={() => navigate('/')}>Home</button>
         <button onClick={() => navigate('/transactions')}>Transacciones</button>
         <button onClick={() => navigate('/categories')}>Categorías</button>
+        <button onClick={() => navigate('/profile')}>Perfil</button>
         <button onClick={() => cerrarSesion()}>Cerrar sesión</button>
       </div>
       <Outlet />
