@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Tipo que representa una función asíncrona para llamadas a endpoints
@@ -102,9 +102,16 @@ type UseEndpointResult<T, P extends any[]> = {
  *   fetchPosts(category);
  * };
  */
-export function useEndpoint<T, P extends any[]>(options: UseEndpointOptions<T, P>): UseEndpointResult<T, P> {
+export function useEndpoint<T, P extends any[]>(
+  options: UseEndpointOptions<T, P>
+): UseEndpointResult<T, P> {
   // Desestructuración de opciones con valores por defecto
-  const { endpoint, immediate = false, immediateArgs = [] as unknown as P, initialData = null } = options;
+  const {
+    endpoint,
+    immediate = false,
+    immediateArgs = [] as unknown as P,
+    initialData = null,
+  } = options;
 
   // Estados del hook
   const [data, setData] = useState<T | null>(initialData);
@@ -158,7 +165,6 @@ export function useEndpoint<T, P extends any[]>(options: UseEndpointOptions<T, P
       call(...immediateArgs);
     }
     // El array de dependencias está vacío porque solo debe ejecutarse al montar
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Retorna todos los estados y funciones de control
