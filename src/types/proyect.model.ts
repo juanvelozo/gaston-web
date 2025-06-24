@@ -8,6 +8,6 @@ export interface IBaseResponse<T> {
 
 export interface ICustomError {
   message: string | string[];
-  error: string | string[];
+  error: string;
   statusCode: number;
 }
