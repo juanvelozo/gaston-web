@@ -12,11 +12,6 @@ export const useProfile = () => {
 
   async function cambiarContraseña(body: IUpdatePasswordDto) {
     await updatePassword.call(body).then(() => {
-      const mensajes = updatePassword.error?.response?.data.message;
-      const errores = Array.isArray(mensajes) ? mensajes : [mensajes];
-
-      console.log('errores', errores);
-
       // acá va un feedback o algo
     });
   }
@@ -26,6 +21,11 @@ export const useProfile = () => {
       // acá va un feedback o algo
     });
   }
+
+  const mensajes = updatePassword.error?.response?.data.message;
+  const errores = mensajes;
+
+  console.log('errores', errores);
 
   useEffect(() => {
     if (updatePassword.data?.status === 201 || edit.data?.status === 201) {
