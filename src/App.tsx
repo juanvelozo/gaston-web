@@ -12,11 +12,11 @@ export default App;
  * - Consumir crud de movimiento✅
  * - Consumir crud de categoria✅
  * - Integrar endpoints de perfil✅
- * - Encontrar forma mejor de controlar los errores de los servicios
+ * - Encontrar forma mejor de controlar los errores de los servicios✅
  * - Agregar assets para foto de perfil de usuario (Tal vez hacerla con IA?)
+ * - Ver cómo agregar assets a la base de datos
  * - Integrar endpoints de cambiar contraseña
  * - Hacer endpoint de recupero de contraseña
- * - Analizar si hace falta redux o seguimos con Context
  * - Buscar librería de componentes/estilos
  * - Validaciones de formularios
  * - Analizar tráfico de datos y planes de despliegue
