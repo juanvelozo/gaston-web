@@ -7,7 +7,7 @@ export interface IBaseResponse<T> {
 }
 
 export interface ICustomError {
-  message: string | string[];
+  message: string[];
   error: string;
   statusCode: number;
 }
