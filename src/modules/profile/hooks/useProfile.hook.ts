@@ -12,6 +12,11 @@ export const useProfile = () => {
 
   async function cambiarContraseña(body: IUpdatePasswordDto) {
     await updatePassword.call(body).then(() => {
+      const mensajes = updatePassword.error?.response?.data.message;
+      const errores = Array.isArray(mensajes) ? mensajes : [mensajes];
+
+      console.log('errores', errores);
+
       // acá va un feedback o algo
     });
   }
