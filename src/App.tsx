@@ -11,7 +11,8 @@ export default App;
  * - Probar lógica de refresh token✅
  * - Consumir crud de movimiento✅
  * - Consumir crud de categoria✅
- * - Integrar endpoints de perfil
+ * - Integrar endpoints de perfil✅
+ * - Encontrar forma mejor de controlar los errores de los servicios
  * - Agregar assets para foto de perfil de usuario (Tal vez hacerla con IA?)
  * - Integrar endpoints de cambiar contraseña
  * - Hacer endpoint de recupero de contraseña
