@@ -1,4 +1,6 @@
+import axios, { AxiosError } from 'axios';
 import { useState, useEffect, useCallback } from 'react';
+import { ICustomError } from '../types/proyect.model';
 
 /**
  * Tipo que representa una función asíncrona para llamadas a endpoints
@@ -51,7 +53,7 @@ type UseEndpointResult<T, P extends any[]> = {
   loading: boolean;
 
   /** Error ocurrido durante la llamada (null si no hay error) */
-  error: Error | null;
+  error: AxiosError<ICustomError> | null;
 
   /** Indica si se está realizando una recarga de datos */
   refetching: boolean;
@@ -117,7 +119,7 @@ export function useEndpoint<T, P extends any[]>(
   const [data, setData] = useState<T | null>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [refetching, setRefetching] = useState<boolean>(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<AxiosError<ICustomError> | null>(null);
 
   /**
    * Función para ejecutar la llamada al endpoint (marca loading)
@@ -131,7 +133,11 @@ export function useEndpoint<T, P extends any[]>(
         const result = await endpoint(...args);
         setData(result);
       } catch (err) {
-        setError(err instanceof Error ? err : new Error(String(err)));
+        if (axios.isAxiosError(err)) {
+          setError(err as AxiosError<ICustomError>);
+        } else {
+          setError(new AxiosError('Error desconocido'));
+        }
       } finally {
         setLoading(false);
       }
@@ -151,7 +157,11 @@ export function useEndpoint<T, P extends any[]>(
         const result = await endpoint(...args);
         setData(result);
       } catch (err) {
-        setError(err instanceof Error ? err : new Error(String(err)));
+        if (axios.isAxiosError(err)) {
+          setError(err as AxiosError<ICustomError>);
+        } else {
+          setError(new AxiosError('Error desconocido'));
+        }
       } finally {
         setRefetching(false);
       }
