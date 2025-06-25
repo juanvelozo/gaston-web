@@ -1,0 +1,37 @@
+/* Puedes importarlo en tu componente o incluirlo en un archivo global */
+.custom-button {
+  position: relative;
+  padding: 12px 24px;
+  border: none;
+  background-color: #ffdb15;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover:not(:disabled) {
+  background-color: #f0c300;
+}
+
+.custom-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button-label {
+  position: relative;
+  z-index: 2;
+}
+
+.progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
