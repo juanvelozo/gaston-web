@@ -19,6 +19,7 @@ export const useProfile = () => {
   async function editar(arg: IUpdateProfileDto) {
     await edit.call(arg).then(() => {
       // acá va un feedback o algo
+      navigate('/profile', { replace: true });
     });
   }
 
@@ -33,5 +34,12 @@ export const useProfile = () => {
     }
   }, [updatePassword.data, edit.data]);
 
-  return { profile, editar, cambiarContraseña };
+  return {
+    profile,
+    editar,
+    cambiarContraseña,
+    submittingEditar: edit.loading,
+    submittingCambiarContraseña: updatePassword.loading,
+    errores,
+  };
 };
