@@ -10,7 +10,7 @@ export interface ITransaction {
   createdAt: string;
   updatedAt: string;
   userId: number;
-  user: IUser;
+  user: Partial<IUser>;
   categoryId: number;
   category: ICategory;
 }
