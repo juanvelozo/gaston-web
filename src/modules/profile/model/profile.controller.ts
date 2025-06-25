@@ -6,7 +6,7 @@ import { IUser } from '../../auth/model/auth.model';
  */
 export type IUpdateProfileDto = {
   fullName?: string;
-  profile_photo?: string;
+  profile_photo?: string | File;
 };
 
 /**
