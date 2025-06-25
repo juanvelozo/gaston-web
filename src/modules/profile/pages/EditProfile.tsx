@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useProfile } from '../hooks/useProfile.hook';
 import { IUpdateProfileDto } from '../model/profile.controller';
+import AsyncButton from '../../../components/common/asyncButton/asyncButton.component';
 
 const EditProfilePage = (): React.JSX.Element => {
   const {
     editar,
-    submittingEditar,
-    profile: { data },
+
+    profile: { data, loading: loadingPerfil },
+    onSuccess,
   } = useProfile();
 
   const [formData, setFormData] = useState<IUpdateProfileDto>({
@@ -21,6 +23,7 @@ const EditProfilePage = (): React.JSX.Element => {
     });
   }, [data]);
 
+  if (loadingPerfil) return <span>Cargando...</span>;
   return (
     <div>
       <span>EditProfile</span>
@@ -67,9 +70,12 @@ const EditProfilePage = (): React.JSX.Element => {
           />
         </label>
         <br />
-        <button type="submit" disabled={submittingEditar}>
-          {submittingEditar ? 'Guardando...' : 'Guardar'}
-        </button>
+        <AsyncButton
+          onClick={() => editar(formData)}
+          onSuccess={onSuccess}
+          text="Guardar"
+          loadingText="Guardando..."
+        />
       </form>
     </div>
   );
