@@ -5,6 +5,7 @@ import {
   IUpdatePasswordDto,
   IUpdateProfileDto,
 } from '../model/profile.controller';
+import { comprimirArchivoImagen } from '../../../utils/comprimirImagen';
 
 export async function getProfile(): Promise<IGetProfileResponse | undefined> {
   try {
@@ -22,7 +23,23 @@ export async function getProfile(): Promise<IGetProfileResponse | undefined> {
 export async function updateProfile(body: IUpdateProfileDto) {
   try {
     console.log('Actualizando perfil...', body);
-    const response = await api.patch('/user/profile', body);
+
+    const formData = new FormData();
+
+    if (body.fullName) {
+      formData.append('fullName', body.fullName);
+    }
+
+    if (body.profile_photo instanceof File) {
+      const foto = await comprimirArchivoImagen(body.profile_photo);
+      formData.append('file', foto);
+    }
+
+    const response = await api.patch('/user/profile', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     console.log('Perfil actualizado exitosamente');
     return response.data;
