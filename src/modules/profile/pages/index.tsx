@@ -10,6 +10,14 @@ const ProfilePage = (): React.JSX.Element => {
   return (
     <div>
       <span>Profile</span>
+      {data?.data.profileImage && (
+        <img
+          src={data?.data.profileImage}
+          alt={`profile photo ${data?.data.fullName}`}
+          width={100}
+          height={100}
+        />
+      )}
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <button onClick={() => navigate('/profile/edit')}>Editar</button>
       <button onClick={() => navigate('/profile/change-password')}>Cambiar contraseña</button>
