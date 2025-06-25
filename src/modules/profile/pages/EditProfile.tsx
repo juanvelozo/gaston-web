@@ -9,7 +9,7 @@ const EditProfilePage = (): React.JSX.Element => {
   } = useProfile();
 
   const [formData, setFormData] = useState<IUpdateProfileDto>({
-    fullName: data?.data.fullName,
+    fullName: data?.data.fullName || '',
     profile_photo: data?.data.profileImage,
   });
 
