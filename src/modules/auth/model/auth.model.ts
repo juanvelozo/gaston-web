@@ -17,10 +17,7 @@ export interface ITokens {
 export interface IUser {
   id: number;
   email: string;
-  hash: string;
-  fullName: any;
+  fullName: string | null;
   profileImage: any;
   createdAt: string;
-  updatedAt: string;
-  refreshToken: string;
 }
