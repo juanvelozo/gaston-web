@@ -18,6 +18,6 @@ export interface IUser {
   id: number;
   email: string;
   fullName: string | null;
-  profileImage: any;
+  profileImage: string | null;
   createdAt: string;
 }
