@@ -3,6 +3,7 @@ import { useTransactions } from '../../transactions/hooks/useTransactions.hook';
 import { useSummary } from '../hooks/useSummary.hook';
 import { useEffect } from 'react';
 import { formatearMonto } from '../../../types/formatearMonto';
+import AnimatedOdometer from '../../../components/animated/odometer/Odometer.component';
 
 const DashboardPages = (): React.JSX.Element => {
   const navigate = useNavigate();
@@ -27,15 +28,15 @@ const DashboardPages = (): React.JSX.Element => {
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <div>
             <h2>Gastos</h2>
-            <h4>{formatearMonto(summary?.data.expense!)}</h4>
+            <AnimatedOdometer text={formatearMonto(summary?.data.expense!)} />
           </div>
           <div>
             <h2>Ingresos</h2>
-            <h4>{formatearMonto(summary?.data.income!)}</h4>
+            <AnimatedOdometer text={formatearMonto(summary?.data.income!)} />
           </div>
           <div>
             <h2>Ahorros</h2>
-            <h4>{formatearMonto(summary?.data.saving!)}</h4>
+            <AnimatedOdometer text={formatearMonto(summary?.data.saving!)} />
           </div>
         </div>
         <div>
