@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$';
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$-';
 
 function AnimatedLetter({ target }: { target: string }) {
   // Animamos un scroll vertical simulando que la letra sube hasta target

@@ -34,7 +34,18 @@ const TransactionDetailPage = (): React.JSX.Element => {
         right={
           <IconButton icon={<EditPencil />} onClick={() => navigate(`/transactions/${id}/edit`)} />
         }
-        bottom={<OdometerText text={formatearMonto(search.data?.data.amount!) ?? 'Cargando...'} />}
+        bottom={
+          <OdometerText
+            text={
+              search.loading
+                ? '00000'
+                : formatearMonto(
+                    search.data?.data.amount! ?? 0,
+                    search.data?.data.type === 'EXPENSE'
+                  )
+            }
+          />
+        }
       />
       <div className="p-4 space-y-4">
         <h2 className="text-3xl font-bold">{search.data?.data?.title}</h2>
