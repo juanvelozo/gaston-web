@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
 import { useTransactions } from '../hooks/useTransactions.hook';
-import { formatearMonto } from '../../../types/formatearMonto';
 import TransactionCard from '../components/transactionCard/transactionCard.component';
+import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
+import IconButton from '../../../components/common/iconButton/iconButton.component';
+import { Plus } from 'iconoir-react';
 
 export const TransactionsPage = (): React.JSX.Element => {
   const {
@@ -9,10 +10,13 @@ export const TransactionsPage = (): React.JSX.Element => {
   } = useTransactions();
 
   return (
-    <div>
-      <h2>Transactions</h2>
-      <Link to="/transactions/create">Agregar</Link>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <div className="bg-white dark:bg-zinc-900 dark:border-zinc-700 shadow-sm rounded-2xl space-y-2">
+      <SectionHeader
+        title="Transacciones"
+        bgColor="#3A7D44"
+        right={<IconButton icon={<Plus />} />}
+      />
+      <div className="flex flex-col gap-4 p-4">
         {data?.data.map((transaction) => (
           <TransactionCard key={transaction.id} data={transaction} />
         ))}
