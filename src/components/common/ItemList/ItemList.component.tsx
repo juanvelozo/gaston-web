@@ -13,18 +13,18 @@ const ItemList = ({
   return (
     <motion.div
       className={cn(
-        className,
-        'flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100  w-full justify-between cursor-pointer'
+        'flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100  w-full justify-between cursor-pointer',
+        className
       )}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className="flex items-center justify-center gap-3">
+      <div className="flex items-center justify-start self-start gap-3  min-w-0 flex-1">
         {icon}
-        <div>
-          <p className="text-lg font-semibold">{title}</p>
-          <p className="text-gray-600 text-sm">{label}</p>
+        <div className="self-start min-w-0 overflow-hidden">
+          <p className="text-lg font-semibold truncate text-ellipsis ">{title}</p>
+          <p className="text-gray-600 text-sm truncate text-ellipsis">{label}</p>
         </div>
       </div>
       <div className="flex items-center gap-2">

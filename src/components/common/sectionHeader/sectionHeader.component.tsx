@@ -7,11 +7,11 @@ const SectionHeader = ({
 }: ISectionHeader): React.JSX.Element => {
   return (
     <div>
-      <div className={`bg-[${bgColor}] p-6 rounded-b-3xl`}>
+      <div className={`p-6 rounded-b-3xl`} style={{ background: bgColor }}>
         <div className="flex gap-2 justify-between items-center my-4">
           {left}
-          <div className="flex gap-2 items-center">
-            <h1 className="text-3xl font-bold text-white">{title}</h1>
+          <div className="flex gap-2 items-center max-w-[70%] overflow-hidden">
+            <h1 className="text-3xl font-bold text-white truncate text-ellipsis ">{title}</h1>
           </div>
           {right}
         </div>
