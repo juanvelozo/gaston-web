@@ -30,7 +30,9 @@ const DashboardPages = (): React.JSX.Element => {
           <ResumeCard data={summary?.data} />
         </div>
         <TransactionActions />
-        <Button onClick={() => navigate('/transactions/create')}>Crear transacción</Button>
+        <Button onClick={() => navigate('/transactions/create')} variant="secondary">
+          Crear transacción
+        </Button>
         <LastTransactions />
       </div>
     </div>
