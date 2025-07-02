@@ -25,7 +25,6 @@ const TransactionDetailPage = (): React.JSX.Element => {
     fetchTransaction();
   }, []);
 
-  if (search.loading) return <span>Loading</span>;
   return (
     <div>
       <SectionHeader
@@ -35,7 +34,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
         right={
           <IconButton icon={<EditPencil />} onClick={() => navigate(`/transactions/${id}/edit`)} />
         }
-        bottom={<OdometerText text={formatearMonto(search.data?.data.amount!)} />}
+        bottom={<OdometerText text={formatearMonto(search.data?.data.amount!) ?? 'Cargando...'} />}
       />
       <div className="p-4 space-y-4">
         <h2 className="text-3xl font-bold">{search.data?.data?.title}</h2>
