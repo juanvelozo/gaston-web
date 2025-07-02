@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTransactions } from '../../transactions/hooks/useTransactions.hook';
 import { useSummary } from '../hooks/useSummary.hook';
 import { useEffect } from 'react';
 import ResumeCard from '../components/ResumeCard';
 import LastTransactions from '../components/LastTransactionsCard';
-import ButtonExamples from '../../../components/animated/button/Button.demo';
+import TransactionActions from '../components/DashboardActions';
+import { Button } from '../../../components/animated/button/Button.component';
 
 const DashboardPages = (): React.JSX.Element => {
   const { data: summary, refetch } = useSummary();
   const {
     allTransactions: { data },
   } = useTransactions();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function reloadSummary() {
@@ -21,16 +23,16 @@ const DashboardPages = (): React.JSX.Element => {
   }, [data, refetch]);
 
   return (
-    <div>
-      <div>
+    <div className="bg-white dark:bg-zinc-900 dark:border-zinc-700 shadow-sm rounded-2xl p-4 space-y-2">
+      <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Resumen</h1>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <ResumeCard data={summary?.data} />
         </div>
-        <Link to="/transactions/create">Crear transacción</Link>
+        <TransactionActions />
+        <Button onClick={() => navigate('/transactions/create')}>Crear transacción</Button>
         <LastTransactions />
       </div>
-      <ButtonExamples />
     </div>
   );
 };
