@@ -3,7 +3,7 @@ import { ICategory } from '../../category/model/category.model';
 
 export interface ITransaction {
   id: number;
-  type: string;
+  type: TransactionType;
   amount: number;
   title: string;
   description?: string;
