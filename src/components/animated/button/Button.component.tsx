@@ -17,7 +17,7 @@ const baseStyles =
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-black text-white hover:bg-zinc-800 focus:ring-black',
-  secondary: 'bg-white text-black border border-zinc-300 hover:bg-zinc-100 focus:ring-zinc-400',
+  secondary: 'bg-white text-black border border-black hover:bg-zinc-100 focus:ring-zinc-400',
   terciary: 'bg-transparent text-zinc-700 hover:bg-zinc-100 focus:ring-zinc-300',
 };
 const loadingStyles: Record<ButtonVariant, string> = {
