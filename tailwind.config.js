@@ -7,6 +7,7 @@ export default {
         brand: {
           coral: '#FE5F55',
           white: '#FFFFFF',
+          blue: '#2A324B',
           green: '#3A7D44',
           yellow: '#F2AF29',
           black: '#000000',
