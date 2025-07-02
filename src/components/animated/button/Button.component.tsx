@@ -13,7 +13,7 @@ interface ButtonProps extends HTMLMotionProps<'button'> {
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center px-4 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none  disabled:opacity-50 disabled:pointer-events-none';
+  'inline-flex items-center justify-center px-4 py-2 rounded-3xl text-sm font-medium transition-colors focus:outline-none  disabled:opacity-50 disabled:pointer-events-none';
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: 'bg-black text-white hover:bg-zinc-800 focus:ring-black',
