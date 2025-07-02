@@ -10,6 +10,7 @@ import { Button } from '../../../components/animated/button/Button.component';
 import ItemList from '../../../components/common/ItemList/ItemList.component';
 import { ITransactionCardValues } from '../components/transactionCard/transactionCard.component';
 import moment from 'moment';
+import colors from '../../../styles/colors';
 
 const TransactionDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
     <div>
       <SectionHeader
         title="Detalle"
-        bgColor="#3A7D44"
+        bgColor={colors.green}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
           <IconButton icon={<EditPencil />} onClick={() => navigate(`/transactions/${id}/edit`)} />
