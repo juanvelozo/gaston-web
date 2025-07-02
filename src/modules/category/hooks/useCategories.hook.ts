@@ -29,5 +29,13 @@ export const useCategories = () => {
     await eliminate.call(id).then(() => fetchAll.refetch());
   }
 
-  return { fetchAll, crear, editar, borrar, search };
+  const categoriasPopulares = fetchAll.data?.data
+    .map((categoria) => ({
+      ...categoria,
+      cantidadTransacciones: categoria.transactions.length,
+    }))
+    .filter((c) => c.cantidadTransacciones > 0)
+    .sort((a, b) => b.cantidadTransacciones - a.cantidadTransacciones);
+
+  return { fetchAll, crear, editar, borrar, search, categoriasPopulares };
 };
