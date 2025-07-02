@@ -1,26 +1,44 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCategories } from '../hooks/useCategories.hook';
+import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
+import colors from '../../../styles/colors';
+import IconButton from '../../../components/common/iconButton/iconButton.component';
+import { Plus } from 'iconoir-react';
+import CategoryCard from '../components/categoryCard.component';
+import { Button } from '../../../components/animated/button/Button.component';
 
 const CategoriesPage = (): React.JSX.Element => {
   const {
     fetchAll: { data },
+    categoriasPopulares,
   } = useCategories();
+  const navigate = useNavigate();
+
   return (
     <div>
-      <h2>Categorías</h2>
-      <Link to="/categories/create">Agregar</Link>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <SectionHeader
+        title="Categorias"
+        bgColor={colors.coral}
+        right={<IconButton icon={<Plus />} onClick={() => navigate('/categories/create')} />}
+      />
+      <div className="p-4 space-y-4">
+        <h2 className="text-3xl font-bold">Las más populares</h2>
+        <div className="flex flex-wrap gap-2 ">
+          {categoriasPopulares?.map((category) => (
+            <Button
+              className="w-min truncate"
+              style={{ backgroundColor: category.color }}
+              onClick={() => navigate(`/categories/${category.id}`)}
+            >
+              {category.icon + ' ' + category.name} ({category?.transactions.length})
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-col gap-4 p-4">
+        <h2 className="text-3xl font-bold">Todas las categorías</h2>
         {data?.data.map((category) => (
-          <Link
-            to={`/categories/${category.id}`}
-            key={category.id}
-            style={{ textDecoration: 'none', backgroundColor: category.color }}
-          >
-            <div style={{ display: 'flex', gap: 10, justifyContent: 'space-between' }}>
-              <h4 style={{ color: '#fff' }}>{category.icon + ' ' + category.name}</h4>
-              <h4>({category?.transactions?.length})</h4>
-            </div>
-          </Link>
+          <CategoryCard key={category.id} data={category} />
         ))}
       </div>
     </div>
