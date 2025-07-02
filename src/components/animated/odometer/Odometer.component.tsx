@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$';
 
 function AnimatedLetter({ target }: { target: string }) {
   // Animamos un scroll vertical simulando que la letra sube hasta target
@@ -14,6 +14,7 @@ function AnimatedLetter({ target }: { target: string }) {
         height: 30,
         width: 20,
         verticalAlign: 'bottom',
+        userSelect: 'none',
       }}
     >
       <motion.div
@@ -21,7 +22,16 @@ function AnimatedLetter({ target }: { target: string }) {
         transition={{ type: 'spring', stiffness: 100, damping: 20, bounce: 2, duration: 0.5 }}
       >
         {letters.split('').map((l) => (
-          <div key={l} style={{ height: 30, lineHeight: '30px', textAlign: 'center' }}>
+          <div
+            key={l}
+            className="drop-shadow-lg"
+            style={{
+              height: 30,
+              lineHeight: '30px',
+              textAlign: 'center',
+              fontFamily: 'monospace',
+            }}
+          >
             {l}
           </div>
         ))}
@@ -32,7 +42,7 @@ function AnimatedLetter({ target }: { target: string }) {
 
 export default function OdometerText({ text }: { text: string }) {
   return (
-    <div className="text-3xl flex items-center">
+    <div className="text-3xl flex items-center text-white">
       {text
         .toUpperCase()
         .split('')
