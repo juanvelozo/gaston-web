@@ -36,8 +36,11 @@ export const useTransactions = () => {
     });
   }
 
+  const lastTransactions = allTransactions.data?.data.slice(0, 3);
+
   return {
     allTransactions,
+    lastTransactions,
     crear,
     editar,
     search,
