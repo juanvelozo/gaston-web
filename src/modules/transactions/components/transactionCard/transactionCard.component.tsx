@@ -3,22 +3,24 @@ import { formatearMonto } from '../../../../types/formatearMonto';
 import { ITransaction, TransactionType } from '../../model/transactions.model';
 import { ReactNode } from 'react';
 import { ArrowDownRightCircle, ArrowUpRightCircle, PiggyBank } from 'iconoir-react';
-
+import { motion } from 'framer-motion';
 const TransactionCard = ({ data }: ITransactionCard): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div
+    <motion.div
       key={data.id}
-      className="flex items-center gap-4 p-4 rounded-2xl bg-gray-400 hover:bg-slate-400 shadow-md w-full justify-between cursor-pointer"
+      className="flex items-center gap-4 p-4 rounded-2xl bg-brand-green hover:bg-opacity-90 w-full justify-between cursor-pointer"
       onClick={() => navigate(`/transactions/${data.id}`)}
+      whileTap={{ scale: 0.97 }}
+      whileHover={{ scale: 1.05 }}
     >
       <div className="flex items-center justify-center gap-3">
         <span>{ITransactionCardValues[data.type].icon}</span>
-        <p>{data.title}</p>
+        <p className="text-white">{data.title}</p>
       </div>
-      <p> {formatearMonto(data.amount)}</p>
-    </div>
+      <p className="text-white"> {formatearMonto(data.amount)}</p>
+    </motion.div>
   );
 };
 interface ITransactionCard {
@@ -33,9 +35,9 @@ export type TypeConfig = {
 };
 
 const ITransactionCardValues: TypeConfig = {
-  EXPENSE: { title: 'Gasto', icon: <ArrowDownRightCircle color="red" /> },
-  INCOME: { title: 'Ingreso', icon: <ArrowUpRightCircle color="green" /> },
-  SAVING: { title: 'Ahorro', icon: <PiggyBank color="yellow" /> },
+  EXPENSE: { title: 'Gasto', icon: <ArrowDownRightCircle color="white" /> },
+  INCOME: { title: 'Ingreso', icon: <ArrowUpRightCircle color="white" /> },
+  SAVING: { title: 'Ahorro', icon: <PiggyBank color="white" /> },
 };
 
 export default TransactionCard;
