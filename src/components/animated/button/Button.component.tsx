@@ -45,7 +45,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             className={cn('h-4 w-4 rounded-full animate-spin border-2', loadingStyles[variant])}
           />
         ) : (
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center text-ellipsis truncate w-min-0">
             {iconLeft && <span>{iconLeft}</span>}
             {children}
             {iconRight && <span>{iconRight}</span>}

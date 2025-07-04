@@ -121,7 +121,7 @@ const AsyncButton: FC<AsyncButtonProps> = ({
 
   return (
     <button
-      className="custom-button"
+      className="custom-button !bg-brand-green w-full !text-white"
       onClick={handleClick}
       disabled={loading || success || disabled}
     >
