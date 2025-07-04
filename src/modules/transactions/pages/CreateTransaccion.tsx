@@ -1,8 +1,17 @@
 import { useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
-import { TransactionType } from '../model/transactions.model';
 import { useCategories } from '../../category/hooks/useCategories.hook';
+import { ArrowLeft } from 'iconoir-react';
+import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
+import colors from '../../../styles/colors';
+import IconButton from '../../../components/common/iconButton/iconButton.component';
+import Input from '../../../components/common/input/input.component';
+import AsyncButton from '../../../components/common/asyncButton/asyncButton.component';
+import TransactionTypeSelect from '../components/form/TransactionTypeSelect.component';
+import CustomSelect from '../../../components/common/select/select.component';
+import { formatearMonto } from '../../../types/formatearMonto';
+import { NumericFormat } from 'react-number-format';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
@@ -10,88 +19,72 @@ const CreateTransationPage = (): React.JSX.Element => {
     amount: 0,
     title: '',
     description: '',
-    categoryId: 1,
   });
 
   const { fetchAll: allCategories } = useCategories();
-  const { crear } = useTransactions();
+  const { crear, submitting } = useTransactions();
+
+  const listaDeCategorías: {
+    label: string;
+    value: string;
+  }[] = [
+    { label: 'Sin categoría', value: 'null' },
+    ...(allCategories?.data?.data?.map((cat) => ({
+      label: `${cat.icon} ${cat.name}`,
+      value: cat.id.toString(),
+    })) ?? []),
+  ];
+
+  console.log(formatearMonto(formData.amount));
 
   return (
-    <div>
-      <h2>Crear transacción</h2>
-      <br />
-      <form
-        id="transaction-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          crear(formData);
-        }}
-      >
-        <label>Tipo:</label>
-        <select
-          id="type"
-          name="type"
-          required
-          value={formData.type}
-          onChange={(e) => setFormData({ ...formData, type: e.target.value as TransactionType })}
-        >
-          <option value="INCOME">Ingreso</option>
-          <option value="EXPENSE">Gasto</option>
-          <option value="SAVING">Ahorro</option>
-        </select>
-        <br />
+    <div className=" bg-brand-white min-h-screen">
+      {/* Header */}
+      <SectionHeader
+        title="Nueva transacción"
+        bgColor={colors.green}
+        left={<IconButton icon={<ArrowLeft />} onClick={() => {}} />}
+      />
 
-        <label>Monto:</label>
-        <input
-          type="number"
-          id="amount"
-          name="amount"
-          step="0.01"
-          required
+      {/* Form */}
+      <form className="px-6 py-6 space-y-6">
+        <NumericFormat
           value={formData.amount}
-          onChange={(e) => setFormData({ ...formData, amount: parseFloat(e.target.value) })}
+          thousandSeparator="."
+          decimalSeparator=","
+          prefix="$"
+          placeholder="$0.00"
+          className="w-full py-2 text-4xl text-center font-bold backdrop-blur transition relative appearance-none outline-none  text-black"
+          onValueChange={(e) => setFormData({ ...formData, amount: Number(e.floatValue) })}
         />
-        <br />
-
-        <label>Título:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          required
-          value={formData.title}
+        <TransactionTypeSelect onChange={(e) => setFormData({ ...formData, type: e })} />
+        <Input
+          placeholder="Agrega un título"
+          label="Título"
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         />
-        <br />
-
-        <label>Descripción (opcional):</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          value={formData.description}
+        <Input
+          placeholder="Agrega una descripción"
+          label="Descripción (Opcional)"
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
         />
-        <br />
-
-        <label>Categoría:</label>
-        <select
-          id="categoryId"
-          name="categoryId"
-          required
-          value={formData.categoryId}
-          defaultValue={allCategories.data?.data[0].id}
-          onChange={(e) => setFormData({ ...formData, categoryId: Number(e.target.value) })}
-        >
-          {allCategories.data?.data.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <br />
-
-        <button type="submit">Crear Transacción</button>
+        {/* Category */}
+        <CustomSelect
+          options={listaDeCategorías}
+          onChange={(e) => {
+            const selected = e.value;
+            setFormData((prev) => ({
+              ...prev,
+              categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
+            }));
+          }}
+        />
+        {/* Submit Button */}
+        <AsyncButton
+          onClick={() => crear(formData)}
+          disabled={submitting || !formData.title || !formData.amount}
+          text="Crear transacción"
+        />
       </form>
     </div>
   );
