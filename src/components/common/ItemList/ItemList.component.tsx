@@ -20,16 +20,16 @@ const ItemList = ({
       whileTap={{ scale: 0.97 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className="flex items-center justify-start self-start gap-3  min-w-0 flex-1">
+      <div className="flex items-center justify-start gap-3 min-w-0 flex-1">
         {icon}
-        <div className="self-start min-w-0 overflow-hidden">
+        <div className=" flex-1 min-w-0 max-w-fit">
           <p className="text-lg font-semibold truncate text-ellipsis ">{title}</p>
           <p className="text-gray-600 text-sm truncate text-ellipsis">{label}</p>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 min-w-0 max-w-[50%] justify-end">
         {valueIcon}
-        <p className="text-lg">{value}</p>
+        <p className="text-lg text-ellipsis truncate">{value}</p>
       </div>
     </motion.div>
   );
