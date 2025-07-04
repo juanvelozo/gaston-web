@@ -26,7 +26,8 @@ const CategoriesPage = (): React.JSX.Element => {
         <div className="flex flex-wrap gap-2 ">
           {categoriasPopulares?.map((category) => (
             <Button
-              className="w-min truncate"
+              key={category.id}
+              className="w-min truncate "
               style={{ backgroundColor: category.color }}
               onClick={() => navigate(`/categories/${category.id}`)}
             >
