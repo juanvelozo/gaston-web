@@ -37,7 +37,7 @@ export const useTransactions = () => {
   }
 
   const lastTransactions = allTransactions.data?.data.slice(0, 3);
-
+  const submitting = create.loading || update.loading;
   return {
     allTransactions,
     lastTransactions,
@@ -45,5 +45,6 @@ export const useTransactions = () => {
     editar,
     search,
     borrar,
+    submitting,
   };
 };
