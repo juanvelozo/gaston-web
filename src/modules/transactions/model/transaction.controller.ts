@@ -10,7 +10,7 @@ export interface ICreateTransactionDto {
   amount: number;
   title: string;
   description?: string;
-  categoryId: number;
+  categoryId?: number;
 }
 
 export interface IUpdateTransactionDto extends Partial<ICreateTransactionDto> {}

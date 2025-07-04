@@ -12,7 +12,7 @@ const TransactionCard = ({ data }: ITransactionCard): React.JSX.Element => {
       onClick={() => navigate(`/transactions/${data.id}`)}
       icon={ITransactionCardValues[data.type].icon}
       title={data.title}
-      label={data.category.name}
+      label={data?.category?.name ?? 'Sin categoría'}
       value={formatearMonto(data.amount)}
     />
   );

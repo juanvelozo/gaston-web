@@ -74,10 +74,11 @@ const TransactionDetailPage = (): React.JSX.Element => {
         />
         <ItemList
           title="Categoría"
-          value={search.data?.data.category.name}
-          valueIcon={search.data?.data?.category?.icon}
+          value={search.data?.data.category?.name ?? 'Sin categoría'}
+          valueIcon={search.data?.data?.category?.icon ?? undefined}
           icon={<List />}
           onClick={() => {
+            if (!search.data?.data.category) return;
             navigate(`/categories/${search.data?.data.category.id}`);
           }}
         />
