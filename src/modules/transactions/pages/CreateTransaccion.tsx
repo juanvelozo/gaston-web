@@ -10,8 +10,8 @@ import Input from '../../../components/common/input/input.component';
 import AsyncButton from '../../../components/common/asyncButton/asyncButton.component';
 import TransactionTypeSelect from '../components/form/TransactionTypeSelect.component';
 import CustomSelect from '../../../components/common/select/select.component';
-import { formatearMonto } from '../../../types/formatearMonto';
 import { NumericFormat } from 'react-number-format';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
@@ -23,6 +23,7 @@ const CreateTransationPage = (): React.JSX.Element => {
 
   const { fetchAll: allCategories } = useCategories();
   const { crear, submitting } = useTransactions();
+  const navigate = useNavigate();
 
   const listaDeCategorías: {
     label: string;
@@ -35,20 +36,19 @@ const CreateTransationPage = (): React.JSX.Element => {
     })) ?? []),
   ];
 
-  console.log(formatearMonto(formData.amount));
-
   return (
     <div className=" bg-brand-white min-h-screen">
       {/* Header */}
       <SectionHeader
         title="Nueva transacción"
         bgColor={colors.green}
-        left={<IconButton icon={<ArrowLeft />} onClick={() => {}} />}
+        left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
       />
 
       {/* Form */}
       <form className="px-6 py-6 space-y-6">
         <NumericFormat
+          autoFocus
           value={formData.amount}
           thousandSeparator="."
           decimalSeparator=","
@@ -78,13 +78,16 @@ const CreateTransationPage = (): React.JSX.Element => {
               categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
             }));
           }}
+          placeholder="Seleccione una categoría"
         />
         {/* Submit Button */}
-        <AsyncButton
-          onClick={() => crear(formData)}
-          disabled={submitting || !formData.title || !formData.amount}
-          text="Crear transacción"
-        />
+        <div className="fixed bottom-0 left-0 right-0 p-4 w-full flex items-center justify-center bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40">
+          <AsyncButton
+            onClick={() => crear(formData)}
+            disabled={submitting || !formData.title || !formData.amount}
+            text="Crear transacción"
+          />
+        </div>
       </form>
     </div>
   );
