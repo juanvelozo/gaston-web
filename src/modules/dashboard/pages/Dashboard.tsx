@@ -23,7 +23,7 @@ const DashboardPages = (): React.JSX.Element => {
   }, [data, refetch]);
 
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:border-zinc-700 shadow-sm rounded-2xl p-4 space-y-2">
+    <div className="bg-white p-4 space-y-2">
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Resumen</h1>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
