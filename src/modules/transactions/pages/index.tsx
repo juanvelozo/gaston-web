@@ -7,6 +7,7 @@ import colors from '../../../styles/colors';
 import { useNavigate } from 'react-router-dom';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Input from '../../../components/common/input/input.component';
+import GroupedTransactionList from '../components/List/TransactionsList.component';
 
 export const TransactionsPage = (): React.JSX.Element => {
   const {
@@ -26,11 +27,7 @@ export const TransactionsPage = (): React.JSX.Element => {
           <div className="sticky top-0 z-10">
             <Input placeholder="Buscar" />
           </div>
-          <div className="flex flex-col gap-4">
-            {data?.data.map((transaction) => (
-              <TransactionCard key={transaction.id} data={transaction} />
-            ))}
-          </div>
+          <GroupedTransactionList data={data?.data || []} />
         </div>
       </SectionBody>
     </div>
