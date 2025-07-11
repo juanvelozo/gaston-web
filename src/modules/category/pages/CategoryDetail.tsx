@@ -10,6 +10,7 @@ import CategoryStats from '../components/categoryStats.component';
 import { formatearMonto } from '../../../types/formatearMonto';
 import { ITransactionCardValues } from '../../transactions/components/transactionCard/transactionCard.component';
 import { Button } from '../../../components/animated/button/Button.component';
+import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 
 const CategoryDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
@@ -45,64 +46,68 @@ const CategoryDetailPage = (): React.JSX.Element => {
           </div>
         }
       />
-      <div className="p-4 space-y-4">
-        <Card
-          title="Descripción"
-          body={
-            <p className="text-gray-600 text-sm">
-              {search?.data?.data?.description.length
-                ? search?.data?.data?.description
-                : 'No hay descripción.'}
-            </p>
-          }
-        />
-        <Card
-          title="Resumen"
-          body={
-            <div className="flex items-center justify-between">
-              <p className="text-gray-600 text-lg">Total</p>
-              <p className="text-brand-green font-bold text-lg">{formatearMonto(total)}</p>
-            </div>
-          }
-          footer={<CategoryStats data={search?.data?.data} />}
-        />
-        <Card
-          title="Transacciones"
-          body={
-            search?.data?.data?.transactions.length ? (
-              search?.data?.data?.transactions.map((t) => (
-                <ItemList
-                  onClick={() => navigate(`/transactions/${t.id}`)}
-                  key={t.id}
-                  index={t.id}
-                  icon={ITransactionCardValues[t.type].icon}
-                  title={t.title}
-                  value={formatearMonto(t.amount)}
-                />
-              ))
-            ) : (
+      <SectionBody>
+        <div className="space-y-4">
+          <Card
+            title="Descripción"
+            body={
               <p className="text-gray-600 text-sm">
-                No hay ningún transacción con esta categoría. Podes crear una y asignarle esta
-                categoría para poder visualizarlas en esta sección.
+                {search?.data?.data?.description.length
+                  ? search?.data?.data?.description
+                  : 'No hay descripción.'}
               </p>
-            )
-          }
-          footer={
-            !search?.data?.data?.transactions.length ? (
-              <Button onClick={() => navigate(`/transactions/create`)} className="w-full">
-                Crear una transacción
-              </Button>
-            ) : null
-          }
-        />
-        <Button
-          variant="secondary"
-          iconLeft={<Trash color="red" />}
-          className="border-red-600 rounded-xl text-red-600 w-full"
-        >
-          Eliminar categoría (PELIGROSO)
-        </Button>
-      </div>
+            }
+          />
+          <Card
+            title="Resumen"
+            body={
+              <div className="flex items-center justify-between">
+                <p className="text-gray-600 text-lg">Total</p>
+                <p className="text-brand-green font-bold text-lg">{formatearMonto(total)}</p>
+              </div>
+            }
+            footer={<CategoryStats data={search?.data?.data} />}
+          />
+          <Card
+            title="Transacciones"
+            body={
+              search?.data?.data?.transactions.length ? (
+                search?.data?.data?.transactions.map((t) => (
+                  <ItemList
+                    onClick={() => navigate(`/transactions/${t.id}`)}
+                    key={t.id}
+                    index={t.id}
+                    icon={ITransactionCardValues[t.type].icon}
+                    title={t.title}
+                    value={formatearMonto(t.amount)}
+                    valueColor={ITransactionCardValues[t.type].color}
+                    iconBgColor={ITransactionCardValues[t.type].color + '40'}
+                  />
+                ))
+              ) : (
+                <p className="text-gray-600 text-sm">
+                  No hay ningún transacción con esta categoría. Podes crear una y asignarle esta
+                  categoría para poder visualizarlas en esta sección.
+                </p>
+              )
+            }
+            footer={
+              !search?.data?.data?.transactions.length ? (
+                <Button onClick={() => navigate(`/transactions/create`)} className="w-full">
+                  Crear una transacción
+                </Button>
+              ) : null
+            }
+          />
+          <Button
+            variant="secondary"
+            iconLeft={<Trash color="red" />}
+            className="border-red-600 rounded-xl text-red-600 w-full"
+          >
+            Eliminar categoría (PELIGROSO)
+          </Button>
+        </div>
+      </SectionBody>
     </div>
   );
 };
