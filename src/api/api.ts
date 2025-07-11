@@ -59,6 +59,12 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
+    // Si el error es por usuario borrado
+    // @ts-ignore
+    if (error.response?.data?.message?.[0] === 'Usuario no encontrado') {
+      console.log('Usuario borrado');
+    }
+    
     // Solo intentar refresh si no lo intentamos antes
     if (error.response?.status === 401) {
       console.log('Token expirado, intentando actualizar el token...');
