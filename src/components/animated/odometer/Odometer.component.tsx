@@ -1,37 +1,35 @@
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { cn } from '../../../libs/utils';
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$-';
 
-function AnimatedLetter({ target }: { target: string }) {
-  // Animamos un scroll vertical simulando que la letra sube hasta target
-  // Para simplificar, generamos un scroll con todas las letras y solo mostramos la que coincida.
-
+function AnimatedLetter({ target, letterHeight }: { target: string; letterHeight: number }) {
   return (
     <motion.div
       style={{
         display: 'inline-block',
         overflow: 'hidden',
-        height: 30,
-        width: 20,
+        height: letterHeight,
+        width: '1ch',
         verticalAlign: 'bottom',
         userSelect: 'none',
       }}
     >
       <motion.div
-        animate={{ y: -letters.indexOf(target) * 30 }}
+        animate={{ y: -letters.indexOf(target) * letterHeight }}
         transition={{ type: 'spring', stiffness: 100, damping: 20, bounce: 2, duration: 0.5 }}
       >
         {letters.split('').map((l) => (
           <div
             key={l}
-            className="drop-shadow-lg"
             style={{
-              height: 30,
-              lineHeight: '30px',
+              height: letterHeight,
+              lineHeight: `${letterHeight}px`,
               textAlign: 'center',
               fontFamily: 'monospace',
             }}
+            className="drop-shadow-lg"
           >
             {l}
           </div>
@@ -42,14 +40,24 @@ function AnimatedLetter({ target }: { target: string }) {
 }
 
 export default function OdometerText({ text, className }: { text: string; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [letterHeight, setLetterHeight] = useState(30); // valor por defecto
+
+  useEffect(() => {
+    if (ref.current) {
+      const computed = window.getComputedStyle(ref.current);
+      const fontSize = parseFloat(computed.fontSize || '30');
+      setLetterHeight(fontSize);
+    }
+  }, []);
+
+  const chars = text.toUpperCase().split('');
+
   return (
-    <div className={cn('text-3xl flex items-center text-white', className)}>
-      {text
-        .toUpperCase()
-        .split('')
-        .map((char, i) => (
-          <AnimatedLetter key={i} target={char} />
-        ))}
+    <div ref={ref} className={cn('text-3xl flex items-center text-white font-mono', className)}>
+      {chars.map((char, i) => (
+        <AnimatedLetter key={i} target={char} letterHeight={letterHeight} />
+      ))}
     </div>
   );
 }
