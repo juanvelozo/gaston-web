@@ -22,7 +22,9 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env REACT_APP_SERVER=local react-scripts start",
+    "start:dev": "cross-env REACT_APP_SERVER=dev react-scripts start",
+    "start:prod": "cross-env REACT_APP_SERVER=prod react-scripts start",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",

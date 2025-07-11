@@ -1,8 +1,34 @@
 import axios, { AxiosError } from 'axios';
 import { postRefreshToken } from '../modules/auth/api/RefreshToken.api';
 
+export enum EnvironmentsEnum {
+  LOCAL = 'local',
+  DEV = 'dev',
+  PROD = 'prod',
+}
+
+type EnvConfig = {
+  [x in EnvironmentsEnum]: string;
+};
+
+const envConfig: EnvConfig = {
+  [EnvironmentsEnum.LOCAL]: 'http://localhost:3000',
+  [EnvironmentsEnum.DEV]: process.env.REACT_APP_SERVER_DEV as string,
+  [EnvironmentsEnum.PROD]: process.env.REACT_APP_SERVER_PROD as string,
+};
+
+const serverEnvironment = process.env.REACT_APP_SERVER as EnvironmentsEnum | undefined;
+
+console.log('🎯 Le estamos apuntando al servidor: ', serverEnvironment);
+
+if (!serverEnvironment) {
+  throw new Error('SERVER environment variable is not set');
+}
+
+const baseURL = envConfig[serverEnvironment];
+
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL,
 });
 
 // Interceptor para agregar token en cada request
