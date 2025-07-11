@@ -11,12 +11,12 @@ const PrivateRoute = () => {
 
   return token ? (
     <Wrapper>
-      <header className="relative">
+      <div className="relative h-screen flex flex-col">
         <main className="pb-24 overflow-x-hidden">
           <Outlet />
         </main>
         {shouldShowNavbar && <Navbar />}
-      </header>
+      </div>
     </Wrapper>
   ) : (
     <Navigate to="/login" replace />
