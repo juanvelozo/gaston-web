@@ -22,3 +22,29 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
 }
+
+.toast-base {
+  background-color: rgba(16, 23, 32, 0.6);
+  color: #fefafa;
+  backdrop-filter: blur(4.5px);
+  background-clip: padding-box;
+  border-radius: 2rem !important;
+  padding: 2rem 1.25rem !important;
+}
+
+.toast-base[data-type='success'] {
+  background-color: rgba(58, 125, 68, 0.3);
+}
+
+.toast-base[data-type='error'] {
+  background-color: rgba(254, 95, 85, 0.3);
+}
+
+.toast-base[data-type='warning'] {
+  background-color: rgba(242, 175, 41, 0.3);
+  color: #101720;
+}
+
+.toast-base[data-type='info'] {
+  background-color: rgba(42, 157, 143, 0.3);
+}

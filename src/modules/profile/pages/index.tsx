@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../hooks/useProfile.hook';
+import { toast } from 'sonner';
 
 const ProfilePage = (): React.JSX.Element => {
   const {
@@ -21,6 +22,9 @@ const ProfilePage = (): React.JSX.Element => {
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <button onClick={() => navigate('/profile/edit')}>Editar</button>
       <button onClick={() => navigate('/profile/change-password')}>Cambiar contraseña</button>
+      <button onClick={() => toast.info('Esto es un toast')}>Toast</button>
+      <button onClick={() => toast.error('Esto es un toast')}>Toast peligro</button>
+      <button onClick={() => toast.warning('Esto es un toast')}>Toast warning</button>
     </div>
   );
 };

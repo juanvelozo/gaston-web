@@ -1,8 +1,14 @@
 import AppRouter from './navigator';
 import './index.css';
+import Tostadita from './components/animated/toast/customToast.component';
 
 function App() {
-  return <AppRouter />;
+  return (
+    <>
+      <Tostadita />
+      <AppRouter />
+    </>
+  );
 }
 
 export default App;
