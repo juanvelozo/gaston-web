@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { cn } from '../../../libs/utils';
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$-';
 
@@ -40,9 +41,9 @@ function AnimatedLetter({ target }: { target: string }) {
   );
 }
 
-export default function OdometerText({ text }: { text: string }) {
+export default function OdometerText({ text, className }: { text: string; className?: string }) {
   return (
-    <div className="text-3xl flex items-center text-white">
+    <div className={cn('text-3xl flex items-center text-white', className)}>
       {text
         .toUpperCase()
         .split('')
