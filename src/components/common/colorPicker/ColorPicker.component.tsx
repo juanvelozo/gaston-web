@@ -3,7 +3,9 @@ import { themeColors } from '../../../styles/colors';
 import { motion } from 'framer-motion';
 
 const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
-  const [hex, setHex] = useState<string>();
+  const colorsArray = Object.values(themeColors);
+
+  const [hex, setHex] = useState<string>(colorsArray[0]);
 
   function handlePick(color: string) {
     setHex(color);
@@ -12,7 +14,7 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
 
   return (
     <div className="w-full h-full grid grid-cols-4 grid-rows-4">
-      {Object.values(themeColors).map((color) => {
+      {colorsArray.map((color) => {
         const isActive = hex === color;
         return (
           <div key={color} className="relative flex items-center justify-center  w-24 h-24">
