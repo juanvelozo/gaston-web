@@ -11,6 +11,8 @@ const ItemList = ({
   className,
   valueIcon,
   index: key,
+  iconBgColor,
+  valueColor = '#000',
 }: IItemList): React.JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
@@ -36,7 +38,12 @@ const ItemList = ({
       whileHover={{ scale: 1.05 }}
     >
       <div className="flex items-center justify-start gap-3 min-w-0 flex-1">
-        {icon}
+        <div
+          className={`rounded-2xl p-3 flex items-center justify-center`}
+          style={{ backgroundColor: iconBgColor }}
+        >
+          {icon}
+        </div>
         <div className=" flex-1 min-w-0 max-w-fit">
           <p className="text-lg font-semibold truncate text-ellipsis ">{title}</p>
           <p className="text-gray-600 text-sm truncate text-ellipsis">{label}</p>
@@ -44,7 +51,9 @@ const ItemList = ({
       </div>
       <div className="flex items-center gap-2 min-w-0 max-w-[50%] justify-end">
         {valueIcon}
-        <p className="text-lg text-ellipsis truncate">{value}</p>
+        <p className={`text-lg font-semibold text-ellipsis truncate`} style={{ color: valueColor }}>
+          {value}
+        </p>
       </div>
     </motion.div>
   );
@@ -52,12 +61,14 @@ const ItemList = ({
 interface IItemList {
   onClick?: () => void;
   icon?: React.ReactNode;
+  iconBgColor?: string;
   title?: string;
   label?: string;
   value?: string;
   className?: string;
   valueIcon?: React.ReactNode;
   index?: number;
+  valueColor?: string;
 }
 
 export default ItemList;
