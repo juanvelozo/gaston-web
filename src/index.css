@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Scrollbar global delgada y sin contenedor */
+::-webkit-scrollbar {
+  width: 6px; /* Ancho para scroll vertical */
+  height: 6px; /* Alto para scroll horizontal */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.6); /* slate-500 con opacidad */
+  border-radius: 9999px; /* Full rounded */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Sin contenedor visible */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
+}
