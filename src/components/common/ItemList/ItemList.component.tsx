@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { cn } from '../../../libs/utils';
+import { useRef } from 'react';
 
 const ItemList = ({
   onClick,
@@ -9,13 +10,27 @@ const ItemList = ({
   value,
   className,
   valueIcon,
+  index: key,
 }: IItemList): React.JSX.Element => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
     <motion.div
+      ref={ref}
       className={cn(
         'flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100  w-full justify-between cursor-pointer',
         className
       )}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }} // Entrada sutil desde abajo, con escala ligeramente pequeña
+      animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{
+        type: 'spring',
+        stiffness: 300, // rigidez alta para rebote rápido
+        damping: 25, // amortiguación para que no rebote mucho
+        mass: 0.7, // masa ligera para que sea rápido
+        delay: 0.1 * (key ? key / 10 : 0),
+      }}
       onClick={onClick}
       whileTap={{ scale: 0.97 }}
       whileHover={{ scale: 1.05 }}
@@ -42,6 +57,7 @@ interface IItemList {
   value?: string;
   className?: string;
   valueIcon?: React.ReactNode;
+  index?: number;
 }
 
 export default ItemList;
