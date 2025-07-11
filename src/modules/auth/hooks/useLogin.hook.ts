@@ -16,9 +16,11 @@ export const useLogin = () => {
   }
   useEffect(() => {
     if (data?.status === 201) {
+      console.log('analizando response login', data.data);
+
       const token = data?.data.tokens.access_token;
       const refreshToken = data?.data.tokens.refresh_token;
-      const userId = data?.data.user.id;
+      const userId = data?.data.userId;
 
       if (userId) {
         localStorage.setItem('user_id', userId.toString());

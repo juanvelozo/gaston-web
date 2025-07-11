@@ -4,7 +4,7 @@ import { ITokens, IUser } from './auth.model';
 export type ILoginResponse = IBaseResponse<LoginResponse>;
 export interface LoginResponse {
   tokens: ITokens;
-  user: IUser;
+  userId: number;
 }
 
 export type IRefreshTokenResponse = IBaseResponse<ITokens>;
