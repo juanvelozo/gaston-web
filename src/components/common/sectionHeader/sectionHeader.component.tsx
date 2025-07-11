@@ -6,12 +6,15 @@ const SectionHeader = ({
   bottom,
 }: ISectionHeader): React.JSX.Element => {
   return (
-    <div>
-      <div className={`p-6 rounded-b-3xl`} style={{ background: bgColor }}>
-        <div className="flex gap-2 justify-between items-center my-4">
+    <div
+      style={{ background: bgColor }}
+      className="h-screen w-screen top-0 left-0 right-0 z-0 absolute px-10 py-4"
+    >
+      <div>
+        <div className="flex justify-between items-center my-8">
           <div>{left}</div>
-          <div className="flex gap-2 items-center max-w-[70%] w-full overflow-hidden place-self-center">
-            <h1 className="text-3xl font-bold text-white text-center truncate text-ellipsis ">
+          <div className="flex gap-2 items-center overflow-hidden place-self-center">
+            <h1 className="text-3xl font-bold text-white text-center truncate text-ellipsis px-10">
               {title}
             </h1>
           </div>
