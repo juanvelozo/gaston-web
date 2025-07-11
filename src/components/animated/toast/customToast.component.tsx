@@ -13,15 +13,15 @@ const Tostadita = (): React.JSX.Element => {
           toast: 'toast-base',
           title: 'font-semibold text-lg',
           description: 'text-sm',
-          icon: '!mr-3',
+          icon: '!mr-8 !ml-1',
         },
         duration: 4000,
       }}
       icons={{
-        success: <CheckCircle className="w-6 h-6 text-green-500" />,
-        error: <XmarkCircle className="w-6 h-6 text-red-500" />,
-        warning: <WarningTriangleSolid className="w-6 h-6 text-yellow-400" />,
-        info: <InfoCircle className="w-6 h-6 text-teal-400" />,
+        success: <CheckCircle className="w-10 h-10 text-green-500" />,
+        error: <XmarkCircle className="w-10 h-10 text-red-500" />,
+        warning: <WarningTriangleSolid className="w-10 h-10 text-yellow-400" />,
+        info: <InfoCircle className="w-10 h-10 text-teal-400" />,
       }}
     />
   );

@@ -22,9 +22,19 @@ const ProfilePage = (): React.JSX.Element => {
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <button onClick={() => navigate('/profile/edit')}>Editar</button>
       <button onClick={() => navigate('/profile/change-password')}>Cambiar contraseña</button>
-      <button onClick={() => toast.info('Esto es un toast')}>Toast</button>
-      <button onClick={() => toast.error('Esto es un toast')}>Toast peligro</button>
-      <button onClick={() => toast.warning('Esto es un toast')}>Toast warning</button>
+      <button onClick={() => toast.info('Esto es un toast', { description: 'esto es una prueba' })}>
+        Toast
+      </button>
+      <button
+        onClick={() => toast.error('Esto es un toast', { description: 'esto es una prueba' })}
+      >
+        Toast peligro
+      </button>
+      <button
+        onClick={() => toast.warning('Esto es un toast', { description: 'esto es una prueba' })}
+      >
+        Toast warning
+      </button>
     </div>
   );
 };
