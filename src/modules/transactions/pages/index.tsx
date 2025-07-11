@@ -13,7 +13,7 @@ export const TransactionsPage = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white dark:bg-zinc-900 dark:border-zinc-700 shadow-sm rounded-2xl space-y-2">
+    <div className="bg-white space-y-2">
       <SectionHeader
         title="Transacciones"
         bgColor={colors.green}
