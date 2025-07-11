@@ -74,6 +74,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
                 <ItemList
                   onClick={() => navigate(`/transactions/${t.id}`)}
                   key={t.id}
+                  index={t.id}
                   icon={ITransactionCardValues[t.type].icon}
                   title={t.title}
                   value={formatearMonto(t.amount)}
