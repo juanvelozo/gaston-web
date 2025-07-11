@@ -16,10 +16,10 @@ const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...pr
   const showFloating = focused || !!props.value;
 
   const baseStyles =
-    'w-full px-4 py-2 rounded-xl backdrop-blur transition relative appearance-none outline-none';
+    'w-full px-4 py-2 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 transition relative appearance-none outline-none';
   const variants = {
     solid:
-      'bg-slate-100 hover:bg-slate-200 border-b focus:bg-slate-200 border-slate-200 text-black',
+      'bg-slate-300 hover:bg-slate-200 border-b focus:bg-slate-200 border-slate-200 text-black',
     transparent: 'bg-white/10 text-black border-white/20',
   };
 
