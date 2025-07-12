@@ -37,8 +37,9 @@ const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...pr
         </label>
       )}
 
-      <div className="flex items-center gap-2">
-        {iconLeft && <span className="pl-2">{iconLeft}</span>}
+      {/* <div className="flex items-center gap-2"> */}
+      <div className={clsx('flex items-center gap-2', baseStyles, variants[variant], className)}>
+        {iconLeft && <span>{iconLeft}</span>}
         <input
           id={id}
           {...props}
@@ -50,15 +51,9 @@ const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...pr
             setFocused(false);
             props.onBlur?.(e);
           }}
-          className={clsx(
-            baseStyles,
-            variants[variant],
-            iconLeft && 'pl-10',
-            iconRight && 'pr-10',
-            className
-          )}
+          className="bg-transparent outline-none"
         />
-        {iconRight && <span className="pr-2 absolute right-2">{iconRight}</span>}
+        {iconRight && <span>{iconRight}</span>}
       </div>
     </div>
   );
