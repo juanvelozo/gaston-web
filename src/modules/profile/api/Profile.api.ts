@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import api from '../../../api/api';
 import {
   IGetProfileResponse,
@@ -6,6 +5,7 @@ import {
   IUpdateProfileDto,
 } from '../model/profile.controller';
 import { comprimirArchivoImagen } from '../../../utils/comprimirImagen';
+import { handleApiError } from '../../../api/apiError';
 
 export async function getProfile(): Promise<IGetProfileResponse | undefined> {
   try {
@@ -16,7 +16,7 @@ export async function getProfile(): Promise<IGetProfileResponse | undefined> {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al obtener el perfil', error);
-    throw error;
+    handleApiError(error);
   }
 }
 
@@ -45,7 +45,7 @@ export async function updateProfile(body: IUpdateProfileDto) {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al actualizar el perfil', error);
-    throw error;
+    handleApiError(error);
   }
 }
 
@@ -58,12 +58,6 @@ export async function changePassword(body: IUpdatePasswordDto) {
     return response.data;
   } catch (error) {
     console.error('Hubo un error al actualizar el perfil', error);
-    throw error;
-    // if ((error as AxiosError).response) {
-    //   const axiosError = error as AxiosError;
-
-    //   const { status, data } = axiosError.response!;
-    //   throw axiosError;
-    // }
+    handleApiError(error);
   }
 }

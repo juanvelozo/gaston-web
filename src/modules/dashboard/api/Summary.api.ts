@@ -1,4 +1,5 @@
 import api from '../../../api/api';
+import { handleApiError } from '../../../api/apiError';
 import { IGetSummaryResponse } from '../model/dashboard.controller';
 
 export async function getSummary(): Promise<IGetSummaryResponse> {
@@ -11,6 +12,6 @@ export async function getSummary(): Promise<IGetSummaryResponse> {
     return response.data;
   } catch (error) {
     console.log('Hubo un error al obtener resumen', error);
-    throw error;
+    handleApiError(error);
   }
 }

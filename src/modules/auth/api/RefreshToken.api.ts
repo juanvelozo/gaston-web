@@ -1,4 +1,5 @@
 import api from '../../../api/api';
+import { handleApiError } from '../../../api/apiError';
 import { IRefreshTokenResponse } from '../model/auth.controller';
 
 export async function postRefreshToken(
@@ -17,6 +18,6 @@ export async function postRefreshToken(
     return response.data;
   } catch (error) {
     console.error('Error en refresh token', error);
-    throw error;
+    handleApiError(error);
   }
 }
