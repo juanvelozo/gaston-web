@@ -1,16 +1,7 @@
 import { HTMLMotionProps, motion } from 'framer-motion';
 import React from 'react';
 import { cn } from '../../../libs/utils';
-
-type ButtonVariant = 'primary' | 'secondary' | 'terciary';
-
-interface ButtonProps extends HTMLMotionProps<'button'> {
-  children?: React.ReactNode;
-  variant?: ButtonVariant;
-  loading?: boolean;
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
-}
+import { IButtonProps, ButtonVariant } from './Button.types';
 
 const baseStyles =
   'inline-flex items-center justify-center px-4 py-2 rounded-2xl text-sm font-medium transition-colors focus:outline-none  disabled:opacity-50 disabled:pointer-events-none';
@@ -26,7 +17,7 @@ const loadingStyles: Record<ButtonVariant, string> = {
   terciary: 'border-zinc-500/30 border-t-zinc-500',
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
   (
     { variant = 'primary', loading, iconLeft, iconRight, children, className, disabled, ...props },
     ref
