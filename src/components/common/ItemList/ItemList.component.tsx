@@ -1,8 +1,9 @@
 import { motion, useInView } from 'framer-motion';
 import { cn } from '../../../libs/utils';
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
+import { IItemList } from './ItemList.types';
 
-const ItemList = ({
+const ItemList: FC<IItemList> = ({
   onClick,
   icon,
   label,
@@ -13,7 +14,7 @@ const ItemList = ({
   index: key,
   iconBgColor,
   valueColor = '#000',
-}: IItemList): React.JSX.Element => {
+}): React.JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
@@ -58,17 +59,5 @@ const ItemList = ({
     </motion.div>
   );
 };
-interface IItemList {
-  onClick?: () => void;
-  icon?: React.ReactNode;
-  iconBgColor?: string;
-  title?: string;
-  label?: string;
-  value?: string;
-  className?: string;
-  valueIcon?: React.ReactNode;
-  index?: number;
-  valueColor?: string;
-}
 
 export default ItemList;
