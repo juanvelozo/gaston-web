@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Input from '../../../components/common/input/input.component';
 import GroupedTransactionList from '../components/List/TransactionsList.component';
+import Section from '../../../components/animated/section/Section.component';
 
 export const TransactionsPage = (): React.JSX.Element => {
   const {
@@ -17,19 +18,19 @@ export const TransactionsPage = (): React.JSX.Element => {
 
   return (
     <div className="flex-1 h-screen">
-      <SectionHeader
+      <Section
         title="Transacciones"
         bgColor={colors.green}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/transactions/create')} />}
-      />
-      <SectionBody tall>
+        tall
+      >
         <div className="flex flex-col gap-4">
           <div className="sticky top-0 z-10">
             <Input placeholder="Buscar" />
           </div>
           <GroupedTransactionList data={data?.data || []} />
         </div>
-      </SectionBody>
+      </Section>
     </div>
   );
 };
