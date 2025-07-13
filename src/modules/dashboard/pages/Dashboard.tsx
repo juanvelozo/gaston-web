@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTransactions } from '../../transactions/hooks/useTransactions.hook';
 import { useSummary } from '../hooks/useSummary.hook';
 import { useEffect } from 'react';
