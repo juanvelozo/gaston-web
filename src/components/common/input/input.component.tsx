@@ -51,7 +51,7 @@ const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...pr
             setFocused(false);
             props.onBlur?.(e);
           }}
-          className="bg-transparent outline-none"
+          className="bg-transparent outline-none w-full"
         />
         {iconRight && <span>{iconRight}</span>}
       </div>
