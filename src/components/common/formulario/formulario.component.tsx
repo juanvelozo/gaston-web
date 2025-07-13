@@ -1,46 +1,37 @@
 import { FormHTMLAttributes } from 'react';
-import { useFormStatus } from 'react-dom';
 import { Button } from '../../animated/button/Button.component';
 import { cn } from '../../../libs/utils';
-
-interface SubmitButtonProps {
-  idleText?: string;
-  loadingText?: string;
-  disabled?: boolean;
-}
-
-const SubmitButton = ({
-  idleText = 'Enviar',
-  loadingText = 'Enviando...',
-  disabled = false,
-}: SubmitButtonProps) => {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending || disabled} className="w-full rounded-2xl">
-      {pending ? loadingText : idleText}
-    </Button>
-  );
-};
+import { IButtonProps } from '../../animated/button/Button.types';
 
 interface FormularioProps extends FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;
   idleText?: string;
   loadingText?: string;
   disabled?: boolean;
+  loading?: boolean;
+  buttonProps?: IButtonProps;
 }
 
 export default function Formulario({
   children,
-  idleText,
-  loadingText,
+  idleText = 'Enviar',
+  loadingText = 'Cargando...',
   disabled,
+  loading,
+  buttonProps,
   ...props
 }: FormularioProps) {
   return (
     <form {...props} className={cn('space-y-3', props.className)}>
       {children}
-      <SubmitButton idleText={idleText} loadingText={loadingText} disabled={disabled} />
+      <Button
+        type="submit"
+        disabled={loading || disabled}
+        className={cn('w-full', buttonProps?.className)}
+        {...buttonProps}
+      >
+        {loading ? loadingText : idleText}
+      </Button>
     </form>
   );
 }
