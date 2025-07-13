@@ -14,6 +14,8 @@ import { NumericFormat } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Textarea from '../../../components/common/textArea/textArea.component';
+import Section from '../../../components/animated/section/Section.component';
+import Formulario from '../../../components/common/formulario/formulario.component';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [mostrarCalculadora, setMostrarCalculadora] = useState<boolean>(false);
@@ -39,10 +41,15 @@ const CreateTransationPage = (): React.JSX.Element => {
     })) ?? []),
   ];
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+    crear(formData);
+  }
+
   return (
     <div className=" bg-brand-white min-h-screen">
       {/* Header */}
-      <SectionHeader
+      <Section
         title="Nueva transacción"
         bgColor={colors.green}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
@@ -64,26 +71,22 @@ const CreateTransationPage = (): React.JSX.Element => {
             />
           </div>
         }
-      />
-
-      {/* Form */}
-      <SectionBody>
+      >
         {mostrarCalculadora ? (
           <div>calculadora</div>
         ) : (
-          <form className="space-y-6">
+          <Formulario
+            onSubmit={handleSubmit}
+            className="space-y-5"
+            loading={submitting}
+            disabled={submitting || formData.amount === 0 || !formData.type || !formData.title}
+          >
             <TransactionTypeSelect onChange={(e) => setFormData({ ...formData, type: e })} />
             <Input
               placeholder="Agrega un título"
               label="Título"
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
-            <Textarea
-              placeholder="Agrega una descripción"
-              label="Descripción (Opcional)"
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            />
-            {/* Category */}
             <CustomSelect
               options={listaDeCategorías}
               onChange={(e) => {
@@ -95,17 +98,14 @@ const CreateTransationPage = (): React.JSX.Element => {
               }}
               placeholder="Seleccione una categoría"
             />
-            {/* Submit Button */}
-            <div className="fixed bottom-0 left-0 right-0 p-4 w-full flex items-center justify-center bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40">
-              <AsyncButton
-                onClick={() => crear(formData)}
-                disabled={submitting || !formData.title || !formData.amount}
-                text="Crear transacción"
-              />
-            </div>
-          </form>
+            <Textarea
+              placeholder="Agrega una descripción"
+              label="Descripción (Opcional)"
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            />
+          </Formulario>
         )}
-      </SectionBody>
+      </Section>
     </div>
   );
 };
