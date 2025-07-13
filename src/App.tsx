@@ -23,6 +23,8 @@ export default App;
  * - Agregar assets para foto de perfil de usuario (Tal vez hacerla con IA?)✅
  * - Ver cómo agregar assets a la base de datos✅
  * - Integrar endpoints de cambiar contraseña✅
+ * - Trabajar en el responsive mobile
+ * - Arreglar tostadita en iOS
  * - Buscar librería de componentes/estilos
  * - Las sesiones entre ambientes se comparten por alguna razón, solucionar
  * - Implementar estrategia de cacheo de datos
@@ -32,7 +34,7 @@ export default App;
  * - Desplegar backend, frontend y base de datos✅
  * - Configurar entornos de desarrollo y producción✅
  * - Configurar CI/CD
- * - Buscar diseños de UI UX
+ * - Buscar diseños de UI UX✅
  * - Optimizar llamados al server
  * - Hacer UI de loading
  * - Hacer UI de error
