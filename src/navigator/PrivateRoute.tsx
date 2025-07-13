@@ -11,7 +11,7 @@ const PrivateRoute = () => {
 
   return token ? (
     <Wrapper>
-      <div className="relative h-screen flex flex-col">
+      <div className="relative h-screen flex flex-col max-w-xl mx-auto">
         <main className="pb-24 overflow-x-hidden">
           <Outlet />
         </main>
