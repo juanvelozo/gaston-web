@@ -2,6 +2,7 @@ import api from '../../../api/api';
 import { ILoginResponse } from '../model/auth.controller';
 import { ILoginRequest } from '../model/auth.model';
 import { handleApiError } from '../../../api/apiError';
+import { toast } from 'sonner';
 
 export async function postLogin(body: ILoginRequest): Promise<ILoginResponse> {
   try {
@@ -9,7 +10,8 @@ export async function postLogin(body: ILoginRequest): Promise<ILoginResponse> {
 
     const response = await api.post<ILoginResponse>('/auth/signin', body);
 
-    console.log('Sesión iniciada exitosamente', { response });
+    // console.log('Sesión iniciada exitosamente', { response });
+    toast.success('Sesión iniciada exitosamente', { description: '¡Bienvenidx!' });
     return response.data;
   } catch (error) {
     console.log('Hubo un error al iniciar sesión', error);

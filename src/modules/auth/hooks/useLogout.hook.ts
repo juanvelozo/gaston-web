@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useEndpoint } from '../../../hooks/useEndpoint';
 import { signOut } from '../api/Logout.api';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 export const useLogout = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export const useLogout = () => {
       localStorage.removeItem('refresh_token');
       localStorage.removeItem('user_id');
       navigate('/login', { replace: true });
+      toast.error('Sesión cerrada exitosamente', { description: '¡Hasta la próxima!' });
     }
   }, [data, navigate]);
 
