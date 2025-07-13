@@ -29,24 +29,34 @@
   backdrop-filter: blur(5px);
   background-clip: padding-box;
   border-radius: 2rem !important;
-  padding: 2rem 1.25rem !important;
+  padding: 1.25rem !important;
   border: none !important;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
+.toast-title,
+.toast-description {
+  color: #fefafa !important; /* blanco por defecto */
+}
+
 .toast-base[data-type='success'] {
-  background-color: rgba(58, 125, 68, 0.3);
+  background-color: rgba(58, 125, 68, 0.5);
 }
 
 .toast-base[data-type='error'] {
-  background-color: rgba(254, 95, 85, 0.3);
+  background-color: rgba(254, 95, 85, 0.7);
 }
 
 .toast-base[data-type='warning'] {
-  background-color: rgba(242, 175, 41, 0.3);
+  background-color: rgba(248, 213, 16, 0.8);
+  color: #101720 !important;
+}
+
+.toast-base[data-type='warning'] .toast-title,
+.toast-base[data-type='warning'] .toast-description {
   color: #101720;
 }
 
 .toast-base[data-type='info'] {
-  background-color: rgba(42, 157, 143, 0.3);
+  background-color: rgba(0, 163, 163, 0.7);
 }
