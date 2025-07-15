@@ -33,11 +33,12 @@ const CategoriesPage = (): React.JSX.Element => {
                 categoriasPopulares?.map((category) => (
                   <Button
                     key={category.id}
-                    className="w-min truncate "
+                    className="w-min truncate text-ellipsis max-w-52"
                     style={{ backgroundColor: category.color }}
                     onClick={() => navigate(`/categories/${category.id}`)}
+                    iconRight={<span>({category?.transactions.length})</span>}
                   >
-                    {category.icon + ' ' + category.name} ({category?.transactions.length})
+                    {category.icon + ' ' + category.name}
                   </Button>
                 ))
               ) : (
