@@ -29,6 +29,7 @@ const baseURL = envConfig[serverEnvironment];
 
 const api = axios.create({
   baseURL,
+  timeout: 5000,
 });
 
 // Interceptor para agregar token en cada request
