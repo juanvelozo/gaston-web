@@ -8,7 +8,9 @@ import colors from '../../../styles/colors';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import Input from '../../../components/common/input/input.component';
 import AsyncButton from '../../../components/common/asyncButton/asyncButton.component';
-import TransactionTypeSelect from '../components/form/TransactionTypeSelect.component';
+import TransactionTypeSelect, {
+  ITransactionButtonValues,
+} from '../components/form/TransactionTypeSelect.component';
 import CustomSelect from '../../../components/common/select/select.component';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
@@ -25,6 +27,7 @@ const CreateTransationPage = (): React.JSX.Element => {
     title: '',
     description: '',
   });
+  const [bgColor, setBgColor] = useState<string>(ITransactionButtonValues[formData.type].color);
 
   const { fetchAll: allCategories } = useCategories();
   const { crear, submitting } = useTransactions();
@@ -47,11 +50,12 @@ const CreateTransationPage = (): React.JSX.Element => {
   }
 
   return (
-    <div className=" bg-brand-white min-h-screen">
+    <div className=" flex-1 h-screen overflow-y-scroll">
       {/* Header */}
       <Section
+        // tall
         title="Nueva transacción"
-        bgColor={colors.green}
+        bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={
           <div className="flex flex-col items-center justify-center">
@@ -81,7 +85,12 @@ const CreateTransationPage = (): React.JSX.Element => {
             loading={submitting}
             disabled={submitting || formData.amount === 0 || !formData.type || !formData.title}
           >
-            <TransactionTypeSelect onChange={(e) => setFormData({ ...formData, type: e })} />
+            <TransactionTypeSelect
+              onChange={(e) => {
+                setFormData({ ...formData, type: e });
+                setBgColor(ITransactionButtonValues[e].color);
+              }}
+            />
             <Input
               placeholder="Agrega un título"
               label="Título"
