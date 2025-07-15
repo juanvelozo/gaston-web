@@ -8,6 +8,7 @@ import PerfilSections from '../components/ProfileSections.component';
 import { useLogout } from '../../auth/hooks/useLogout.hook';
 import { Button } from '../../../components/animated/button/Button.component';
 import { LogOut } from 'iconoir-react';
+import Section from '../../../components/animated/section/Section.component';
 
 const ProfilePage = (): React.JSX.Element => {
   const {
@@ -18,17 +19,16 @@ const ProfilePage = (): React.JSX.Element => {
 
   return (
     <div className="flex-1 h-screen">
-      <SectionHeader title="Perfil" bgColor={colors.blue} />
-      <span>Profile</span>
-      {data?.data.profileImage && (
-        <img
-          src={data?.data.profileImage}
-          alt={`profile photo ${data?.data.fullName}`}
-          width={100}
-          height={100}
-        />
-      )}
-      <SectionBody>
+      <Section title="Perfil" bgColor={colors.blue}>
+        <span>Profile</span>
+        {data?.data.profileImage && (
+          <img
+            src={data?.data.profileImage}
+            alt={`profile photo ${data?.data.fullName}`}
+            width={100}
+            height={100}
+          />
+        )}
         <PerfilSections />
         <Button
           iconLeft={<LogOut color="red" />}
@@ -38,7 +38,7 @@ const ProfilePage = (): React.JSX.Element => {
         >
           Cerrar sesión
         </Button>
-      </SectionBody>
+      </Section>
     </div>
   );
 };
