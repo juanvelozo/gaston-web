@@ -19,6 +19,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
     color: '',
     icon: '😉',
   });
+  const [mostrarEmojis, setMostrarEmojis] = useState<boolean>(false);
 
   const { crear } = useCategories();
   const navigate = useNavigate();
@@ -31,32 +32,47 @@ const CreateCategoryPage = (): React.JSX.Element => {
         title="Nueva categoría"
         bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
-        bottom={<EmojiButtonPicker onChange={(e) => setFormData({ ...formData, icon: e })} />}
+        bottom={
+          <IconButton
+            icon={formData.icon}
+            onClick={() => setMostrarEmojis((prev) => !prev)}
+            className="w-16 h-16 rounded-2xl text-3xl"
+          />
+        }
       >
-        <Formulario
-          className="space-y-6"
-          onSubmit={() => crear(formData)}
-          buttonProps={{
-            style: { background: bgColor },
-          }}
-          disabled={formData.name === '' || formData.color === '' || formData.icon === ''}
-        >
-          <Input
-            label="Nombre"
-            type="text"
-            placeholder='Ej: "Comida"'
-            required
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        {mostrarEmojis ? (
+          <EmojiButtonPicker
+            onChange={(e) => {
+              setMostrarEmojis(false);
+              setFormData({ ...formData, icon: e });
+            }}
           />
-          <ColorPicker onPickColor={(color) => setFormData({ ...formData, color: color })} />
-          <Textarea
-            label="Descripción (Opcional)"
-            name="description"
-            // className="h-20 placeholder:self-start placeholder:top-0"
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            placeholder="Añade una breve descripción de la categoría"
-          />
-        </Formulario>
+        ) : (
+          <Formulario
+            className="space-y-6"
+            onSubmit={() => crear(formData)}
+            buttonProps={{
+              style: { background: bgColor },
+            }}
+            disabled={formData.name === '' || formData.color === '' || formData.icon === ''}
+          >
+            <Input
+              label="Nombre"
+              type="text"
+              placeholder='Ej: "Comida"'
+              required
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+            <ColorPicker onPickColor={(color) => setFormData({ ...formData, color: color })} />
+            <Textarea
+              label="Descripción (Opcional)"
+              name="description"
+              // className="h-20 placeholder:self-start placeholder:top-0"
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              placeholder="Añade una breve descripción de la categoría"
+            />
+          </Formulario>
+        )}
       </Section>
     </div>
   );
