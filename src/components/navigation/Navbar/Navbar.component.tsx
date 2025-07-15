@@ -9,7 +9,7 @@ const Navbar = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex m-3 rounded-3xl p-3 items-center justify-around z-40 max-w-xl">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex m-3 rounded-3xl p-1 sm:p-3 items-center justify-around z-40 max-w-xl">
       {Object.values(privateRouteConfig).map((route) => {
         const isActive = currentRoute === route.href;
 
@@ -37,7 +37,7 @@ const Navbar = (): React.JSX.Element => {
                 setCurrentRoute(route.href);
                 navigate(route.href);
               }}
-              className={`relative z-10 flex flex-col items-center p-3 rounded-3xl transition-colors duration-200 ${
+              className={`relative z-10 flex flex-col items-center p-2 sm:p-3 rounded-3xl text-sm sm:text-base transition-colors duration-200 ${
                 isActive ? 'text-white' : 'text-gray-600'
               } focus:ring-0 focus:outline-none`}
             >
