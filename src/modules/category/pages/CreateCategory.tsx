@@ -12,6 +12,8 @@ import AsyncButton from '../../../components/common/asyncButton/asyncButton.comp
 import ColorPicker from '../../../components/common/colorPicker/ColorPicker.component';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Textarea from '../../../components/common/textArea/textArea.component';
+import Section from '../../../components/animated/section/Section.component';
+import Formulario from '../../../components/common/formulario/formulario.component';
 
 const CreateCategoryPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateCategoryDto>({
@@ -24,16 +26,24 @@ const CreateCategoryPage = (): React.JSX.Element => {
   const { crear } = useCategories();
   const navigate = useNavigate();
 
+  const bgColor = formData.color ? formData.color : colors.coral;
+
   return (
-    <div>
-      <SectionHeader
+    <div className="flex-1 h-screen overflow-y-screen">
+      <Section
         title="Nueva categoría"
-        bgColor={formData.color ? formData.color : colors.coral}
+        bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={<EmojiButtonPicker onChange={(e) => setFormData({ ...formData, icon: e })} />}
-      />
-      <SectionBody>
-        <form className="space-y-6">
+      >
+        <Formulario
+          className="space-y-6"
+          onSubmit={() => crear(formData)}
+          buttonProps={{
+            style: { background: bgColor },
+          }}
+          disabled={formData.name === '' || formData.color === '' || formData.icon === ''}
+        >
           <Input
             label="Nombre"
             type="text"
@@ -41,23 +51,16 @@ const CreateCategoryPage = (): React.JSX.Element => {
             required
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
+          <ColorPicker onPickColor={(color) => setFormData({ ...formData, color: color })} />
           <Textarea
             label="Descripción (Opcional)"
             name="description"
-            className="h-20 placeholder:self-start placeholder:top-0"
+            // className="h-20 placeholder:self-start placeholder:top-0"
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             placeholder="Añade una breve descripción de la categoría"
           />
-          <ColorPicker onPickColor={(color) => setFormData({ ...formData, color: color })} />
-          <div className="fixed bottom-0 left-0 right-0 p-4 w-full flex items-center justify-center bg-white bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40">
-            <AsyncButton
-              onClick={() => crear(formData)}
-              // disabled={submitting || !formData.name || !formData.color || !formData.icon}
-              text="Crear transacción"
-            />
-          </div>
-        </form>
-      </SectionBody>
+        </Formulario>
+      </Section>
     </div>
   );
 };

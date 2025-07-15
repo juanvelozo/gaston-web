@@ -7,23 +7,27 @@ import { Plus } from 'iconoir-react';
 import CategoryCard from '../components/categoryCard.component';
 import { Button } from '../../../components/animated/button/Button.component';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
+import Section from '../../../components/animated/section/Section.component';
+import Input from '../../../components/common/input/input.component';
 
 const CategoriesPage = (): React.JSX.Element => {
   const {
-    fetchAll: { data },
+    fetchAll: { data, loading },
     categoriasPopulares,
   } = useCategories();
   const navigate = useNavigate();
 
   return (
-    <div>
-      <SectionHeader
+    <div className="flex-1 h-screen overflow-y-scroll">
+      <Section
         title="Categorias"
         bgColor={colors.coral}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/categories/create')} />}
-      />
-      <SectionBody tall>
+      >
         <div className="space-y-6">
+          <div className="sticky top-0 z-10 pt-3">
+            <Input placeholder="Buscar" disabled={loading} className="p-4" />
+          </div>
           <div className="space-y-4">
             <h2 className="text-3xl font-bold">Las más populares</h2>
             <div className="flex flex-wrap gap-2 ">
@@ -52,7 +56,7 @@ const CategoriesPage = (): React.JSX.Element => {
             ))}
           </div>
         </div>
-      </SectionBody>
+      </Section>
     </div>
   );
 };

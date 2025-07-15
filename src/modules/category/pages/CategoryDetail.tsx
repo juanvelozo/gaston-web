@@ -11,6 +11,7 @@ import { formatearMonto } from '../../../types/formatearMonto';
 import { ITransactionCardValues } from '../../transactions/components/transactionCard/transactionCard.component';
 import { Button } from '../../../components/animated/button/Button.component';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
+import Section from '../../../components/animated/section/Section.component';
 
 const CategoryDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
@@ -28,8 +29,8 @@ const CategoryDetailPage = (): React.JSX.Element => {
   const total = search?.data?.data?.transactions?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
 
   return (
-    <div>
-      <SectionHeader
+    <div className="flex-1 h-screen overflow-y-scroll">
+      <Section
         title={search?.data?.data?.name}
         bgColor={search?.data?.data?.color}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
@@ -38,15 +39,17 @@ const CategoryDetailPage = (): React.JSX.Element => {
         }
         bottom={
           <div className="flex flex-col gap-4 items-center justify-center">
-            <IconButton icon={search?.data?.data?.icon} />
+            <IconButton
+              icon={search?.data?.data?.icon}
+              className="w-16 h-16 rounded-2xl text-3xl"
+            />
 
             <p className="text-white text-xl font-bold">
               {search?.data?.data?.transactions?.length} transacciones
             </p>
           </div>
         }
-      />
-      <SectionBody>
+      >
         <div className="space-y-4">
           <Card
             title="Descripción"
@@ -107,7 +110,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
             Eliminar categoría (PELIGROSO)
           </Button>
         </div>
-      </SectionBody>
+      </Section>
     </div>
   );
 };
