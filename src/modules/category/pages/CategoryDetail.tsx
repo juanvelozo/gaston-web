@@ -3,14 +3,12 @@ import { useCategories } from '../hooks/useCategories.hook';
 import { useEffect } from 'react';
 import { ArrowLeft, EditPencil, Trash } from 'iconoir-react';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
 import ItemList from '../../../components/common/ItemList/ItemList.component';
 import Card from '../../../components/common/Card/Card.component';
 import CategoryStats from '../components/categoryStats.component';
 import { formatearMonto } from '../../../types/formatearMonto';
 import { ITransactionCardValues } from '../../transactions/components/transactionCard/transactionCard.component';
 import { Button } from '../../../components/animated/button/Button.component';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Section from '../../../components/animated/section/Section.component';
 
 const CategoryDetailPage = (): React.JSX.Element => {

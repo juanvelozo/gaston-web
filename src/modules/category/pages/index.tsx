@@ -1,12 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCategories } from '../hooks/useCategories.hook';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
 import colors from '../../../styles/colors';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import { Plus } from 'iconoir-react';
 import CategoryCard from '../components/categoryCard.component';
 import { Button } from '../../../components/animated/button/Button.component';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Section from '../../../components/animated/section/Section.component';
 import Input from '../../../components/common/input/input.component';
 

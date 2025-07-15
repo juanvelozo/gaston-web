@@ -1,11 +1,8 @@
 import { useTransactions } from '../hooks/useTransactions.hook';
-import TransactionCard from '../components/transactionCard/transactionCard.component';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import { Plus } from 'iconoir-react';
 import colors from '../../../styles/colors';
 import { useNavigate } from 'react-router-dom';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Input from '../../../components/common/input/input.component';
 import GroupedTransactionList from '../components/List/TransactionsList.component';
 import Section from '../../../components/animated/section/Section.component';

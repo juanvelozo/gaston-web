@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { useEffect } from 'react';
 import { formatearMonto } from '../../../types/formatearMonto';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import { ArrowLeft, Clock, DollarCircle, EditPencil, List, Trash, User } from 'iconoir-react';
 import OdometerText from '../../../components/animated/odometer/Odometer.component';
@@ -11,7 +10,6 @@ import ItemList from '../../../components/common/ItemList/ItemList.component';
 import { ITransactionCardValues } from '../components/transactionCard/transactionCard.component';
 import moment from 'moment';
 import colors from '../../../styles/colors';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Section from '../../../components/animated/section/Section.component';
 
 const TransactionDetailPage = (): React.JSX.Element => {

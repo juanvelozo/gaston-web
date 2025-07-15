@@ -3,18 +3,14 @@ import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
 import { useCategories } from '../../category/hooks/useCategories.hook';
 import { ArrowLeft } from 'iconoir-react';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
-import colors from '../../../styles/colors';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import Input from '../../../components/common/input/input.component';
-import AsyncButton from '../../../components/common/asyncButton/asyncButton.component';
 import TransactionTypeSelect, {
   ITransactionButtonValues,
 } from '../components/form/TransactionTypeSelect.component';
 import CustomSelect from '../../../components/common/select/select.component';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import Textarea from '../../../components/common/textArea/textArea.component';
 import Section from '../../../components/animated/section/Section.component';
 import Formulario from '../../../components/common/formulario/formulario.component';

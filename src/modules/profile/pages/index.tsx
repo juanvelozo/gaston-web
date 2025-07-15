@@ -1,9 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../hooks/useProfile.hook';
-import { toast } from 'sonner';
-import SectionHeader from '../../../components/common/sectionHeader/sectionHeader.component';
 import colors from '../../../styles/colors';
-import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
 import PerfilSections from '../components/ProfileSections.component';
 import { useLogout } from '../../auth/hooks/useLogout.hook';
 import { Button } from '../../../components/animated/button/Button.component';
