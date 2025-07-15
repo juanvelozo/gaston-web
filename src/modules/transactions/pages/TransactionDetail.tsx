@@ -12,6 +12,7 @@ import { ITransactionCardValues } from '../components/transactionCard/transactio
 import moment from 'moment';
 import colors from '../../../styles/colors';
 import SectionBody from '../../../components/common/sectionBody/sectionBody.component';
+import Section from '../../../components/animated/section/Section.component';
 
 const TransactionDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
@@ -27,8 +28,8 @@ const TransactionDetailPage = (): React.JSX.Element => {
   }, []);
 
   return (
-    <div>
-      <SectionHeader
+    <div className="flex-1 h-screen overflow-y-scroll">
+      <Section
         title="Detalle"
         bgColor={colors.green}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
@@ -51,8 +52,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
             />
           </div>
         }
-      />
-      <SectionBody>
+      >
         <div className="space-y-4">
           <h2 className="text-3xl font-bold">{search.data?.data?.title}</h2>
           <p className="text-sm text-gray-600">
@@ -101,7 +101,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
             Eliminar transacción
           </Button>
         </div>
-      </SectionBody>
+      </Section>
     </div>
   );
 };

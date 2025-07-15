@@ -26,7 +26,7 @@ export const TransactionsPage = (): React.JSX.Element => {
       >
         <div className="flex flex-col gap-4 ">
           <div className="sticky top-0 z-10 pt-3">
-            <Input placeholder="Buscar" disabled={loading} />
+            <Input placeholder="Buscar" disabled={loading} className="p-4" />
           </div>
           {loading ? <span>Cargando...</span> : <GroupedTransactionList data={data?.data || []} />}
         </div>
