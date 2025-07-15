@@ -36,10 +36,10 @@ export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
             className={cn('h-4 w-4 rounded-full animate-spin border-2', loadingStyles[variant])}
           />
         ) : (
-          <div className="flex gap-2 items-center text-ellipsis truncate w-min-0">
-            {iconLeft && <span>{iconLeft}</span>}
-            {children}
-            {iconRight && <span>{iconRight}</span>}
+          <div className="flex items-center gap-2 min-w-0">
+            {iconLeft && <span className="shrink-0">{iconLeft}</span>}
+            <span className="truncate">{children}</span>
+            {iconRight && <span className="shrink-0">{iconRight}</span>}
           </div>
         )}
       </motion.button>
