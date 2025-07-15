@@ -13,16 +13,19 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
   }
 
   return (
-    <div className="w-full h-full grid grid-cols-4 grid-rows-4">
+    <div className="w-full h-full grid grid-cols-4 grid-rows-3">
       {colorsArray.map((color) => {
         const isActive = hex === color;
         return (
-          <div key={color} className="relative flex items-center justify-center  w-24 h-24">
+          <div
+            key={color}
+            className="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24"
+          >
             {isActive && (
               <motion.div
                 layoutId="activeBackground"
                 className="absolute inset-0 
-                left-0 right-0 top-0 bottom-0 rounded-3xl z-0 w-24 h-24"
+                left-0 right-0 top-0 bottom-0 rounded-3xl z-0 w-20 h-20 sm:w-24 sm:h-24"
                 initial={false}
                 animate={{
                   backgroundColor: color + '50',
@@ -36,7 +39,7 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
               />
             )}
             <div
-              className={`relative w-20 h-20 rounded-3xl cursor-pointer bg-[${color}] flex items-center justify-center`}
+              className={`relative w-16 sm:w-20 h-16 sm:h-20 rounded-3xl cursor-pointer bg-[${color}] flex items-center justify-center`}
               onClick={() => handlePick(color)}
               style={{ backgroundColor: color }}
             >
