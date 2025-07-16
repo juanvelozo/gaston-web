@@ -10,7 +10,7 @@ const Navbar = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex m-3 rounded-3xl p-1 sm:p-3 items-center justify-around z-40 max-w-xl">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex m-3 rounded-3xl p-1 sm:p-3 items-center justify-around z-40 max-w-[390px]">
       {Object.values(privateRouteConfig).map((route) => {
         const isActive = currentRoute === route.href;
 

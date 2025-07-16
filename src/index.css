@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+main {
+  max-width: 420px;
+}
 /* Scrollbar global delgada y sin contenedor */
 ::-webkit-scrollbar {
   width: 6px; /* Ancho para scroll vertical */
