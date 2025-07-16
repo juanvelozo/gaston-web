@@ -21,7 +21,7 @@ const Section = ({
 }: SectionProps): React.JSX.Element => {
   return (
     <div
-      className="min-h-screen w-screen flex flex-col transition-colors duration-500 ease-in-out"
+      className="min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out"
       style={{ background: bgColor }}
     >
       {/* HEADER sticky */}
