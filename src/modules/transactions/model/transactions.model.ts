@@ -15,4 +15,4 @@ export interface ITransaction {
   category: ICategory;
 }
 
-export type TransactionType = 'INCOME' | 'EXPENSE' | 'SAVING';
+export type TransactionType = 'INCOME' | 'EXPENSE';

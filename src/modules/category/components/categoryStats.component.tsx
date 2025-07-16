@@ -10,7 +10,7 @@ const CategoryStats = ({ data }: ICategoryStats): React.JSX.Element => {
       .reduce((acc, curr) => acc + curr.amount, 0);
   }
 
-  const ahorros = getTotalByType('SAVING');
+  // const ahorros = getTotalByType('SAVING');
   const gastos = getTotalByType('EXPENSE');
   const ingresos = getTotalByType('INCOME');
 

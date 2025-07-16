@@ -28,9 +28,25 @@ export type TypeConfig = {
 };
 
 const ITransactionCardValues: TypeConfig = {
-  EXPENSE: { title: 'Gasto', icon: <ArrowDownRightCircle color="#fff" fontSize={24} /> },
-  INCOME: { title: 'Ingreso', icon: <ArrowUpRightCircle color="#fff" fontSize={24} /> },
-  SAVING: { title: 'Ahorro', icon: <PiggyBank color="#fff" fontSize={24} /> },
+  CREATE: {
+    title: 'Crear transaccion',
+    icon: <PlusCircle color="#fff" fontSize={16} />,
+    className: 'bg-brand-navy col-span-4',
+    type: 'CREATE',
+  },
+  EXPENSE: {
+    title: 'Ver gastos',
+    icon: <ArrowDownRight color="#fff" fontSize={16} />,
+    className: 'bg-brand-coral col-span-2',
+    type: 'EXPENSE',
+  },
+  INCOME: {
+    title: 'Ver ingresos',
+    icon: <ArrowUpRight color="#fff" fontSize={16} />,
+    className: 'bg-brand-green col-span-2',
+    type: 'INCOME',
+  },
+  // SAVING: { title: 'Ahorro', icon: <PiggyBank color="#fff" fontSize={24} /> },
 };
 
 export default TransactionActions;

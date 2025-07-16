@@ -33,7 +33,15 @@ type ResumeCardConfig = {
 };
 
 const IResumeCardValues: ResumeCardConfig = {
-  expense: { title: 'Gasto', icon: <ArrowDownRightCircle color="red" /> },
-  income: { title: 'Ingreso', icon: <ArrowUpRightCircle color="green" /> },
-  saving: { title: 'Ahorro', icon: <PiggyBank color="#deb602" /> },
+  expense: {
+    title: 'Gasto',
+    icon: <ArrowDownRight color="red" strokeWidth={2.5} />,
+    color: 'text-brand-coral',
+  },
+  income: {
+    title: 'Ingreso',
+    icon: <ArrowUpRight color="green" strokeWidth={2.5} />,
+    color: 'text-brand-green',
+  },
+  // saving: { title: 'Ahorro', icon: <PiggyBank color="#deb602" /> },
 };

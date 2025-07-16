@@ -8,7 +8,7 @@ import { ArrowDownRightCircle, PiggyBank } from 'iconoir-react';
 export const TRANSACTION_TYPE = {
   INCOME: 'INCOME',
   EXPENSE: 'EXPENSE',
-  SAVING: 'SAVING',
+  // SAVING: 'SAVING',
 } as const;
 
 const TransactionTypeSelect = ({ onChange }: ITransactionTypeSelect): React.JSX.Element => {
@@ -79,10 +79,10 @@ export const ITransactionButtonValues: TypeConfig = {
     color: '#3A7D44',
     icon: (isSelected) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
   },
-  SAVING: {
-    color: '#F2AF29',
-    icon: (isSelected) => <PiggyBank color={isSelected ? '#fff' : '#F2AF29'} />,
-  },
+  // SAVING: {
+  //   color: '#F2AF29',
+  //   icon: (isSelected) => <PiggyBank color={isSelected ? '#fff' : '#F2AF29'} />,
+  // },
 };
 
 export default TransactionTypeSelect;

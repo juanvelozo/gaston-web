@@ -1,5 +1,5 @@
 export interface ISummary {
   income: number;
   expense: number;
-  saving: number;
+  // saving: number;
 }
