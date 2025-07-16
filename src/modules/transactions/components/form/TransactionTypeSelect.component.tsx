@@ -51,7 +51,7 @@ const TransactionTypeSelect = ({ onChange }: ITransactionTypeSelect): React.JSX.
              rounded-3xl ${isActive ? 'text-white border-none' : 'text-gray-500'} transition-colors duration-200 focus:ring-0 focus:outline-none`}
             >
               {ITransactionButtonValues[key].icon(isActive)}
-              <span className="mt-2 text-sm font-medium">{ITransactionCardValues[key].title}</span>
+              <span className="mt-2 font-medium">{ITransactionCardValues[key].title}</span>
             </button>
           </div>
         );

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
 import { useCategories } from '../../category/hooks/useCategories.hook';
@@ -16,7 +16,6 @@ import Section from '../../../components/animated/section/Section.component';
 import Formulario from '../../../components/common/formulario/formulario.component';
 
 const CreateTransationPage = (): React.JSX.Element => {
-  const [mostrarCalculadora, setMostrarCalculadora] = useState<boolean>(false);
   const [formData, setFormData] = useState<ICreateTransactionDto>({
     type: 'INCOME',
     amount: 0,
@@ -25,6 +24,7 @@ const CreateTransationPage = (): React.JSX.Element => {
   });
   const [bgColor, setBgColor] = useState<string>(ITransactionButtonValues[formData.type].color);
 
+  const inputRef = useRef<HTMLInputElement>(null);
   const { fetchAll: allCategories } = useCategories();
   const { crear, submitting } = useTransactions();
   const navigate = useNavigate();
@@ -44,72 +44,76 @@ const CreateTransationPage = (): React.JSX.Element => {
     e.preventDefault();
     crear(formData);
   }
+  useEffect(() => {
+    if (inputRef?.current) inputRef?.current?.focus();
+  }, []);
 
   return (
     <div className=" flex-1 h-screen overflow-y-scroll">
       {/* Header */}
       <Section
         // tall
-        title="Nueva transacción"
+        title={formData.type === 'EXPENSE' ? 'Nuevo gasto' : 'Nuevo ingreso'}
         bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={
-          <div className="flex flex-col items-center justify-center">
+          <div
+            className="flex flex-col items-center justify-center"
+            onClick={() => inputRef.current?.focus()}
+          >
             <span className="text-center text-white text-sm">
-              Ingresa el monto de la transacción
+              Ingresa el monto haciendo click en este campo
             </span>
             <NumericFormat
+              getInputRef={inputRef}
               value={formData.amount}
               thousandSeparator="."
               decimalSeparator=","
-              prefix="$"
+              prefix="$ "
+              // autoFocus={true}
+              inputMode="numeric"
               placeholder="$0.00"
-              className="w-full py-2 text-4xl text-center font-bold backdrop-blur transition relative appearance-none outline-none bg-transparent  text-white"
+              className="w-full py-2 text-4xl text-center font-bold transition-colors duration-500 ease-in-out appearance-none outline-none bg-transparent  text-white"
               onValueChange={(e) => setFormData({ ...formData, amount: Number(e.floatValue) })}
-              onFocus={() => setMostrarCalculadora(true)}
-              onBlur={() => setMostrarCalculadora(false)}
             />
           </div>
         }
       >
-        {mostrarCalculadora ? (
-          <div>calculadora</div>
-        ) : (
-          <Formulario
-            onSubmit={handleSubmit}
-            className="space-y-5"
-            loading={submitting}
-            disabled={submitting || formData.amount === 0 || !formData.type || !formData.title}
-          >
-            <TransactionTypeSelect
-              onChange={(e) => {
-                setFormData({ ...formData, type: e });
-                setBgColor(ITransactionButtonValues[e].color);
-              }}
-            />
-            <Input
-              placeholder="Agrega un título"
-              label="Título"
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            />
-            <CustomSelect
-              options={listaDeCategorías}
-              onChange={(e) => {
-                const selected = e.value;
-                setFormData((prev) => ({
-                  ...prev,
-                  categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
-                }));
-              }}
-              placeholder="Seleccione una categoría"
-            />
-            <Textarea
-              placeholder="Agrega una descripción"
-              label="Descripción (Opcional)"
-              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            />
-          </Formulario>
-        )}
+        <Formulario
+          onSubmit={handleSubmit}
+          className="space-y-5"
+          loading={submitting}
+          disabled={submitting || formData.amount === 0 || !formData.type || !formData.title}
+        >
+          <p>Elegí el tipo de transacción:</p>
+          <TransactionTypeSelect
+            onChange={(e) => {
+              setFormData({ ...formData, type: e });
+              setBgColor(ITransactionButtonValues[e].color);
+            }}
+          />
+          <Input
+            placeholder="Agrega un título"
+            label="Título"
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          />
+          <CustomSelect
+            options={listaDeCategorías}
+            onChange={(e) => {
+              const selected = e.value;
+              setFormData((prev) => ({
+                ...prev,
+                categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
+              }));
+            }}
+            placeholder="Seleccione una categoría"
+          />
+          <Textarea
+            placeholder="Agrega una descripción"
+            label="Descripción (Opcional)"
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          />
+        </Formulario>
       </Section>
     </div>
   );
