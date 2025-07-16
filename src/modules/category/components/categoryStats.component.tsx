@@ -31,13 +31,13 @@ const CategoryStats = ({ data }: ICategoryStats): React.JSX.Element => {
         <p className="font-bold text-sm">{formatearMonto(ingresos ?? 0)}</p>
       </div>
 
-      <div className="text-center">
+      {/* <div className="text-center">
         <div className="flex items-center justify-center mb-1">
           <PiggyBank color="#deb602" />
         </div>
         <p className="text-xs text-gray-500">Ahorros</p>
         <p className="font-bold text-sm">{formatearMonto(ahorros ?? 0)}</p>
-      </div>
+      </div> */}
     </div>
   );
 };
