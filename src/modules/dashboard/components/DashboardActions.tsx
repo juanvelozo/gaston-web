@@ -21,14 +21,14 @@ const TransactionActions = (): React.JSX.Element => {
     <div className="grid grid-cols-4 gap-2">
       {Object.values(ITransactionCardValues).map((value) => (
         <motion.div
-          className={cn(`flex items-center justify-center gap-2 p-3 rounded-2xl`, value.className)}
+          className={cn(`flex items-center justify-center gap-2 p-3 rounded-3xl cursor-pointer select-none`, value.className)}
           key={value.title}
           whileTap={{ scale: 0.97 }}
           whileHover={{ scale: 1.05 }}
           onClick={() => handleClick(value.type)}
         >
           {value.icon}
-          <p className="text-white text-lg truncate">{value.title}</p>
+          <p className="text-white text-base truncate">{value.title}</p>
         </motion.div>
       ))}
     </div>

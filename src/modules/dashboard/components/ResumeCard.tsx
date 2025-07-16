@@ -8,13 +8,13 @@ import { cn } from '../../../libs/utils';
 const ResumeCard = ({ data, loading }: IResumeCard): React.JSX.Element => {
   // TOOD: componetizar esta card y agregar fondo animado
   return (
-    <div className="flex flex-col md:flex-row bg-brand-white border min-w-[320px] min-h-[170px] md:gap-0 gap-4 p-4 rounded-3xl w-full md:justify-around flex-wrap justify-start items-start md:items-center">
+    <div className="flex flex-col md:flex-row bg-brand-white border min-w-[320px] min-h-[170px] md:gap-0 gap-4 p-4 rounded-3xl w-full  flex-wrap justify-start items-start">
       {loading ? (
         <span>Cargando</span>
       ) : (
         data &&
         Object.entries(data).map(([key, value]) => (
-          <div key={key} className="flex flex-col items-start gap-4">
+          <div key={key} className="flex flex-col  items-start gap-4">
             <p
               className={cn(
                 'text-white text-sm font-semibold',
