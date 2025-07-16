@@ -1,26 +1,48 @@
 import { ReactNode } from 'react';
 import { ISummary } from '../model/dashboard.model';
 import OdometerText from '../../../components/animated/odometer/Odometer.component';
-import { ArrowDownRightCircle, ArrowUpRightCircle, PiggyBank } from 'iconoir-react';
+import { ArrowDownRight, ArrowUpRight } from 'iconoir-react';
 import { formatearMonto } from '../../../types/formatearMonto';
+import { cn } from '../../../libs/utils';
 
-const ResumeCard = ({ data }: IResumeCard): React.JSX.Element => {
+const ResumeCard = ({ data, loading }: IResumeCard): React.JSX.Element => {
   // TOOD: componetizar esta card y agregar fondo animado
   return (
-    <div className="flex flex-col md:flex-row bg-brand-green md:gap-0 gap-4 p-4 rounded-3xl w-full md:justify-around flex-wrap justify-start items-start md:items-center">
-      {data &&
+    <div className="flex flex-col md:flex-row bg-brand-white border min-w-[320px] min-h-[170px] md:gap-0 gap-4 p-4 rounded-3xl w-full md:justify-around flex-wrap justify-start items-start md:items-center">
+      {loading ? (
+        <span>Cargando</span>
+      ) : (
+        data &&
         Object.entries(data).map(([key, value]) => (
           <div key={key} className="flex flex-col items-start gap-4">
-            <p className="text-white text-sm">{IResumeCardValues[key as keyof ISummary].title}</p>
-            <OdometerText text={formatearMonto(value)} />
+            <p
+              className={cn(
+                'text-white text-sm font-semibold',
+                IResumeCardValues[key as keyof ISummary].color
+              )}
+            >
+              {IResumeCardValues[key as keyof ISummary].title}
+            </p>
+            <div className="flex items-center gap-4">
+              {IResumeCardValues[key as keyof ISummary].icon}
+              <OdometerText
+                text={formatearMonto(value, (key as keyof ISummary) == 'expense')}
+                className={cn(
+                  'text-xl font-semibold',
+                  IResumeCardValues[key as keyof ISummary].color
+                )}
+              />
+            </div>
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 };
 
 interface IResumeCard {
   data?: ISummary;
+  loading?: boolean;
 }
 
 export default ResumeCard;
@@ -29,6 +51,7 @@ type ResumeCardConfig = {
   [x in keyof ISummary]: {
     title: string;
     icon?: ReactNode;
+    color?: string;
   };
 };
 

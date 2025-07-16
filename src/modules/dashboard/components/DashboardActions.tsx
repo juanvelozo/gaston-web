@@ -1,29 +1,48 @@
 import { ReactNode } from 'react';
-import { TransactionType } from '../../transactions/model/transactions.model';
-import { ArrowDownRightCircle, ArrowUpRightCircle, PiggyBank } from 'iconoir-react';
+import { ArrowDownRight, ArrowDownRightCircle, ArrowUpRight, PlusCircle } from 'iconoir-react';
 import { motion } from 'framer-motion';
+import { cn } from '../../../libs/utils';
+import { useNavigate } from 'react-router-dom';
 const TransactionActions = (): React.JSX.Element => {
+  const navigate = useNavigate();
+
+  function handleClick(key: Actions) {
+    switch (key) {
+      case 'CREATE':
+        navigate('/transactions/create');
+        break;
+
+      default:
+        break;
+    }
+  }
+
   return (
-    <div className="flex gap-4 justify-between">
+    <div className="grid grid-cols-4 gap-2">
       {Object.values(ITransactionCardValues).map((value) => (
         <motion.div
-          className={`flex flex-col items-center justify-center w-1/3 gap-4 bg-brand-green hover:bg-opacity-90 p-4 rounded-3xl`}
+          className={cn(`flex items-center justify-center gap-2 p-3 rounded-2xl`, value.className)}
           key={value.title}
           whileTap={{ scale: 0.97 }}
           whileHover={{ scale: 1.05 }}
+          onClick={() => handleClick(value.type)}
         >
           {value.icon}
-          <p className="text-white">Ver {value.title}</p>
+          <p className="text-white text-lg truncate">{value.title}</p>
         </motion.div>
       ))}
     </div>
   );
 };
 
+type Actions = 'CREATE' | 'EXPENSE' | 'INCOME';
+
 export type TypeConfig = {
-  [x in TransactionType]: {
+  [x in Actions]: {
     icon?: ReactNode;
     title: string;
+    className?: string;
+    type: Actions;
   };
 };
 

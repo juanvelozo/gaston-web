@@ -8,9 +8,9 @@ import TransactionActions from '../components/DashboardActions';
 import { Button } from '../../../components/animated/button/Button.component';
 
 const DashboardPages = (): React.JSX.Element => {
-  const { data: summary, refetch } = useSummary();
+  const { data: summary, loading: loadingSummary, refetch } = useSummary();
   const {
-    allTransactions: { data },
+    allTransactions: { data, loading: loadingTransactions },
   } = useTransactions();
   const navigate = useNavigate();
 
@@ -23,17 +23,15 @@ const DashboardPages = (): React.JSX.Element => {
   }, [data, refetch]);
 
   return (
-    <div className="bg-white p-4 space-y-2">
+    <div className="bg-white p-4 mt-8 mb-16 space-y-2">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-bold">Resumen</h1>
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-          <ResumeCard data={summary?.data} />
+        <h1 className="text-4xl font-bold">Hola</h1>
+        <p>Mirá un resumen del estado actual de tus finanzas en un solo vistazo</p>
+        <div className="space-y-10">
+          <ResumeCard data={summary?.data} loading={loadingSummary} />
+          <TransactionActions />
+          <LastTransactions />
         </div>
-        <TransactionActions />
-        <Button onClick={() => navigate('/transactions/create')} variant="secondary">
-          Crear transacción
-        </Button>
-        <LastTransactions />
       </div>
     </div>
   );
