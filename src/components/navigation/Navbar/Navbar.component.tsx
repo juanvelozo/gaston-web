@@ -2,6 +2,7 @@ import { DollarCircle, Home, List, UserCircle } from 'iconoir-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import colors from '../../../styles/colors';
 
 const Navbar = (): React.JSX.Element => {
   const [currentRoute, setCurrentRoute] = useState<string>('/');
@@ -63,24 +64,24 @@ export type PrivateRouteConfig = {
 };
 
 export const privateRouteConfig: PrivateRouteConfig = {
-  HOME: { title: 'Home', icon: <Home fontSize={12} />, href: '/', color: 'gray' },
+  HOME: { title: 'Resumen', icon: <Home fontSize={12} />, href: '/', color: colors.navy },
   TRANSACTIONS: {
     title: 'Transacciones',
     icon: <DollarCircle fontSize={12} />,
     href: '/transactions',
-    color: '#3A7D44',
+    color: colors.green,
   },
   CATEGORIES: {
     title: 'Categorías',
     icon: <List fontSize={12} />,
     href: '/categories',
-    color: '#FE5F55',
+    color: colors.coral,
   },
   PROFILE: {
     title: 'Perfil',
     icon: <UserCircle fontSize={12} />,
     href: '/profile',
-    color: '#2A324B',
+    color: colors.blue,
   },
 };
 
