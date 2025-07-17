@@ -29,9 +29,9 @@ main {
 
 @layer components {
   .toast-base {
-    background-color: rgba(16, 23, 32, 0.6) !important;
+    background-color: rgba(16, 23, 32, 0.7) !important;
     color: #fefafa !important;
-    backdrop-filter: blur(6px) saturate(180%) !important;
+    backdrop-filter: blur(7px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(6px) saturate(180%) !important;
     background-clip: padding-box !important;
     border-radius: 1.5rem !important;
@@ -41,12 +41,12 @@ main {
   }
 
   .toast-base[data-type='success'] {
-    background-color: rgba(58, 125, 68, 0.5) !important;
+    background-color: rgba(58, 125, 68, 0.7) !important;
     color: #fefafa !important;
   }
 
   .toast-base[data-type='error'] {
-    background-color: rgba(254, 95, 85, 0.5) !important;
+    background-color: rgba(254, 95, 85, 0.8) !important;
     color: #fefafa !important;
   }
 
@@ -56,7 +56,7 @@ main {
   }
 
   .toast-base[data-type='info'] {
-    background-color: rgba(42, 157, 143, 0.5) !important;
+    background-color: rgba(42, 157, 143, 0.7) !important;
     color: #fefafa !important;
   }
 
