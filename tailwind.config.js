@@ -1,18 +1,16 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   safelist: [
-    'backdrop-blur-sm',
-    'backdrop-saturate-150',
-    'bg-opacity-60',
-    'bg-opacity-50',
-    'bg-opacity-80',
-    'text-brand-white',
-    'text-brand-black',
-    'bg-brand-green',
-    'bg-brand-coral',
-    'bg-brand-yellow',
-    'bg-brand-teal',
+    {
+      pattern: /toast-base/,
+    },
+    {
+      pattern: /data-type=.*/,
+    },
+    {
+      pattern: /(backdrop|bg|text|border)-(.*)/,
+    },
   ],
   theme: {
     extend: {
