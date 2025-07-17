@@ -62,7 +62,7 @@ const LoginScreen = (): React.JSX.Element => {
             </Link>
           </div>
         </Formulario>
-        <div className="flex items-center justify-between gap-2">
+        {/* <div className="flex items-center justify-between gap-2">
           <div className="h-0.5 w-full  bg-gray-400" />
           <span className="truncate w-full">o seguí con</span>
           <div className="h-0.5 w-full  bg-gray-400" />
@@ -80,7 +80,7 @@ const LoginScreen = (): React.JSX.Element => {
           iconLeft={<AppleIcon className="w-5 h-5" />}
         >
           Continuar con Apple
-        </Button>
+        </Button> */}
 
         <div className="flex items-center justify-center py-2">
           <span className="text-center">
