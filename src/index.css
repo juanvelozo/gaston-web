@@ -29,38 +29,45 @@ main {
 
 @layer components {
   .toast-base {
-    background-color: rgba(16, 23, 32, 0.6);
-    color: #fefafa;
-    backdrop-filter: blur(6px) saturate(180%);
-    -webkit-backdrop-filter: blur(6px) saturate(180%);
-    background-clip: padding-box;
-    border-radius: 1.5rem;
-    padding: 1.25rem;
-    border: none;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(16, 23, 32, 0.6) !important;
+    color: #fefafa !important;
+    backdrop-filter: blur(6px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(180%) !important;
+    background-clip: padding-box !important;
+    border-radius: 1.5rem !important;
+    padding: 1.25rem !important;
+    border: none !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
   }
 
   .toast-base[data-type='success'] {
-    @apply bg-brand-green bg-opacity-50 text-brand-white;
+    background-color: rgba(58, 125, 68, 0.5) !important;
+    color: #fefafa !important;
   }
 
   .toast-base[data-type='error'] {
-    @apply bg-brand-coral bg-opacity-50 text-brand-white;
+    background-color: rgba(254, 95, 85, 0.5) !important;
+    color: #fefafa !important;
   }
 
   .toast-base[data-type='warning'] {
-    @apply bg-brand-yellow bg-opacity-80 text-brand-black;
+    background-color: rgba(242, 175, 41, 0.8) !important;
+    color: #101720 !important;
   }
 
   .toast-base[data-type='info'] {
-    @apply bg-brand-teal bg-opacity-50 text-brand-white;
+    background-color: rgba(42, 157, 143, 0.5) !important;
+    color: #fefafa !important;
   }
 
   .toast-title {
-    @apply font-semibold;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
   }
 
   .toast-description {
-    @apply text-sm;
+    font-size: 0.875rem !important;
+    font-weight: 300 !important;
   }
 }
+

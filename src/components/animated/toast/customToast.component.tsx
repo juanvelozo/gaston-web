@@ -9,8 +9,8 @@ const Tostadita = (): React.JSX.Element => {
       toastOptions={{
         classNames: {
           toast: 'toast-base',
-          title: 'font-extrabold text-lg toast-title text-shadow-lg',
-          description: 'text-lg font-light toast-description text-shadow-lg',
+          title: 'toast-title',
+          description: 'toast-description',
           icon: '!mr-8 !ml-1',
           warning: '!text-black',
         },
@@ -23,6 +23,7 @@ const Tostadita = (): React.JSX.Element => {
         info: <InfoCircle className="w-10 h-10 text-teal-200" />,
       }}
     />
+
   );
 };
 
