@@ -1,6 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  safelist: [
+    'backdrop-blur-sm',
+    'backdrop-saturate-150',
+    'bg-opacity-60',
+    'bg-opacity-50',
+    'bg-opacity-80',
+    'text-brand-white',
+    'text-brand-black',
+    'bg-brand-green',
+    'bg-brand-coral',
+    'bg-brand-yellow',
+    'bg-brand-teal',
+  ],
   theme: {
     extend: {
       colors: {
@@ -22,11 +35,4 @@ export default {
     },
   },
   plugins: [],
-  safelist: [
-  'backdrop-filter',
-  'backdrop-blur-sm',
-  'backdrop-saturate-150',
-  'bg-opacity-60',
-],
-
 };
