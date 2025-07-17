@@ -22,4 +22,11 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+  'backdrop-filter',
+  'backdrop-blur-sm',
+  'backdrop-saturate-150',
+  'bg-opacity-60',
+],
+
 };
