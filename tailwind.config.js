@@ -1,6 +1,21 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  safelist: [
+    'toast-base',
+    'toast-title',
+    'toast-description',
+    // También agregamos patrones para no purgar clases con atributos data-type
+    {
+      pattern: /toast-base/,
+    },
+    {
+      pattern: /data-type=.*/,
+    },
+    {
+      pattern: /(backdrop|bg|text|border)-(.*)/,
+    },
+  ],
   theme: {
     extend: {
       colors: {

@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 main {
   max-width: 420px;
 }
+
 /* Scrollbar global delgada y sin contenedor */
 ::-webkit-scrollbar {
-  width: 6px; /* Ancho para scroll vertical */
-  height: 6px; /* Alto para scroll horizontal */
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(100, 116, 139, 0.6); /* slate-500 con opacidad */
-  border-radius: 9999px; /* Full rounded */
+  background-color: rgba(100, 116, 139, 0.6);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* Sin contenedor visible */
+  background: transparent;
 }
 
 /* Firefox */
@@ -27,43 +27,47 @@ main {
   scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
 }
 
-.toast-base {
-  background-color: rgba(16, 23, 32, 0.6);
-  color: #fefafa;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  background-clip: padding-box;
+@layer components {
+  .toast-base {
+    background-color: rgba(16, 23, 32, 0.7) !important;
+    color: #fefafa !important;
+    backdrop-filter: blur(7px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(180%) !important;
+    background-clip: padding-box !important;
+    border-radius: 1.5rem !important;
+    padding: 1.25rem !important;
+    border: none !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+  }
 
-  border-radius: 2rem !important;
-  padding: 1.25rem !important;
+  .toast-base[data-type='success'] {
+    background-color: rgba(58, 125, 68, 0.7) !important;
+    color: #fefafa !important;
+  }
 
-  border: none !important;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+  .toast-base[data-type='error'] {
+    background-color: rgba(254, 95, 85, 0.8) !important;
+    color: #fefafa !important;
+  }
+
+  .toast-base[data-type='warning'] {
+    background-color: rgba(242, 175, 41, 0.8) !important;
+    color: #101720 !important;
+  }
+
+  .toast-base[data-type='info'] {
+    background-color: rgba(42, 157, 143, 0.7) !important;
+    color: #fefafa !important;
+  }
+
+  .toast-title {
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+  }
+
+  .toast-description {
+    font-size: 0.875rem !important;
+    font-weight: 300 !important;
+  }
 }
 
-.toast-title,
-.toast-description {
-  color: #fefafa !important; /* blanco por defecto */
-}
-
-.toast-base[data-type='success'] {
-  background-color: rgba(58, 125, 68, 0.5);
-}
-
-.toast-base[data-type='error'] {
-  background-color: rgba(254, 95, 85, 0.7);
-}
-
-.toast-base[data-type='warning'] {
-  background-color: rgba(248, 213, 16, 0.8);
-  color: #101720 !important;
-}
-
-.toast-base[data-type='warning'] .toast-title,
-.toast-base[data-type='warning'] .toast-description {
-  color: #101720;
-}
-
-.toast-base[data-type='info'] {
-  background-color: rgba(0, 163, 163, 0.7);
-}
