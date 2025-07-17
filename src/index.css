@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 main {
   max-width: 420px;
 }
+
 /* Scrollbar global delgada y sin contenedor */
 ::-webkit-scrollbar {
-  width: 6px; /* Ancho para scroll vertical */
-  height: 6px; /* Alto para scroll horizontal */
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(100, 116, 139, 0.6); /* slate-500 con opacidad */
-  border-radius: 9999px; /* Full rounded */
+  background-color: rgba(100, 116, 139, 0.6);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* Sin contenedor visible */
+  background: transparent;
 }
 
 /* Firefox */
@@ -29,36 +29,31 @@ main {
 
 @layer components {
   .toast-base {
-    background-color: rgba(16, 23, 32, 0.6);
-    color: #fefafa;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    background-clip: padding-box;
-    border-radius: 2rem !important;
-    padding: 1.25rem !important;
-    border: none !important;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
+    @apply bg-black bg-opacity-60 text-brand-white backdrop-blur-sm backdrop-saturate-150 bg-clip-padding rounded-3xl px-5 py-5 shadow-md border-none;
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
   }
 
   .toast-base[data-type='success'] {
-    background-color: rgba(58, 125, 68, 0.5);
+    @apply bg-brand-green bg-opacity-50 text-brand-white;
   }
 
   .toast-base[data-type='error'] {
-    background-color: rgba(254, 95, 85, 0.5);
+    @apply bg-brand-coral bg-opacity-50 text-brand-white;
   }
 
   .toast-base[data-type='warning'] {
-    background-color: rgba(242, 175, 41, 0.8); /* más opaco */
-    color: #101720;
-  }
-
-  .toast-base[data-type='warning'] .toast-title,
-  .toast-base[data-type='warning'] .toast-description {
-    color: #101720;
+    @apply bg-brand-yellow bg-opacity-80 text-brand-black;
   }
 
   .toast-base[data-type='info'] {
-    background-color: rgba(42, 157, 143, 0.5);
+    @apply bg-brand-teal bg-opacity-50 text-brand-white;
+  }
+
+  .toast-title {
+    @apply font-semibold;
+  }
+
+  .toast-description {
+    @apply text-sm;
   }
 }
