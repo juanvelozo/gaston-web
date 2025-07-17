@@ -29,9 +29,16 @@ main {
 
 @layer components {
   .toast-base {
-    @apply bg-black bg-opacity-60 text-brand-white backdrop-blur-sm backdrop-saturate-150 bg-clip-padding rounded-3xl px-5 py-5 shadow-md border-none;
-    -webkit-backdrop-filter: blur(5px) saturate(150%);
-  }
+  background-color: rgba(16, 23, 32, 0.6); /* negro con opacidad */
+  color: #fefafa;
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  background-clip: padding-box;
+  border-radius: 1.5rem;
+  padding: 1.25rem;
+  border: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
   .toast-base[data-type='success'] {
     @apply bg-brand-green bg-opacity-50 text-brand-white;
