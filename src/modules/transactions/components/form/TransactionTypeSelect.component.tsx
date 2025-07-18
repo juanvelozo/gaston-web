@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TransactionType } from '../../model/transactions.model';
 import { motion } from 'framer-motion';
 import { Button } from '../../../../components/animated/button/Button.component';
@@ -11,12 +11,19 @@ export const TRANSACTION_TYPE = {
   // SAVING: 'SAVING',
 } as const;
 
-const TransactionTypeSelect = ({ onChange }: ITransactionTypeSelect): React.JSX.Element => {
+const TransactionTypeSelect = ({ onChange, value }: ITransactionTypeSelect): React.JSX.Element => {
   const [selected, setSelected] = useState<TransactionType>(TRANSACTION_TYPE.INCOME);
 
   function handleChange(value: TransactionType) {
     onChange && onChange(value);
   }
+
+  useEffect(() => {
+    if (value) {
+      handleChange(value);
+      setSelected(value);
+    }
+  }, [value]);
 
   return (
     <div className="flex items-center gap-4">
@@ -61,6 +68,7 @@ const TransactionTypeSelect = ({ onChange }: ITransactionTypeSelect): React.JSX.
 };
 interface ITransactionTypeSelect {
   onChange?: (arg: TransactionType) => void;
+  value?: TransactionType;
 }
 
 export type TypeConfig = {

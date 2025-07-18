@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
 import { useCategories } from '../../category/hooks/useCategories.hook';
@@ -8,13 +8,15 @@ import Input from '../../../components/common/input/input.component';
 import TransactionTypeSelect, {
   ITransactionButtonValues,
 } from '../components/form/TransactionTypeSelect.component';
-import CustomSelect from '../../../components/common/select/select.component';
+import CustomSelect, { SelectOption } from '../../../components/common/select/select.component';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate, useParams } from 'react-router-dom';
 import Textarea from '../../../components/common/textArea/textArea.component';
 import Section from '../../../components/animated/section/Section.component';
 import Formulario from '../../../components/common/formulario/formulario.component';
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
+import { useSelectOptions } from '../../../hooks/useSelectOptions.hook';
+import { ICategory } from '../../category/model/category.model';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
@@ -22,26 +24,33 @@ const CreateTransationPage = (): React.JSX.Element => {
     amount: 0,
     title: '',
     description: '',
+    categoryId: undefined,
   });
   const [bgColor, setBgColor] = useState<string>(ITransactionButtonValues[formData.type].color);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
   const { fetchAll: allCategories } = useCategories();
-  const { crear, submitting, search, cargando, error } = useTransactions();
+  const { crear, submitting, search, cargando, error, editar } = useTransactions();
   const navigate = useNavigate();
+  const { mapToSelectOptions } = useSelectOptions<ICategory>();
 
   const ocurrioUnError = Boolean(error);
-  const listaDeCategorías: {
-    label: string;
-    value: string;
-  }[] = [
-    { label: 'Sin categoría', value: 'null' },
-    ...(allCategories?.data?.data?.map((cat) => ({
-      label: `${cat.icon} ${cat.name}`,
-      value: cat.id.toString(),
-    })) ?? []),
-  ];
+  const estamosEditando = Boolean(id);
+  const listaDeCategorías = useMemo(() => {
+    return mapToSelectOptions(
+      allCategories.data?.data ?? [],
+      (cat) => ({
+        value: cat.id.toString(),
+        label: `${cat.icon} ${cat.name}`,
+      }),
+      { value: 'null', label: 'Sin categoría' }
+    );
+  }, [allCategories.data?.data]);
+
+  const categoríaYaAsignada = (listaDeCategorías as { value: string; label: string }[])?.find(
+    (cat) => cat.value === formData.categoryId?.toString()
+  );
 
   async function fetchDetail() {
     await search.call(Number(id));
@@ -57,15 +66,36 @@ const CreateTransationPage = (): React.JSX.Element => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    crear(formData);
+    if (estamosEditando) {
+      editar(Number(id), formData);
+    } else {
+      crear(formData);
+    }
   }
+
+  function enfocarInputMonto() {
+    if (inputRef?.current) inputRef?.current?.focus();
+  }
+
   useEffect(() => {
     if (inputRef?.current) inputRef?.current?.focus();
   }, []);
 
   useEffect(() => {
-    if (id) fetchDetail();
-  }, [id]);
+    if (estamosEditando) fetchDetail();
+  }, [estamosEditando]);
+
+  useEffect(() => {
+    if (search.data?.data) {
+      setFormData({
+        amount: search?.data?.data?.amount,
+        title: search?.data?.data?.title,
+        description: search?.data?.data?.description,
+        type: search?.data?.data?.type,
+        categoryId: search?.data?.data?.category?.id,
+      });
+    }
+  }, [search.data?.data]);
 
   return (
     <div className=" flex-1 h-screen overflow-y-scroll">
@@ -73,7 +103,9 @@ const CreateTransationPage = (): React.JSX.Element => {
       <Section
         // tall
         loading={cargando}
-        title={formData.type === 'EXPENSE' ? 'Nuevo gasto' : 'Nuevo ingreso'}
+        title={
+          estamosEditando ? 'Editar' : formData.type === 'EXPENSE' ? 'Nuevo gasto' : 'Nuevo ingreso'
+        }
         bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={
@@ -91,7 +123,7 @@ const CreateTransationPage = (): React.JSX.Element => {
                 thousandSeparator="."
                 decimalSeparator=","
                 prefix="$ "
-                // autoFocus={true}
+                autoFocus={true}
                 inputMode="numeric"
                 placeholder="$0.00"
                 className="w-full py-2 text-4xl text-center font-bold transition-colors duration-500 ease-in-out appearance-none outline-none bg-transparent  text-white"
@@ -108,10 +140,12 @@ const CreateTransationPage = (): React.JSX.Element => {
             onSubmit={handleSubmit}
             className="space-y-5"
             loading={submitting}
-            disabled={submitting || formData.amount === 0 || !formData.type || !formData.title}
+            disabled={submitting || !formData.type || !formData.title}
+            idleText="Guardar"
           >
             <p>Elegí el tipo de transacción:</p>
             <TransactionTypeSelect
+              value={formData.type}
               onChange={(e) => {
                 setFormData({ ...formData, type: e });
                 setBgColor(ITransactionButtonValues[e].color);
@@ -120,9 +154,11 @@ const CreateTransationPage = (): React.JSX.Element => {
             <Input
               placeholder="Agrega un título"
               label="Título"
+              value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
             <CustomSelect
+              loading={allCategories.loading}
               options={listaDeCategorías}
               onChange={(e) => {
                 const selected = e.value;
@@ -131,11 +167,14 @@ const CreateTransationPage = (): React.JSX.Element => {
                   categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
                 }));
               }}
+              value={categoríaYaAsignada || null}
               placeholder="Seleccione una categoría"
             />
+
             <Textarea
               placeholder="Agrega una descripción"
               label="Descripción (Opcional)"
+              value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
           </Formulario>
