@@ -6,9 +6,6 @@ import Input from '../../../components/common/input/input.component';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import { Dollar, Lock, Mail } from 'iconoir-react';
 import Formulario from '../../../components/common/formulario/formulario.component';
-import { Button } from '../../../components/animated/button/Button.component';
-import { GoogleIcon } from '../../../assets/svg/googleicon';
-import { AppleIcon } from '../../../assets/svg/appleicon';
 
 const LoginScreen = (): React.JSX.Element => {
   const { signIn, loading } = useLogin();
@@ -35,7 +32,7 @@ const LoginScreen = (): React.JSX.Element => {
       </div>
       <div className="p-5 shadow-lg border rounded-3xl space-y-5 bg-white">
         <Formulario
-          loading={!loading}
+          loading={loading}
           onSubmit={handleSubmit}
           disabled={!formData.email || !formData.password}
           idleText="Entrar a mi cuenta"
