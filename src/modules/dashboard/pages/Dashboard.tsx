@@ -1,4 +1,3 @@
-import { useTransactions } from '../../transactions/hooks/useTransactions.hook';
 import { useSummary } from '../hooks/useSummary.hook';
 import { useEffect } from 'react';
 import ResumeCard from '../components/ResumeCard';
@@ -12,9 +11,8 @@ const DashboardPages = (): React.JSX.Element => {
     async function reloadSummary() {
       await refetch();
     }
-
     reloadSummary();
-  }, [summary, refetch]);
+  }, []);
 
   return (
     <div className="bg-white p-4 mt-8 mb-16 space-y-2">
