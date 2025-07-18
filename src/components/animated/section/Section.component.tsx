@@ -1,9 +1,8 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import clsx from 'clsx';
-import { FadeLoader } from 'react-spinners';
 import colors from '../../../styles/colors';
 import { cn } from '../../../libs/utils';
-import { Skeleton } from '../skeleton/skeleton.component';
+import { IOSSpinner } from '../iosSpinner/Spinner.component';
 
 interface SectionProps extends PropsWithChildren {
   bgColor?: string;
@@ -44,7 +43,7 @@ const Section = ({
         </div>
         {bottom && (
           <div className="flex justify-center items-center my-6">
-            {loading ? <FadeLoader color={colors.white} /> : bottom}
+            {loading ? <IOSSpinner color={colors.white} /> : bottom}
           </div>
         )}
       </div>
@@ -59,7 +58,7 @@ const Section = ({
       >
         {loading ? (
           <div className="w-full h-full flex items-center justify-center p-16">
-            <FadeLoader color={bgColor} />
+            <IOSSpinner color={bgColor} />
           </div>
         ) : (
           children
