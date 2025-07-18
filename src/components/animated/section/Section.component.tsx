@@ -1,5 +1,9 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import clsx from 'clsx';
+import { FadeLoader } from 'react-spinners';
+import colors from '../../../styles/colors';
+import { cn } from '../../../libs/utils';
+import { Skeleton } from '../skeleton/skeleton.component';
 
 interface SectionProps extends PropsWithChildren {
   bgColor?: string;
@@ -8,6 +12,7 @@ interface SectionProps extends PropsWithChildren {
   right?: ReactNode;
   bottom?: ReactNode;
   tall?: boolean;
+  loading?: boolean;
 }
 
 const Section = ({
@@ -18,6 +23,7 @@ const Section = ({
   bottom,
   children,
   tall = false,
+  loading,
 }: SectionProps): React.JSX.Element => {
   return (
     <div
@@ -30,13 +36,17 @@ const Section = ({
         style={{ background: bgColor }}
       >
         <div className="flex justify-between items-center mb-4">
-          <div className="min-w-10">{left}</div>
+          <div className={cn('min-w-10', loading && 'pointer-events-none opacity-75')}>{left}</div>
           <div className="flex-1 px-4 text-center">
             <h1 className="text-2xl font-bold text-white truncate text-center">{title}</h1>
           </div>
-          <div className="min-w-10">{right}</div>
+          <div className={cn('min-w-10', loading && 'pointer-events-none opacity-75')}>{right}</div>
         </div>
-        {bottom && <div className="flex justify-center items-center my-6">{bottom}</div>}
+        {bottom && (
+          <div className="flex justify-center items-center my-6">
+            {loading ? <FadeLoader color={colors.white} /> : bottom}
+          </div>
+        )}
       </div>
 
       {/* BODY */}
@@ -47,7 +57,13 @@ const Section = ({
           'min-h-screen '
         )}
       >
-        {children}
+        {loading ? (
+          <div className="w-full h-full flex items-center justify-center p-16">
+            <FadeLoader color={bgColor} />
+          </div>
+        ) : (
+          children
+        )}
       </div>
     </div>
   );
