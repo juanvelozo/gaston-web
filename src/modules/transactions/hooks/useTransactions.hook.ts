@@ -38,6 +38,8 @@ export const useTransactions = () => {
 
   const lastTransactions = allTransactions.data?.data.slice(0, 3);
   const submitting = create.loading || update.loading;
+  const cargando = search.loading || allTransactions.loading;
+  const eliminando = eliminate.loading;
   const error =
     allTransactions.error || create.error || update.error || eliminate.error || search.error;
 
@@ -50,5 +52,7 @@ export const useTransactions = () => {
     borrar,
     error,
     submitting,
+    cargando,
+    eliminando,
   };
 };
