@@ -4,14 +4,11 @@ import { IRegisterRequest } from '../model/auth.model';
 import { Link } from 'react-router-dom';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import { Dollar, Lock, Mail } from 'iconoir-react';
-import { Button } from '../../../components/animated/button/Button.component';
-import { GoogleIcon } from '../../../assets/svg/googleicon';
-import { AppleIcon } from '../../../assets/svg/appleicon';
 import Input from '../../../components/common/input/input.component';
 import Formulario from '../../../components/common/formulario/formulario.component';
 
 const RegisterScreen = (): React.JSX.Element => {
-  const { signUp } = useRegister();
+  const { signUp, loading } = useRegister();
 
   const [formData, setFormData] = useState<IRegisterRequest>({
     email: '',
@@ -41,7 +38,7 @@ const RegisterScreen = (): React.JSX.Element => {
           onSubmit={handleSubmit}
           disabled={!formData.email || !formData.password}
           idleText="Crear mi cuenta"
-          loadingText="Registrando..."
+          loading={loading}
         >
           <Input
             placeholder="Tu nombre completo"

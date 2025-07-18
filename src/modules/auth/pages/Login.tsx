@@ -11,7 +11,7 @@ import { GoogleIcon } from '../../../assets/svg/googleicon';
 import { AppleIcon } from '../../../assets/svg/appleicon';
 
 const LoginScreen = (): React.JSX.Element => {
-  const { signIn } = useLogin();
+  const { signIn, loading } = useLogin();
 
   const [formData, setFormData] = useState<ILoginRequest>({
     email: '',
@@ -35,10 +35,10 @@ const LoginScreen = (): React.JSX.Element => {
       </div>
       <div className="p-5 shadow-lg border rounded-3xl space-y-5 bg-white">
         <Formulario
+          loading={!loading}
           onSubmit={handleSubmit}
           disabled={!formData.email || !formData.password}
           idleText="Entrar a mi cuenta"
-          loadingText="Ingresando..."
         >
           <Input
             placeholder="Tu correo"
