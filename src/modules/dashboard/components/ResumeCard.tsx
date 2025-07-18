@@ -1,12 +1,15 @@
 import { ReactNode } from 'react';
 import { ISummary } from '../model/dashboard.model';
 import OdometerText from '../../../components/animated/odometer/Odometer.component';
-import { ArrowDownRight, ArrowUpRight } from 'iconoir-react';
+import { ArrowDownRight, ArrowUpRight, WarningHexagon, WarningTriangle } from 'iconoir-react';
 import { formatearMonto } from '../../../types/formatearMonto';
 import { cn } from '../../../libs/utils';
+import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 
-const ResumeCard = ({ data, loading }: IResumeCard): React.JSX.Element => {
+const ResumeCard = ({ data, loading, errors }: IResumeCard): React.JSX.Element => {
   // TOOD: componetizar esta card y agregar fondo animado
+  if (errors?.length) return <ErrorCard title="Ocurrio un error" errors={errors} />;
+
   return (
     <div className="flex flex-col md:flex-row bg-brand-white border min-w-[320px] min-h-[170px] md:gap-0 gap-4 p-4 rounded-3xl w-full  flex-wrap justify-start items-start">
       {loading ? (
@@ -43,6 +46,7 @@ const ResumeCard = ({ data, loading }: IResumeCard): React.JSX.Element => {
 interface IResumeCard {
   data?: ISummary;
   loading?: boolean;
+  errors?: string[];
 }
 
 export default ResumeCard;
