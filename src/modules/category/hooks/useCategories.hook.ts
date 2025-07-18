@@ -37,5 +37,7 @@ export const useCategories = () => {
     .filter((c) => c.cantidadTransacciones > 0)
     .sort((a, b) => b.cantidadTransacciones - a.cantidadTransacciones);
 
-  return { fetchAll, crear, editar, borrar, search, categoriasPopulares };
+  const error = create.error || update.error || eliminate.error || search.error;
+
+  return { fetchAll, crear, editar, borrar, search, categoriasPopulares, error };
 };
