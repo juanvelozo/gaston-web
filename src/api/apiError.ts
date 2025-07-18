@@ -43,7 +43,8 @@ export function handleApiError(error: unknown): never {
 
 const ERROR_MESSAGES = {
   TIMEOUT: 'El servidor tardó demasiado en responder. Intentalo de nuevo más tarde.',
-  NO_RESPONSE: 'No se pudo conectar con el servidor. Verificá tu conexión a Internet.',
+  NO_RESPONSE:
+    'No se pudo conectar con el servidor. Es posible que esté fuera de servicio o que haya problemas con la base de datos.',
   INVALID_FORMAT: 'Error inesperado en la respuesta del servidor.',
   UNKNOWN: 'Se produjo un error desconocido.',
 };
