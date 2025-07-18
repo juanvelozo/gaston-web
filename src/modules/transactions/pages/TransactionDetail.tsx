@@ -15,7 +15,7 @@ import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component'
 
 const TransactionDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
-  const { search, error } = useTransactions();
+  const { search, error, cargando } = useTransactions();
   const navigate = useNavigate();
 
   async function fetchTransaction() {
@@ -30,7 +30,13 @@ const TransactionDetailPage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title="Detalle"
-        bgColor={colors.green}
+        bgColor={
+          cargando
+            ? colors.black
+            : search.data?.data.type === 'EXPENSE'
+              ? colors.coral
+              : colors.green
+        }
         loading={search.loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
