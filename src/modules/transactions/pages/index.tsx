@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../../components/common/input/input.component';
 import GroupedTransactionList from '../components/List/TransactionsList.component';
 import Section from '../../../components/animated/section/Section.component';
+import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 
 export const TransactionsPage = (): React.JSX.Element => {
   const {
-    allTransactions: { data, loading },
+    allTransactions: { data, loading, error },
   } = useTransactions();
   const navigate = useNavigate();
 
@@ -21,12 +22,23 @@ export const TransactionsPage = (): React.JSX.Element => {
         right={<IconButton icon={<Plus />} onClick={() => navigate('/transactions/create')} />}
         tall
       >
-        <div className="flex flex-col gap-4 ">
-          <div className="sticky top-0 z-10 pt-3">
-            <Input placeholder="Buscar" disabled={loading} className="p-4" />
+        {error && !loading ? (
+          <ErrorCard
+            title="No se pudo obtener las transacciones"
+            errors={error.response?.data.message}
+          />
+        ) : (
+          <div className="flex flex-col gap-4 ">
+            <div className="sticky top-0 z-10 pt-3">
+              <Input placeholder="Buscar" disabled={loading} className="p-4" loading={loading} />
+            </div>
+            {loading ? (
+              <span>Cargando...</span>
+            ) : (
+              <GroupedTransactionList data={data?.data || []} />
+            )}
           </div>
-          {loading ? <span>Cargando...</span> : <GroupedTransactionList data={data?.data || []} />}
-        </div>
+        )}
       </Section>
     </div>
   );
