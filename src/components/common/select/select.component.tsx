@@ -22,13 +22,17 @@ interface CustomSelectProps {
   onChange?: (arg: any) => void;
   variant?: Variant;
   placeholder?: string;
+  value?: { value: string; label: string } | null;
+  loading?: boolean;
 }
 
 export default function CustomSelect({
-  options,
+  options = [],
   onChange,
   variant = 'solid',
   placeholder = 'Seleccione una opcion',
+  value,
+  loading,
 }: CustomSelectProps) {
   const baseStyles =
     'w-full px-3 rounded-xl backdrop-blur transition relative appearance-none outline-none placeholder:text-gray-400';
@@ -49,7 +53,11 @@ export default function CustomSelect({
       menuPortalTarget={document.body}
       unstyled
       placeholder={placeholder}
+      value={value}
       className={clsx(baseStyles, variants[variant])}
+      isLoading={loading}
+      isSearchable
+      isDisabled={loading}
       styles={{
         menuPortal: (base) => ({ ...base, zIndex: 9999 }),
         menu: (base) => ({
