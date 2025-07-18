@@ -39,5 +39,7 @@ export const useCategories = () => {
 
   const error = create.error || update.error || eliminate.error || search.error;
 
-  return { fetchAll, crear, editar, borrar, search, categoriasPopulares, error };
+  const loading = create.loading || update.loading || eliminate.loading || search.loading;
+
+  return { fetchAll, crear, editar, borrar, search, categoriasPopulares, error, loading };
 };
