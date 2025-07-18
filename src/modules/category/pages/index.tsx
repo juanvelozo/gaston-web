@@ -21,6 +21,7 @@ const CategoriesPage = (): React.JSX.Element => {
       <Section
         title="Categorias"
         bgColor={colors.coral}
+        loading={loading}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/categories/create')} />}
       >
         {error ? (
@@ -28,7 +29,7 @@ const CategoriesPage = (): React.JSX.Element => {
         ) : (
           <div className="space-y-6">
             <div className="sticky top-0 z-10 pt-3">
-              <Input placeholder="Buscar" disabled={loading} className="p-4" loading={loading} />
+              <Input placeholder="Buscar" />
             </div>
             <div className="space-y-4">
               <h2 className="text-3xl font-bold">Las más populares</h2>

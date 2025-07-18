@@ -21,7 +21,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
   });
   const [mostrarEmojis, setMostrarEmojis] = useState<boolean>(false);
 
-  const { crear } = useCategories();
+  const { crear, loading } = useCategories();
   const navigate = useNavigate();
 
   const bgColor = formData.color ? formData.color : colors.coral;
@@ -53,6 +53,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
             onSubmit={() => crear(formData)}
             buttonProps={{
               style: { background: bgColor },
+              loading: loading,
             }}
             disabled={formData.name === '' || formData.color === '' || formData.icon === ''}
           >

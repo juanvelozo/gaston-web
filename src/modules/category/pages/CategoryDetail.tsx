@@ -15,7 +15,7 @@ import colors from '../../../styles/colors';
 
 const CategoryDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
-  const { search, error } = useCategories();
+  const { search, error, loading } = useCategories();
   const navigate = useNavigate();
 
   async function fetchCategory() {
@@ -33,6 +33,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
       <Section
         title={search?.data?.data?.name ?? 'Categoría'}
         bgColor={search?.data?.data?.color ?? colors.coral}
+        loading={loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
           <IconButton
