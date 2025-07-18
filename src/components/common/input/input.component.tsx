@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, ReactNode, useId, useState } from 'react';
 import clsx from 'clsx';
+import { Skeleton } from '../../animated/skeleton/skeleton.component';
 
 type Variant = 'solid' | 'transparent';
 
@@ -8,9 +9,18 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   iconLeft?: ReactNode;
   iconRight?: ReactNode;
   variant?: Variant;
+  loading?: boolean;
 }
 
-const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...props }: Props) => {
+const Input = ({
+  label,
+  iconLeft,
+  iconRight,
+  variant = 'solid',
+  className,
+  loading,
+  ...props
+}: Props) => {
   const id = useId();
   const [focused, setFocused] = useState(false);
   const showFloating = focused || !!props.value;
@@ -40,19 +50,23 @@ const Input = ({ label, iconLeft, iconRight, variant = 'solid', className, ...pr
       {/* <div className="flex items-center gap-2"> */}
       <div className={clsx('flex items-center gap-2', baseStyles, variants[variant], className)}>
         {iconLeft && <span>{iconLeft}</span>}
-        <input
-          id={id}
-          {...props}
-          onFocus={(e) => {
-            setFocused(true);
-            props.onFocus?.(e);
-          }}
-          onBlur={(e) => {
-            setFocused(false);
-            props.onBlur?.(e);
-          }}
-          className="bg-transparent outline-none w-full"
-        />
+        {loading ? (
+          <Skeleton circle width="100%" height="100%" />
+        ) : (
+          <input
+            id={id}
+            {...props}
+            onFocus={(e) => {
+              setFocused(true);
+              props.onFocus?.(e);
+            }}
+            onBlur={(e) => {
+              setFocused(false);
+              props.onBlur?.(e);
+            }}
+            className="bg-transparent outline-none w-full"
+          />
+        )}
         {iconRight && <span>{iconRight}</span>}
       </div>
     </div>
