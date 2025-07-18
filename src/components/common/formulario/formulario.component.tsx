@@ -6,7 +6,6 @@ import { IButtonProps } from '../../animated/button/Button.types';
 interface FormularioProps extends FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;
   idleText?: string;
-  loadingText?: string;
   disabled?: boolean;
   loading?: boolean;
   buttonProps?: IButtonProps;
@@ -15,7 +14,6 @@ interface FormularioProps extends FormHTMLAttributes<HTMLFormElement> {
 export default function Formulario({
   children,
   idleText = 'Enviar',
-  loadingText = 'Cargando...',
   disabled,
   loading,
   buttonProps,
@@ -27,10 +25,11 @@ export default function Formulario({
       <Button
         type="submit"
         disabled={loading || disabled}
+        loading={loading}
         className={cn('w-full', buttonProps?.className)}
         {...buttonProps}
       >
-        {loading ? loadingText : idleText}
+        {idleText}
       </Button>
     </form>
   );
