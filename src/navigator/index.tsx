@@ -39,11 +39,13 @@ const AppRouter = () => {
           <Route path="/transactions" element={<TransactionsPage />} />
           <Route path="/transactions/:id" element={<TransactionDetailPage />} />
           <Route path="/transactions/create" element={<CreateTransationPage />} />
+          <Route path="/transactions/:id/edit" element={<CreateTransationPage />} />
 
           {/* categories */}
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/categories/:id" element={<CategoryDetailPage />} />
           <Route path="/categories/create" element={<CreateCategoryPage />} />
+          <Route path="/categories/:id/edit" element={<CreateCategoryPage />} />
 
           {/* profile */}
           <Route path="/profile" element={<ProfilePage />} />
