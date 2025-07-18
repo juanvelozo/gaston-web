@@ -31,6 +31,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
       <Section
         title="Detalle"
         bgColor={colors.green}
+        loading={search.loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
           <IconButton

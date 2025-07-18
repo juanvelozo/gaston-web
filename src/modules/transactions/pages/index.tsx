@@ -19,10 +19,11 @@ export const TransactionsPage = (): React.JSX.Element => {
       <Section
         title="Transacciones"
         bgColor={colors.green}
+        loading={loading}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/transactions/create')} />}
         tall
       >
-        {error && !loading ? (
+        {error ? (
           <ErrorCard
             title="No se pudo obtener las transacciones"
             errors={error.response?.data.message}
@@ -30,13 +31,9 @@ export const TransactionsPage = (): React.JSX.Element => {
         ) : (
           <div className="flex flex-col gap-4 ">
             <div className="sticky top-0 z-10 pt-3">
-              <Input placeholder="Buscar" disabled={loading} className="p-4" loading={loading} />
+              <Input placeholder="Buscar" />
             </div>
-            {loading ? (
-              <span>Cargando...</span>
-            ) : (
-              <GroupedTransactionList data={data?.data || []} />
-            )}
+            <GroupedTransactionList data={data?.data || []} />
           </div>
         )}
       </Section>
