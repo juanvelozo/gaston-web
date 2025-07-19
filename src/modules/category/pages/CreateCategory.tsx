@@ -16,7 +16,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateCategoryDto>({
     name: '',
     description: '',
-    color: '',
+    color: undefined,
     icon: '😉',
   });
   const [mostrarEmojis, setMostrarEmojis] = useState<boolean>(false);
@@ -24,7 +24,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
   const { crear, loading } = useCategories();
   const navigate = useNavigate();
 
-  const bgColor = formData.color ? formData.color : colors.coral;
+  const bgColor = formData.color ? formData.color : 'coral';
 
   return (
     <div className="flex-1 h-screen overflow-y-screen">
@@ -55,7 +55,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
               style: { background: bgColor },
               loading: loading,
             }}
-            disabled={formData.name === '' || formData.color === '' || formData.icon === ''}
+            disabled={formData.name === '' || !formData.color || formData.icon === ''}
           >
             <Input
               label="Nombre"

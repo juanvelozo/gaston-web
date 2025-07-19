@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
 import { ICreateTransactionDto } from '../model/transaction.controller';
 import { useCategories } from '../../category/hooks/useCategories.hook';
-import { ArrowLeft } from 'iconoir-react';
+import { ArrowLeft, FloppyDisk } from 'iconoir-react';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import Input from '../../../components/common/input/input.component';
 import TransactionTypeSelect, {
   ITransactionButtonValues,
 } from '../components/form/TransactionTypeSelect.component';
-import CustomSelect, { SelectOption } from '../../../components/common/select/select.component';
+import CustomSelect from '../../../components/common/select/select.component';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate, useParams } from 'react-router-dom';
 import Textarea from '../../../components/common/textArea/textArea.component';
@@ -17,6 +17,7 @@ import Formulario from '../../../components/common/formulario/formulario.compone
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 import { useSelectOptions } from '../../../hooks/useSelectOptions.hook';
 import { ICategory } from '../../category/model/category.model';
+import { Colors } from '../../../styles/colors';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
@@ -26,7 +27,9 @@ const CreateTransationPage = (): React.JSX.Element => {
     description: '',
     categoryId: undefined,
   });
-  const [bgColor, setBgColor] = useState<string>(ITransactionButtonValues[formData.type].color);
+  const [bgColor, setBgColor] = useState<keyof Colors>(
+    ITransactionButtonValues[formData.type].color
+  );
 
   const inputRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
@@ -65,6 +68,9 @@ const CreateTransationPage = (): React.JSX.Element => {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    if (formData.amount === 0) {
+      return;
+    }
     e.preventDefault();
     if (estamosEditando) {
       editar(Number(id), formData);
@@ -137,6 +143,13 @@ const CreateTransationPage = (): React.JSX.Element => {
           <ErrorCard errors={error?.response?.data.message} />
         ) : (
           <Formulario
+            buttonProps={{
+              style: {
+                backgroundColor: bgColor,
+                transition: 'background-color 0.5s ease-in-out',
+              },
+              iconRight: <FloppyDisk />,
+            }}
             onSubmit={handleSubmit}
             className="space-y-5"
             loading={submitting}
@@ -158,6 +171,7 @@ const CreateTransationPage = (): React.JSX.Element => {
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
             <CustomSelect
+              label="Categoría (Opcional)"
               loading={allCategories.loading}
               options={listaDeCategorías}
               onChange={(e) => {

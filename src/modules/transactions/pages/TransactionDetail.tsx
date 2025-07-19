@@ -30,13 +30,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title="Detalle"
-        bgColor={
-          cargando
-            ? colors.black
-            : search.data?.data.type === 'EXPENSE'
-              ? colors.coral
-              : colors.green
-        }
+        bgColor={cargando ? 'black' : search.data?.data.type === 'EXPENSE' ? 'coral' : 'green'}
         loading={search.loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={

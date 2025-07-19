@@ -18,7 +18,7 @@ const ProfilePage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title="Perfil"
-        bgColor={colors.blue}
+        bgColor="blue"
         loading={loading}
         bottom={
           <div className="flex flex-col items-center justify-center gap-3">

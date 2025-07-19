@@ -1,3 +1,4 @@
+import { Colors } from '../../../styles/colors';
 import { IBaseResponse } from '../../../types/proyect.model';
 import { ICategory } from './category.model';
 
@@ -14,7 +15,7 @@ export type GetAllCategoryData = ICategory[];
 export interface ICreateCategoryDto {
   name: string;
   description?: string;
-  color: string;
+  color?: keyof Colors;
   icon: string;
 }
 

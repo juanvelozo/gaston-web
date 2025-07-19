@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { themeColors } from '../../../styles/colors';
+import { Colors, themeColors } from '../../../styles/colors';
 import { motion } from 'framer-motion';
 
 const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
-  const colorsArray = Object.values(themeColors);
+  const colorsArray = Object.keys(themeColors);
 
   const [hex, setHex] = useState<string>(colorsArray[0]);
 
-  function handlePick(color: string) {
+  function handlePick(color: keyof Colors) {
     setHex(color);
     onPickColor?.(color);
   }
@@ -40,7 +40,7 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
             )}
             <div
               className={`relative w-16 sm:w-20 h-16 sm:h-20 rounded-3xl cursor-pointer bg-[${color}] flex items-center justify-center`}
-              onClick={() => handlePick(color)}
+              onClick={() => handlePick(color as keyof Colors)}
               style={{ backgroundColor: color }}
             >
               {isActive && (
@@ -82,7 +82,7 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
   );
 };
 interface IColorPicker {
-  onPickColor?: (color: string) => void;
+  onPickColor?: (color: keyof Colors) => void;
 }
 
 export default ColorPicker;

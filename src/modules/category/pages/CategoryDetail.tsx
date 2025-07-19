@@ -32,7 +32,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title={search?.data?.data?.name ?? 'Categoría'}
-        bgColor={search?.data?.data?.color ?? colors.coral}
+        bgColor={search?.data?.data?.color ?? 'coral'}
         loading={loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={

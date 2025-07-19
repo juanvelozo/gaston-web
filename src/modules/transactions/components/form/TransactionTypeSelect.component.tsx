@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '../../../../components/animated/button/Button.component';
 import { ITransactionCardValues } from '../transactionCard/transactionCard.component';
 import { ArrowDownRightCircle, PiggyBank } from 'iconoir-react';
+import { Colors } from '../../../../styles/colors';
 
 export const TRANSACTION_TYPE = {
   INCOME: 'INCOME',
@@ -73,18 +74,18 @@ interface ITransactionTypeSelect {
 
 export type TypeConfig = {
   [x in TransactionType]: {
-    color: string;
+    color: keyof Colors;
     icon: (isSelected: boolean) => React.ReactNode;
   };
 };
 
 export const ITransactionButtonValues: TypeConfig = {
   EXPENSE: {
-    color: '#FE5F55',
+    color: 'coral',
     icon: (isSelected) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#FE5F55'} />,
   },
   INCOME: {
-    color: '#3A7D44',
+    color: 'green',
     icon: (isSelected) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
   },
   // SAVING: {

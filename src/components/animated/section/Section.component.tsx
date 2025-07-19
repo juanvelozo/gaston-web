@@ -1,11 +1,11 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import clsx from 'clsx';
-import colors from '../../../styles/colors';
+import colors, { Colors } from '../../../styles/colors';
 import { cn } from '../../../libs/utils';
 import { IOSSpinner } from '../iosSpinner/Spinner.component';
 
 interface SectionProps extends PropsWithChildren {
-  bgColor?: string;
+  bgColor?: keyof Colors;
   title?: string;
   left?: ReactNode;
   right?: ReactNode;
@@ -15,7 +15,7 @@ interface SectionProps extends PropsWithChildren {
 }
 
 const Section = ({
-  bgColor = '#000',
+  bgColor = 'black',
   title,
   left,
   right,
@@ -27,12 +27,12 @@ const Section = ({
   return (
     <div
       className="min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out"
-      style={{ background: bgColor }}
+      style={{ background: colors[bgColor] }}
     >
       {/* HEADER sticky */}
       <div
         className="sticky top-0 z-20 px-6 pt-6 pb-4 transition-colors duration-500 ease-in-out "
-        style={{ background: bgColor }}
+        style={{ background: colors[bgColor] }}
       >
         <div className="flex justify-between items-center mb-4">
           <div className={cn('min-w-10', loading && 'pointer-events-none opacity-75')}>{left}</div>
@@ -43,7 +43,7 @@ const Section = ({
         </div>
         {bottom && (
           <div className="flex justify-center items-center my-6">
-            {loading ? <IOSSpinner color={colors.white} /> : bottom}
+            {loading ? <IOSSpinner /> : bottom}
           </div>
         )}
       </div>

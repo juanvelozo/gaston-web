@@ -1,6 +1,13 @@
 import { motion, Variants } from 'framer-motion';
+import colors, { Colors } from '../../../styles/colors';
 
-export function IOSSpinner({ size = 40, color = 'text-white' }: { size?: number; color?: string }) {
+export function IOSSpinner({
+  size = 40,
+  color = 'white',
+}: {
+  size?: number;
+  color?: keyof Colors;
+}) {
   const dots = Array.from({ length: 12 });
   const radius = size / 2;
   const dotWidth = size * 0.12; // más chico que antes para que parezca más sutil
@@ -19,7 +26,10 @@ export function IOSSpinner({ size = 40, color = 'text-white' }: { size?: number;
   };
 
   return (
-    <div className={`relative ${color}`} style={{ width: size, height: size }}>
+    <div
+      className={`relative ${color}`}
+      style={{ width: size, height: size, color: colors[color] }}
+    >
       {dots.map((_, i) => {
         const angle = (i * 360) / dots.length;
 

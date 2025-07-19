@@ -18,7 +18,7 @@ export const TransactionsPage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-x-hidden overflow-y-scroll">
       <Section
         title="Transacciones"
-        bgColor={colors.green}
+        bgColor="green"
         loading={loading}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/transactions/create')} />}
         tall
