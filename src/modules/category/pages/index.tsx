@@ -20,7 +20,7 @@ const CategoriesPage = (): React.JSX.Element => {
     <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title="Categorias"
-        bgColor={colors.coral}
+        bgColor="coral"
         loading={loading}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/categories/create')} />}
       >
