@@ -6,7 +6,7 @@ main {
   max-width: 420px;
 }
 
-/* Scrollbar global delgada y sin contenedor */
+/* Scrollbar global delgada y sin contenedor
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -21,11 +21,10 @@ main {
   background: transparent;
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
-}
+} */
 
 @layer components {
   .toast-base {
@@ -70,4 +69,3 @@ main {
     font-weight: 300 !important;
   }
 }
-
