@@ -15,7 +15,7 @@ const CategoryStats = ({ data }: ICategoryStats): React.JSX.Element => {
   const ingresos = getTotalByType('INCOME');
 
   return (
-    <div className="grid grid-cols-3 gap-4 pt-3 border-t border-gray-100">
+    <div className="flex justify-around pt-3 border-t border-gray-100">
       <div className="text-center">
         <div className="flex items-center justify-center mb-1">
           <ArrowDownRightCircle color="red" />
