@@ -15,7 +15,7 @@ const ProfilePage = (): React.JSX.Element => {
   const { cerrarSesion } = useLogout();
 
   return (
-    <div className="flex-1 h-screen">
+    <div className="flex-1 h-screen overflow-y-scroll">
       <Section
         title="Perfil"
         bgColor={colors.blue}
@@ -23,8 +23,8 @@ const ProfilePage = (): React.JSX.Element => {
         bottom={
           <div className="flex flex-col items-center justify-center gap-3">
             <Avatar src={data?.data.profileImage} />
-            <h2 className="text-3xl">{data?.data.fullName}</h2>
-            <span className="text-sm text-gray-300">{data?.data.email}</span>
+            <h2 className="text-3xl text-brand-white">{data?.data.fullName}</h2>
+            <span className="text-sm text-gray-300 ">{data?.data.email}</span>
           </div>
         }
       >
