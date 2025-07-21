@@ -3,7 +3,7 @@ import { Button } from './Button.component';
 
 export default function ButtonExamples() {
   return (
-    <div className="p-6 space-y-6 bg-gray-50 min-h-screen text-sm text-black">
+    <div className="p-6 space-y-6 bg-gray-50 text-sm text-black">
       {/* Primary */}
       <div className="space-y-2">
         <h2 className="font-semibold">Primary</h2>

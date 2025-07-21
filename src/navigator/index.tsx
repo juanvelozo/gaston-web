@@ -19,11 +19,15 @@ import CreateCategoryPage from '../modules/category/pages/CreateCategory';
 import ProfilePage from '../modules/profile/pages';
 import EditProfilePage from '../modules/profile/pages/EditProfile';
 import ProfileChangePasswordPage from '../modules/profile/pages/ChangePassword';
+import Playground from '../modules/dev/pages/Playground';
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {process.env.REACT_APP_SERVER === 'local' && (
+          <Route path="/playground" element={<Playground />} />
+        )}
         {/* Rutas públicas */}
         <Route element={<PublicRoute />}>
           <Route path="/login" element={<LoginScreen />} />
