@@ -3,7 +3,6 @@ import { ITokens, IUser } from './auth.model';
 
 export type ILoginResponse = IBaseResponse<LoginResponse>;
 export interface LoginResponse {
-  tokens: ITokens;
   userId: number;
 }
 
