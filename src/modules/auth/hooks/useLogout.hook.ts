@@ -1,26 +1,47 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEndpoint } from '../../../hooks/useEndpoint';
 import { signOut } from '../api/Logout.api';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { AuthContext } from '../../../context/Auth.context';
 
 export const useLogout = () => {
   const navigate = useNavigate();
-  const { call, data, loading, error } = useEndpoint({ endpoint: signOut, immediate: false });
+  const { call, data, loading, error } = useEndpoint({
+    endpoint: signOut,
+    immediate: false,
+  });
+
+  const authContext = useContext(AuthContext);
+  const { checkAuthStatus } = authContext ?? {};
 
   async function cerrarSesion() {
     await call();
   }
 
+  // ✅ Efecto para manejo del éxito
   useEffect(() => {
-    if (data?.status === 201) {
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      localStorage.removeItem('user_id');
-      navigate('/login', { replace: true });
-      toast.error('Sesión cerrada exitosamente', { description: '¡Hasta la próxima!' });
+    const handleLogoutSuccess = async () => {
+      if (data?.status === 201) {
+        localStorage.removeItem('user_id');
+        toast.error('Sesión cerrada exitosamente', { description: '¡Hasta la próxima!' });
+
+        await new Promise((res) => setTimeout(res, 100));
+        await checkAuthStatus?.();
+
+        navigate('/login', { replace: true });
+      }
+    };
+
+    handleLogoutSuccess();
+  }, [data, checkAuthStatus, navigate]);
+
+  // ✅ Efecto para errores
+  useEffect(() => {
+    if (error) {
+      toast.warning('No se pudo cerrar sesión correctamente');
     }
-  }, [data, navigate]);
+  }, [error]);
 
   return { cerrarSesion, loading, error };
 };
