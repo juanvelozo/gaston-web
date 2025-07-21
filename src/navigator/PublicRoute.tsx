@@ -1,9 +1,17 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth.hook';
+import { useEffect } from 'react';
 
 const PublicRoute = () => {
-  const token = localStorage.getItem('access_token');
+  const { isAuthenticated } = useAuth();
 
-  return token ? <Navigate to="/" /> : <Outlet />;
+  useEffect(() => {
+    if (isAuthenticated) {
+      window.location.href = '/';
+    }
+  }, [location.pathname]);
+
+  return isAuthenticated ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default PublicRoute;

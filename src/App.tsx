@@ -1,13 +1,14 @@
 import AppRouter from './navigator';
 import './index.css';
 import Tostadita from './components/animated/toast/customToast.component';
+import { AuthProvider } from './context/Auth.context';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Tostadita />
       <AppRouter />
-    </>
+    </AuthProvider>
   );
 }
 
