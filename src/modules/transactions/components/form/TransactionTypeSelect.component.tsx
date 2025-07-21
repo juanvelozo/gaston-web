@@ -3,8 +3,8 @@ import { TransactionType } from '../../model/transactions.model';
 import { motion } from 'framer-motion';
 import { Button } from '../../../../components/animated/button/Button.component';
 import { ITransactionCardValues } from '../transactionCard/transactionCard.component';
-import { ArrowDownRightCircle, PiggyBank } from 'iconoir-react';
-import { Colors } from '../../../../styles/colors';
+import { ArrowDownRightCircle, ArrowUpRightCircle, PiggyBank } from 'iconoir-react';
+import colors, { Colors } from '../../../../styles/colors';
 
 export const TRANSACTION_TYPE = {
   INCOME: 'INCOME',
@@ -35,10 +35,10 @@ const TransactionTypeSelect = ({ onChange, value }: ITransactionTypeSelect): Rea
             {isActive && (
               <motion.div
                 layoutId="activeTypeTransaction"
-                className="absolute inset-0 rounded-3xl z-0 border"
+                className="absolute inset-0 rounded-3xl z-0 border will-change-transform"
                 initial={false}
                 animate={{
-                  backgroundColor: ITransactionButtonValues[key].color,
+                  backgroundColor: colors[ITransactionButtonValues[key].color],
                 }}
                 transition={{
                   type: 'spring',
@@ -86,7 +86,7 @@ export const ITransactionButtonValues: TypeConfig = {
   },
   INCOME: {
     color: 'green',
-    icon: (isSelected) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
+    icon: (isSelected) => <ArrowUpRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
   },
   // SAVING: {
   //   color: '#F2AF29',
