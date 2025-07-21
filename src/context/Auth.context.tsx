@@ -16,16 +16,8 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  const isAuthPage =
-    window.location.pathname === '/login' ||
-    window.location.pathname === '/register' ||
-    window.location.pathname === 'recover-password';
   // Función para verificar el estado de la sesión con el backend
   const checkAuthStatus = useCallback(async () => {
-    if (isAuthPage) {
-      setIsAuthenticated(false);
-      return;
-    }
     try {
       // Intentar una solicitud a un endpoint protegido para validar la cookie
       const response = await api.get<
