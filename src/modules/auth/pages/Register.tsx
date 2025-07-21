@@ -3,7 +3,7 @@ import { useRegister } from '../hooks/useRegister.hook';
 import { IRegisterRequest } from '../model/auth.model';
 import { Link } from 'react-router-dom';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
-import { Dollar, Lock, Mail } from 'iconoir-react';
+import { Dollar, Eye, EyeClosed, Lock, Mail } from 'iconoir-react';
 import Input from '../../../components/common/input/input.component';
 import Formulario from '../../../components/common/formulario/formulario.component';
 
@@ -15,6 +15,7 @@ const RegisterScreen = (): React.JSX.Element => {
     password: '',
     fullName: '',
   });
+  const [showPin, setShowPin] = useState<boolean>(false);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
@@ -55,11 +56,25 @@ const RegisterScreen = (): React.JSX.Element => {
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
           <Input
-            placeholder="Tu contraseña"
-            type="password"
-            name="password"
+            placeholder="Tu PIN"
+            type={showPin ? 'text' : 'password'}
+            name="pin"
+            value={formData.password}
             iconLeft={<Lock />}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            onChange={(e) => {
+              if (/^\d{0,6}$/.test(e.target.value)) {
+                setFormData({ ...formData, password: e.target.value });
+              }
+            }}
+            inputMode="numeric"
+            iconRight={
+              <div onClick={() => setShowPin((prev) => !prev)}>
+                {showPin ? <EyeClosed fontSize={16} /> : <Eye fontSize={16} />}
+              </div>
+            }
+            pattern="[0-9]{0,6}"
+            maxLength={6}
+            required
           />
           <span className=" text-gray-600 text-sm ">Mínimo 6 caracteres</span>
         </Formulario>

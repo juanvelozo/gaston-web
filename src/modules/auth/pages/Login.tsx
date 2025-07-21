@@ -4,7 +4,7 @@ import { ILoginRequest } from '../model/auth.model';
 import { Link } from 'react-router-dom';
 import Input from '../../../components/common/input/input.component';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
-import { Dollar, Lock, Mail } from 'iconoir-react';
+import { Dollar, Eye, EyeClosed, Lock, Mail } from 'iconoir-react';
 import Formulario from '../../../components/common/formulario/formulario.component';
 
 const LoginScreen = (): React.JSX.Element => {
@@ -14,10 +14,16 @@ const LoginScreen = (): React.JSX.Element => {
     email: '',
     password: '',
   });
+  const [showPin, setShowPin] = useState<boolean>(false);
+  const [recordarUsuario, setRecordarUsuario] = useState<boolean>(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
-    await signIn(formData);
+    await signIn(formData).then(() => {
+      if (recordarUsuario) {
+        localStorage.setItem('email', formData.email);
+      }
+    });
   }
 
   return (
@@ -43,17 +49,47 @@ const LoginScreen = (): React.JSX.Element => {
             name="email"
             iconLeft={<Mail />}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            required
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           />
           <Input
-            placeholder="Tu contraseña"
-            type="password"
-            name="password"
+            placeholder="Tu PIN"
+            type={showPin ? 'text' : 'password'}
+            name="pin"
+            value={formData.password}
             iconLeft={<Lock />}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            onChange={(e) => {
+              if (/^\d{0,6}$/.test(e.target.value)) {
+                setFormData({ ...formData, password: e.target.value });
+              }
+            }}
+            inputMode="numeric"
+            iconRight={
+              <div onClick={() => setShowPin((prev) => !prev)}>
+                {showPin ? <EyeClosed fontSize={16} /> : <Eye fontSize={16} />}
+              </div>
+            }
+            pattern="[0-9]{0,6}"
+            maxLength={6}
+            required
           />
-          <div className="flex items-center justify-end">
+
+          <div className="flex items-center justify-between my-3 gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                className="w-4 h-4 text-brand-green"
+                checked={recordarUsuario}
+                onChange={(e) => setRecordarUsuario(e.target.checked)}
+              />
+              <div onClick={() => setRecordarUsuario((prev) => !prev)}>
+                <span className="text-right text-brand-green text-sm font-bold cursor-pointer">
+                  Recordar usuario
+                </span>
+              </div>
+            </div>
             <Link to="/recover-password">
-              <span className="text-right text-brand-green text-sm font-bold my-3">
+              <span className="text-right text-brand-green text-sm font-bold">
                 ¿Olvidaste tu contraseña?
               </span>
             </Link>
