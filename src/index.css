@@ -36,7 +36,6 @@ main {
     border-radius: 1.5rem !important;
     padding: 1.25rem !important;
     border: none !important;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1) !important;
   }
 
   .toast-base[data-type='success'] {
@@ -51,7 +50,7 @@ main {
 
   .toast-base[data-type='warning'] {
     background-color: rgba(242, 175, 41, 0.8) !important;
-    color: #101720 !important;
+    /* color: #101720 !important; */
   }
 
   .toast-base[data-type='info'] {
@@ -65,7 +64,8 @@ main {
   }
 
   .toast-description {
-    font-size: 0.875rem !important;
-    font-weight: 300 !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    color: #fefafa !important;
   }
 }
