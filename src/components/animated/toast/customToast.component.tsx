@@ -12,7 +12,6 @@ const Tostadita = (): React.JSX.Element => {
           title: 'toast-title',
           description: 'toast-description',
           icon: '!mr-8 !ml-1',
-          warning: '!text-black',
         },
         duration: 4000,
       }}
@@ -23,7 +22,6 @@ const Tostadita = (): React.JSX.Element => {
         info: <InfoCircle className="w-10 h-10 text-teal-200" />,
       }}
     />
-
   );
 };
 
