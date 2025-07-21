@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEndpoint } from '../../../hooks/useEndpoint';
 import { IRegisterRequest } from '../model/auth.model';
 import { postRegister } from '../api/Register.api';
+import { toast } from 'sonner';
 
 export const useRegister = () => {
   const { loading, error, data, call } = useEndpoint({
@@ -16,23 +17,13 @@ export const useRegister = () => {
   }
   useEffect(() => {
     if (data?.status === 201) {
-      const token = data?.data.tokens.access_token;
-      const refreshToken = data?.data.tokens.refresh_token;
       const userId = data?.data.userId;
 
       if (userId) {
         localStorage.setItem('user_id', userId.toString());
       }
+      toast.success('Usuario registrado', { description: '¡Bienvenidx!' });
 
-      if (refreshToken) {
-        localStorage.setItem('refresh_token', refreshToken);
-      }
-
-      if (token) {
-        console.log('Guardando token de acceso...');
-        localStorage.setItem('access_token', token);
-        console.log('Token de acceso guardado exitosamente');
-      }
       navigate('/', { replace: true });
     }
   }, [data, navigate]);

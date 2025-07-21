@@ -5,11 +5,9 @@ import { IRegisterRequest } from '../model/auth.model';
 
 export async function postRegister(body: IRegisterRequest): Promise<ILoginResponse> {
   try {
-    console.log('Registrando usuario...', { body });
+    console.log('Registrando usuario...');
 
     const response = await api.post<ILoginResponse>('/auth/signup', body);
-
-    console.log('Usuario registrado exitosamente', { response });
     return response.data;
   } catch (error) {
     console.error('Error al registrar un usuario', error);
