@@ -53,7 +53,7 @@ const habiaSesionIniciada = Boolean(localStorage.getItem('user_id'));
  */
 const clearSession = async () => {
   if (habiaSesionIniciada) {
-    localStorage.clear();
+    localStorage.removeItem('user_id');
     try {
       await signOut();
     } catch (err) {

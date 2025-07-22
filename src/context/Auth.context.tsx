@@ -29,7 +29,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } catch (error) {
       // Si la solicitud falla (ej. 401), significa que la sesión no es válida
       setIsAuthenticated(false);
-      localStorage.clear(); // Limpia cualquier residuo de localStorage
     }
   }, []);
 
