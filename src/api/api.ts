@@ -1,6 +1,10 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { signOut } from '../modules/auth/api/Logout.api';
 import { toast } from 'sonner';
+import { modalManager } from '../components/animated/Modal/Modal.component';
+import { WarningCircleSolid, WarningTriangleSolid } from 'iconoir-react';
+import { createElement } from 'react';
+import colors from '../styles/colors';
 
 // Enum con los posibles entornos
 export enum EnvironmentsEnum {
@@ -114,9 +118,15 @@ api.interceptors.response.use(
     if (is401 && isLogoutEndpoint) {
       console.log('Ya no existe una sesión activa.');
       window.location.replace('/login');
-      toast.warning('Tu sesión ha expirado o fue cerrada', {
+      modalManager.open({
+        icon: createElement(WarningTriangleSolid, { width: 24, height: 24, color: colors.yellow }),
+        title: 'Tu sesión ha expirado',
         description: 'Por favor, iniciá sesión nuevamente.',
+        backdropClose: false,
+        confirmText: 'Sí, continuar',
+        onConfirm: () => window.location.replace('/login'),
       });
+
       return Promise.reject(error);
     }
     if (error.response?.status === 403 && isRefreshEndpoint) {
