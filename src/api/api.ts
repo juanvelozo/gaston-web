@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { signOut } from '../modules/auth/api/Logout.api';
+import { toast } from 'sonner';
 
 // Enum con los posibles entornos
 export enum EnvironmentsEnum {
@@ -56,6 +57,10 @@ const clearSession = async () => {
     localStorage.removeItem('user_id');
     try {
       await signOut();
+      window.location.replace('/login');
+      toast.warning('Tu sesión ha expirado o fue cerrada', {
+        description: 'Por favor, iniciá sesión nuevamente.',
+      });
     } catch (err) {
       console.warn('Error signing out:', err);
     }
