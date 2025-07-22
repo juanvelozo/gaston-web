@@ -22,6 +22,7 @@ const LoginScreen = (): React.JSX.Element => {
 
   function checkUsuarioRecordado(): void {
     if (emailGuardado) {
+      setFormData((prev) => ({ ...prev, email: emailGuardado }));
       setHayUsuarioRecordado(Boolean(emailGuardado));
     }
   }
@@ -31,10 +32,7 @@ const LoginScreen = (): React.JSX.Element => {
     if (!formData.email || !formData.password) return;
 
     if (hayUsuarioRecordado) {
-      await signIn({
-        email: emailGuardado!,
-        password: formData.password,
-      });
+      await signIn(formData);
     } else {
       await signIn(formData).then(() => {
         if (recordarUsuario) {
