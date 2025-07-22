@@ -78,7 +78,7 @@ api.interceptors.response.use(
 
     const is401 = error.response?.status === 401;
     const isRefreshEndpoint = originalRequest?.url === '/auth/refresh';
-
+    const isLogoutEndpoint = originalRequest?.url === '/auth/logout';
     // Si el token expiró y no estamos ya reintentando, intentamos refrescarlo
     if (is401 && !isRefreshEndpoint && !originalRequest._retry) {
       originalRequest._retry = true;
@@ -111,6 +111,14 @@ api.interceptors.response.use(
     }
 
     // Si el refresh falla (ej: refresh token expirado o inválido)
+    if (is401 && isLogoutEndpoint) {
+      console.log('Ya no existe una sesión activa.');
+      window.location.replace('/login');
+      toast.warning('Tu sesión ha expirado o fue cerrada', {
+        description: 'Por favor, iniciá sesión nuevamente.',
+      });
+      return Promise.reject(error);
+    }
     if (error.response?.status === 403 && isRefreshEndpoint) {
       console.log('⚠️ Refresh token inválido o expirado.');
       await clearSession();
