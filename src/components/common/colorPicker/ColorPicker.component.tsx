@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Colors, themeColors } from '../../../styles/colors';
+import colors, { Colors, themeColors } from '../../../styles/colors';
 import { motion } from 'framer-motion';
 
 const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
@@ -23,12 +23,12 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
           >
             {isActive && (
               <motion.div
-                layoutId="activeBackground"
+                layoutId="pickedColor"
                 className="absolute inset-0 
                 left-0 right-0 top-0 bottom-0 rounded-3xl z-0 w-20 h-20 sm:w-24 sm:h-24"
                 initial={false}
                 animate={{
-                  backgroundColor: color + '50',
+                  backgroundColor: colors[color as keyof Colors] + '50',
                 }}
                 transition={{
                   type: 'spring',
@@ -41,7 +41,7 @@ const ColorPicker = ({ onPickColor }: IColorPicker): React.JSX.Element => {
             <div
               className={`relative w-16 sm:w-20 h-16 sm:h-20 rounded-3xl cursor-pointer bg-[${color}] flex items-center justify-center`}
               onClick={() => handlePick(color as keyof Colors)}
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: colors[color as keyof Colors] }}
             >
               {isActive && (
                 <motion.svg
