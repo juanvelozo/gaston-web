@@ -2,7 +2,7 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { signOut } from '../modules/auth/api/Logout.api';
 import { toast } from 'sonner';
 import { modalManager } from '../components/animated/Modal/Modal.component';
-import { WarningCircleSolid, WarningTriangleSolid } from 'iconoir-react';
+import { WarningTriangleSolid } from 'iconoir-react';
 import { createElement } from 'react';
 import colors from '../styles/colors';
 
@@ -51,12 +51,13 @@ const processQueue = (error: AxiosError | null) => {
   failedQueue = [];
 };
 
-const habiaSesionIniciada = Boolean(localStorage.getItem('user_id'));
-
 /**
  * Limpia la sesión del usuario y hace logout si corresponde.
  */
 const clearSession = async () => {
+  const userId = localStorage.getItem('user_id');
+  const habiaSesionIniciada = Boolean(userId);
+
   if (habiaSesionIniciada) {
     localStorage.removeItem('user_id');
     try {
@@ -104,7 +105,37 @@ api.interceptors.response.use(
         processQueue(null); // Resolvemos todas las requests en espera
 
         // Reintentamos la original
-        return api(originalRequest);
+        try {
+          return api(originalRequest);
+        } catch (refreshError: any) {
+          isRefreshing = false;
+          processQueue(refreshError); // Rechazamos todas las requests en espera
+
+          console.log('Refresh error capturado:', refreshError);
+
+          // Si el refresh falla con un código 403 (token inválido o expirado)
+          if (refreshError.response?.status === 403) {
+            console.log('El refresh token ha fallado con un código 403.');
+            modalManager.open({
+              icon: createElement(WarningTriangleSolid, {
+                width: 24,
+                height: 24,
+                color: colors.yellow,
+              }),
+              title: 'Tu sesión ha expirado',
+              description: 'Por favor, iniciá sesión nuevamente.',
+              backdropClose: false,
+              confirmText: 'Sí, continuar',
+              onConfirm: () => window.location.replace('/login'),
+            });
+            await clearSession();
+            return Promise.reject(refreshError);
+          }
+
+          console.log('Refresh error no es 403.');
+          await clearSession();
+          return Promise.reject(refreshError);
+        }
       } catch (refreshError: any) {
         isRefreshing = false;
         processQueue(refreshError); // Rechazamos todas las requests en espera
@@ -117,7 +148,6 @@ api.interceptors.response.use(
     // Si el refresh falla (ej: refresh token expirado o inválido)
     if (is401 && isLogoutEndpoint) {
       console.log('Ya no existe una sesión activa.');
-      window.location.replace('/login');
       modalManager.open({
         icon: createElement(WarningTriangleSolid, { width: 24, height: 24, color: colors.yellow }),
         title: 'Tu sesión ha expirado',
@@ -127,11 +157,26 @@ api.interceptors.response.use(
         onConfirm: () => window.location.replace('/login'),
       });
 
+      await clearSession(); // Limpia la sesión antes de redirigir
       return Promise.reject(error);
     }
+
+    console.log('Error no es 401 o no es logout endpoint.');
+
+    // Si el refresh falla con un código 403 (refresh token inválido o expirado)
     if (error.response?.status === 403 && isRefreshEndpoint) {
       console.log('⚠️ Refresh token inválido o expirado.');
-      await clearSession();
+      modalManager.open({
+        icon: createElement(WarningTriangleSolid, { width: 50, height: 50, color: colors.yellow }),
+        title: 'Tu sesión ha expirado',
+        description: 'Por favor, iniciá sesión nuevamente.',
+        backdropClose: false,
+        confirmText: 'Sí, continuar',
+        onConfirm: () => window.location.replace('/login'),
+      });
+
+      await clearSession(); // Limpia la sesión antes de rechazar la promesa
+      return Promise.reject(error);
     }
 
     // Mensaje de error específico desde el backend (opcional)
