@@ -2,11 +2,13 @@ import AppRouter from './navigator';
 import './index.css';
 import Tostadita from './components/animated/toast/customToast.component';
 import { AuthProvider } from './context/Auth.context';
+import { ModalRoot } from './components/animated/Modal/Modal.component';
 
 function App() {
   return (
     <AuthProvider>
       <Tostadita />
+      <ModalRoot />
       <AppRouter />
     </AuthProvider>
   );
