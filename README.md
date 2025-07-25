@@ -1,46 +1,180 @@
-# Getting Started with Create React App
+# Gastón – The Decentralized Wallet That Improves Your Finances
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Gastón** is a modern virtual wallet designed to help you manage your finances across multiple currencies and cryptocurrencies. With advanced reports, categorized transactions, and powerful features like investment tracking and financial news, Gastón gives you full control of your money.
 
-## Available Scripts
+Built on the innovative **Internet Computer Protocol (ICP)**, Gastón guarantees speed, security, and a truly decentralized backend architecture.
 
-In the project directory, you can run:
+Whether you’re just starting your financial journey or you’re an experienced crypto user, Gastón offers an intuitive, empathetic, and aesthetically pleasing experience.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🔧 About the Project
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Gastón is currently built with a **React (TypeScript)** frontend and a **NestJS (TypeScript)** backend, using a **PostgreSQL** database. The final goal is to migrate the backend to **Rust canisters** on the Internet Computer.
 
-### `npm test`
+For now, there’s a deployed backend on **Railway**, and the app can be run locally or connected to the cloud backend.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚀 Try It Out
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You have **two ways** to run Gastón locally. Choose the one that suits you best:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Option 1 – Run Both Frontend and Backend Locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone both repos**:  
+   - [Frontend](https://github.com/juanvelozo/gaston-client)  
+   - [Backend](https://github.com/juanvelozo/gaston-server)
 
-### `npm run eject`
+2. Set the enviroment variables for both projects: <br> [In this document](https://docs.google.com/document/d/1UM3tiaUrgbUBKIgK3SqII4B-tiiIKUOx8JOIc40MIWI/edit?usp=sharing) you can find the values.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. In both root directories, run:  
+   ```bash
+   npm install
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the backend:  
+   ```bash
+   npm run start
+   # or, for live reload:
+   npm run start:dev
+   ```
+   The server will run on `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+5. Start the frontend:  
+   ```bash
+   npm start
+   ```
+   Since port 3000 is in use by the backend, the command line will ask to use port `3001`. Accept it.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+6. Use your own credentials to register, or log in with the demo account:
 
-## Learn More
+   ```
+   Email: juanvelozomoreno18@gmail.com
+   PIN: 123456
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   This account includes preloaded data for testing.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+### Option 2 – Run Only the Frontend Locally (Connected to Deployed Backend)
+
+1. **Clone only the frontend**:
+   ```bash
+   git clone https://github.com/juanvelozo/gaston-client
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create an `.env` file at the root with this content:
+   ```
+   REACT_APP_SERVER_DEV=https://gaston-server-production.up.railway.app/
+   ```
+
+4. Run the app in development mode:
+   ```bash
+   npm run start:dev
+   ```
+
+   This will set an enviroment variable that configures the api.ts file to point the baseUrl of the axios configuration to the url you have set in the REACT_APP_SERVER_DEV enviroment variable.
+
+5. Log in with the same demo credentials or register a new user.
+
+
+---
+
+## 🛣️ 4-Month Development Roadmap
+
+### 🎯 Project Goal
+
+Build a powerful and intuitive personal finance web application (mobile + desktop) focused on **crypto and multi-currency support**, with:
+
+- Clean identity and branding
+- ICP (Internet Computer) login and backend in Rust canisters
+- Full transaction history and dashboard
+- Advanced features: investments, financial news, export options
+- Multi-language support (ES/EN)
+
+---
+
+### ✅ Current Progress
+
+- Mobile-first frontend implemented
+- Working income/expense form (no validation yet)
+- List and history by date
+- Basic feedback (toasts and modals)
+- Working NestJS backend
+- Basic authentication (login/register)
+
+---
+
+### 📅 Month 1 – Infrastructure + UI Foundation (Weeks 1–4)
+
+| Area             | Tasks                                                                                   |
+|------------------|------------------------------------------------------------------------------------------|
+| **Backend**       | - Design initial ICP architecture <br> - Implement transaction & category canisters <br> - ICP Identity login <br> - Stable memory setup |
+| **Frontend Dev**  | - Refactor layout to support desktop <br> - Add form validation and error states <br> - Integrate with ICP backend |
+| **UX/UI Designer**| - Create brand identity (logo, palette, typography) <br> - Responsive design for mobile and desktop <br> - UI improvements to existing components |
+
+---
+
+### 📅 Month 2 – Multi-Currency & Internationalization (Weeks 5–8)
+
+| Area             | Tasks                                                                                     |
+|------------------|--------------------------------------------------------------------------------------------|
+| **Backend**       | - Add support for multi-currency/crypto transactions <br> - Store and update exchange rates <br> - Provide APIs for currency data |
+| **Frontend Dev**  | - Currency selector per transaction <br> - Live conversion logic <br> - Show totals in base currency |
+| **UX/UI Designer**| - Currency selector UI <br> - Clear visual of conversion rates <br> - Implement i18n structure (ES/EN) |
+
+---
+
+### 📅 Month 3 – Investments & Financial News (Weeks 9–12)
+
+| Area             | Tasks                                                                                         |
+|------------------|------------------------------------------------------------------------------------------------|
+| **Backend**       | - Design and implement investment data model <br> - CRUD endpoints for investments <br> - News feed integration via external APIs |
+| **Frontend Dev**  | - Investment registration form <br> - Performance tracking charts <br> - News feed display by topic |
+| **UX/UI Designer**| - Investment dashboard design <br> - Clean card layout for news items <br> - Visual differentiation for types of assets |
+
+---
+
+### 📅 Month 4 – Final Polish & Expansion (Weeks 13–16)
+
+| Area             | Tasks                                                                                         |
+|------------------|------------------------------------------------------------------------------------------------|
+| **Backend**       | - Secure and validate canister logic <br> - Final documentation <br> - Deploy to ICP mainnet |
+| **Frontend Dev**  | - Export transactions (CSV/JSON) <br> - Multi-language switch UI <br> - Group wallets (shared access with roles) |
+| **UX/UI Designer**| - UI for exporting and reporting <br> - Polish animations and transitions <br> - Support for shared wallets UI |
+
+---
+
+## 📦 Final Deliverables (End of Month 4)
+
+- ✅ Fully functional web app (desktop + mobile)
+- ✅ Internet Identity login via ICP
+- ✅ Multi-currency and multi-language support
+- ✅ Investment tracking module
+- ✅ Real-time financial news section
+- ✅ Backend on Internet Computer (Rust canisters)
+- ✅ Clean brand identity and UX
+- ✅ Documentation + working live demo
+
+---
+
+## 👥 Team Roles
+
+- **Backend / Project Lead**: Infrastructure, ICP/Rust migration, database, deployment, CI/CD.
+- **Frontend Developer**: UI integration, state management, client-server communication.
+- **UX/UI Designer**: Branding, layout design, visual polish, responsive interface.
+
+---
+## 👥 Team Members
+
+| Name            | GitHub Profile                       | Role                  |
+|-----------------|---------------------------------------|------------------------|
+| Juan Velozo     | [@juanvelozo](https://github.com/juanvelozo) | Backend Developer, Project Lead, Head of engineering, UX/UI Designer |
+| Matias Garay Gadea    | [@Mggadea](https://github.com/Mggadea) | Frontend developer, UX/UI Designer, DevOPS |
