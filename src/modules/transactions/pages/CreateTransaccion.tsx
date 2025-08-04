@@ -104,7 +104,7 @@ const CreateTransationPage = (): React.JSX.Element => {
   }, [search.data?.data]);
 
   return (
-    <div className=" flex-1 h-screen overflow-y-scroll">
+    <div className=" flex-1 min-h-screen overflow-y-scroll">
       {/* Header */}
       <Section
         // tall

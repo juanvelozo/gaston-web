@@ -15,7 +15,7 @@ export const TransactionsPage = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-1 h-screen overflow-x-hidden overflow-y-scroll">
+    <div className="flex-1 min-h-screen overflow-x-hidden overflow-y-scroll">
       <Section
         title="Transacciones"
         bgColor="green"

@@ -17,7 +17,7 @@ const CategoriesPage = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex-1 h-screen overflow-y-scroll">
+    <div className="flex-1 min-h-screen overflow-y-scroll">
       <Section
         title="Categorias"
         bgColor="coral"

@@ -27,7 +27,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
   }, []);
 
   return (
-    <div className="flex-1 h-screen overflow-y-scroll">
+    <div className="flex-1 min-h-screen overflow-y-scroll">
       <Section
         title="Detalle"
         bgColor={cargando ? 'black' : search.data?.data.type === 'EXPENSE' ? 'coral' : 'green'}

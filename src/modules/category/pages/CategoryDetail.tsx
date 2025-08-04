@@ -29,7 +29,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
   const total = search?.data?.data?.transactions?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
 
   return (
-    <div className="flex-1 h-screen overflow-y-scroll">
+    <div className="flex-1 min-h-screen overflow-y-scroll">
       <Section
         title={search?.data?.data?.name ?? 'Categoría'}
         bgColor={search?.data?.data?.color ?? 'coral'}

@@ -27,7 +27,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
   const bgColor = formData.color ? formData.color : 'coral';
 
   return (
-    <div className="flex-1 h-screen overflow-y-screen">
+    <div className="flex-1 min-h-screen overflow-y-screen">
       <Section
         title="Nueva categoría"
         bgColor={bgColor}
