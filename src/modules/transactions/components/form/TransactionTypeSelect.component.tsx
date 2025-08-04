@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TransactionType } from '../../model/transactions.model';
 import { motion } from 'framer-motion';
-import { Button } from '../../../../components/animated/button/Button.component';
 import { ITransactionCardValues } from '../transactionCard/transactionCard.component';
 import { ArrowDownRightCircle, ArrowUpRightCircle, PiggyBank } from 'iconoir-react';
 import colors, { Colors } from '../../../../styles/colors';
