@@ -5,6 +5,23 @@
 main {
   max-width: 420px;
 }
+:root {
+  --font-sora: 'Sora', sans-serif;
+  --font-work-sans: 'Work Sans', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+}
+
+.font-sora {
+  font-family: var(--font-sora);
+}
+
+.font-work-sans {
+  font-family: var(--font-work-sans);
+}
+
+.font-space-mono {
+  font-family: var(--font-space-mono);
+}
 
 /* Scrollbar global delgada y sin contenedor
 ::-webkit-scrollbar {

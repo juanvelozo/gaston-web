@@ -18,6 +18,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sora: ['Sora', 'sans-serif'],
+        'work-sans': ['Work Sans', 'sans-serif'],
+        'space-mono': ['Space Mono', 'monospace'],
+      },
+
       colors: {
         brand: {
           coral: '#FE5F55',
