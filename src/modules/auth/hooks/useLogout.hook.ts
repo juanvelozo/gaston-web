@@ -29,7 +29,7 @@ export const useLogout = () => {
         await new Promise((res) => setTimeout(res, 100));
         await checkAuthStatus?.();
 
-        navigate('/login', { replace: true });
+        navigate('/init', { replace: true });
       }
     };
 

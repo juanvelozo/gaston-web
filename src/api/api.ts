@@ -31,6 +31,9 @@ const api = axios.create({
   baseURL: envConfig[serverEnvironment],
   timeout: 10000,
   withCredentials: true, // Importante: permite enviar cookies HTTP-only automáticamente
+  headers: {
+    'X-enviroment': serverEnvironment,
+  },
 });
 
 // Variables para manejar múltiples requests fallidos simultáneamente
@@ -57,7 +60,7 @@ const clearSession = async () => {
     localStorage.removeItem('user_id');
     try {
       await signOut();
-      window.location.replace('/login');
+      window.location.replace('/init');
       toast.warning('Tu sesión ha expirado o fue cerrada', {
         description: 'Por favor, iniciá sesión nuevamente.',
       });
@@ -113,7 +116,7 @@ api.interceptors.response.use(
     // Si el refresh falla (ej: refresh token expirado o inválido)
     if (is401 && isLogoutEndpoint) {
       console.log('Ya no existe una sesión activa.');
-      window.location.replace('/login');
+      window.location.replace('/init');
       toast.warning('Tu sesión ha expirado o fue cerrada', {
         description: 'Por favor, iniciá sesión nuevamente.',
       });

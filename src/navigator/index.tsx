@@ -20,6 +20,7 @@ import ProfilePage from '../modules/profile/pages';
 import EditProfilePage from '../modules/profile/pages/EditProfile';
 import ProfileChangePasswordPage from '../modules/profile/pages/ChangePassword';
 import Playground from '../modules/dev/pages/Playground';
+import Onboarding from '../modules/auth/pages/Onboarding';
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
         )}
         {/* Rutas públicas */}
         <Route element={<PublicRoute />}>
+          <Route path="/init" element={<Onboarding />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/forgot-password" element={<ForgotPasswordScreen />} />

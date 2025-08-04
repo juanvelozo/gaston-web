@@ -15,7 +15,7 @@ const PrivateRoute = () => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/init" replace />;
   }
 
   return (
