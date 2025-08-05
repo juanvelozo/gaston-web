@@ -32,7 +32,7 @@ const api = axios.create({
   timeout: 10000,
   withCredentials: true, // Importante: permite enviar cookies HTTP-only automáticamente
   headers: {
-    'X-enviroment': serverEnvironment,
+    'X-environment': serverEnvironment,
   },
 });
 
