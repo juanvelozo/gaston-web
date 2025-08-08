@@ -1,6 +1,5 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { SessionActions } from '../components/onboarding/SessionButtons.component';
-import SessionButtons from '../components/onboarding/SessionButtons.component';
 import LoginForm from '../components/session/LoginForm.component';
 import RegisterForm from '../components/session/RegisterForm.component';
 import { Button } from '../../../components/animated/button/Button.component';
@@ -15,8 +14,8 @@ import MoneyLogo from '../../../assets/png/money-logo.png';
 import GastonLogo from '../../../assets/png/Gaston-Logo.png';
 import RotatingCircle from '../../../components/animated/RotatingCircle/RotatingCircle.component';
 import { useNavigate } from 'react-router-dom';
+import { NFIDButton } from '../components/session/NFIDSessionButton.component';
 const Onboarding = (): React.JSX.Element => {
-  const [currentPath, setCurrentPath] = useState<SessionActions>('LOGIN');
   const navigate = useNavigate();
 
   return (
@@ -80,7 +79,8 @@ const Onboarding = (): React.JSX.Element => {
         </div>
       </div>
       <div className="w-1/2 hidden md:flex flex-col justify-between gap-10 p-4">
-        <SessionButtons onChange={setCurrentPath} />
+        <NFIDButton />
+        {/* <SessionButtons onChange={setCurrentPath} />
         <div>
           <div className="p-5 space-y-5">
             <h2 className="text-6xl font-bold text-brand-black">¡Hola!</h2>
@@ -91,7 +91,7 @@ const Onboarding = (): React.JSX.Element => {
         </div>
         <span className="text-center my-4">
           Al usar la plataforma aceptas los términos y condiciones de uso.
-        </span>
+        </span> */}
       </div>
     </div>
   );
