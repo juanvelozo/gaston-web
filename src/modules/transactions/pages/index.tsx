@@ -9,9 +9,7 @@ import Section from '../../../components/animated/section/Section.component';
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 
 export const TransactionsPage = (): React.JSX.Element => {
-  const {
-    allTransactions: { data, loading, error },
-  } = useTransactions();
+  const { allTransactions } = useTransactions();
   const navigate = useNavigate();
 
   return (
@@ -19,21 +17,18 @@ export const TransactionsPage = (): React.JSX.Element => {
       <Section
         title="Transacciones"
         bgColor="green"
-        loading={loading}
+        // loading={loading}
         right={<IconButton icon={<Plus />} onClick={() => navigate('/transactions/create')} />}
         tall
       >
-        {error ? (
-          <ErrorCard
-            title="No se pudo obtener las transacciones"
-            errors={error.response?.data.message}
-          />
+        {false ? (
+          <ErrorCard title="No se pudo obtener las transacciones" errors={[]} />
         ) : (
           <div className="flex flex-col gap-4 ">
             <div className="sticky top-0 z-10 pt-3">
               <Input placeholder="Buscar" />
             </div>
-            <GroupedTransactionList data={data?.data || []} />
+            <GroupedTransactionList data={[]} />
           </div>
         )}
       </Section>

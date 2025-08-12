@@ -1,4 +1,3 @@
-import { IUser } from '../../auth/model/auth.model';
 import { ICategory } from '../../category/model/category.model';
 
 export interface ITransaction {
@@ -10,7 +9,7 @@ export interface ITransaction {
   createdAt: string;
   updatedAt: string;
   userId: number;
-  user: Partial<IUser>;
+  user: any;
   categoryId: number;
   category: ICategory;
 }
