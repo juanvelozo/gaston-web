@@ -12,27 +12,40 @@ import { Button } from '../../../components/animated/button/Button.component';
 import Section from '../../../components/animated/section/Section.component';
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 import colors from '../../../styles/colors';
+import { ICategory } from '../model/category.model';
 
 const CategoryDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
-  const { search, error, loading } = useCategories();
+  const { error, loading } = useCategories();
   const navigate = useNavigate();
 
-  async function fetchCategory() {
-    await search.call(Number(id));
-  }
+  // async function fetchCategory() {
+  //   await search.call(Number(id));
+  // }
 
-  useEffect(() => {
-    fetchCategory();
-  }, []);
+  let search: ICategory | undefined = {
+    id: 0,
+    name: '',
+    description: '',
+    color: 'blue',
+    icon: '',
+    transactions: [],
+    createdAt: '',
+    updatedAt: '',
+    userId: 0,
+  };
 
-  const total = search?.data?.data?.transactions?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
+  // useEffect(() => {
+  //   fetchCategory();
+  // }, []);
+
+  const total = search?.transactions?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
 
   return (
     <div className="flex-1 min-h-screen overflow-y-scroll">
       <Section
-        title={search?.data?.data?.name ?? 'Categoría'}
-        bgColor={search?.data?.data?.color ?? 'coral'}
+        title={search?.name ?? 'Categoría'}
+        bgColor={search?.color ?? 'coral'}
         loading={loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
@@ -45,29 +58,25 @@ const CategoryDetailPage = (): React.JSX.Element => {
         bottom={
           <div className="flex flex-col gap-4 items-center justify-center">
             <IconButton
-              icon={error ? <Xmark /> : search?.data?.data?.icon}
+              icon={error ? <Xmark /> : search?.icon}
               className="w-16 h-16 rounded-2xl text-3xl"
             />
 
             <p className="text-white text-xl font-bold">
-              {error
-                ? 'No disponible'
-                : search?.data?.data?.transactions?.length + ' transacciones'}
+              {error ? 'No disponible' : search?.transactions?.length + ' transacciones'}
             </p>
           </div>
         }
       >
         {error ? (
-          <ErrorCard errors={error.response?.data.message} />
+          <ErrorCard errors={[]} />
         ) : (
           <div className="space-y-4">
             <Card
               title="Descripción"
               body={
                 <p className="text-gray-600 text-sm">
-                  {search?.data?.data?.description.length
-                    ? search?.data?.data?.description
-                    : 'No hay descripción.'}
+                  {search?.description.length ? search?.description : 'No hay descripción.'}
                 </p>
               }
             />
@@ -79,13 +88,13 @@ const CategoryDetailPage = (): React.JSX.Element => {
                   <p className="text-brand-green font-bold text-lg">{formatearMonto(total)}</p>
                 </div>
               }
-              footer={<CategoryStats data={search?.data?.data} />}
+              footer={<CategoryStats data={search} />}
             />
             <Card
               title="Transacciones"
               body={
-                search?.data?.data?.transactions.length ? (
-                  search?.data?.data?.transactions.map((t) => (
+                search?.transactions.length ? (
+                  search?.transactions.map((t) => (
                     <ItemList
                       onClick={() => navigate(`/transactions/${t.id}`)}
                       key={t.id}
@@ -105,7 +114,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
                 )
               }
               footer={
-                !search?.data?.data?.transactions.length ? (
+                !search?.transactions.length ? (
                   <Button onClick={() => navigate(`/transactions/create`)} className="w-full">
                     Crear una transacción
                   </Button>
