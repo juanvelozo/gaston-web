@@ -7,7 +7,6 @@ const EditProfilePage = (): React.JSX.Element => {
   const {
     editar,
 
-    profile: { data, loading: loadingPerfil },
     onSuccess,
   } = useProfile();
 
@@ -16,14 +15,14 @@ const EditProfilePage = (): React.JSX.Element => {
     profile_photo: '',
   });
 
-  useEffect(() => {
-    setFormData({
-      fullName: data?.data.fullName || '',
-      profile_photo: data?.data.profileImage || '',
-    });
-  }, [data]);
+  // useEffect(() => {
+  //   setFormData({
+  //     fullName: data?.data.fullName || '',
+  //     profile_photo: data?.data.profileImage || '',
+  //   });
+  // }, [data]);
 
-  if (loadingPerfil) return <span>Cargando...</span>;
+  // if (loadingPerfil) return <span>Cargando...</span>;
   return (
     <div>
       <span>EditProfile</span>
@@ -39,7 +38,7 @@ const EditProfilePage = (): React.JSX.Element => {
           <input
             type="text"
             value={formData.fullName}
-            defaultValue={data?.data.fullName || ''}
+            defaultValue={''}
             onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
           />
         </label>

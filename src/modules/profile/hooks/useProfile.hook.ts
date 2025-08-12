@@ -1,22 +1,19 @@
 import { useNavigate } from 'react-router-dom';
-import { useEndpoint } from '../../../hooks/useEndpoint';
 import { changePassword, getProfile, updateProfile } from '../api/Profile.api';
 import { IUpdatePasswordDto, IUpdateProfileDto } from '../model/profile.controller';
 
 export const useProfile = () => {
   const navigate = useNavigate();
-  const profile = useEndpoint({ endpoint: getProfile, immediate: true });
-  const edit = useEndpoint({ endpoint: updateProfile });
-  const updatePassword = useEndpoint({ endpoint: changePassword });
+  const profile = getProfile();
 
   async function cambiarContraseña(body: IUpdatePasswordDto) {
-    await updatePassword.call(body).then(() => {
+    await changePassword(body).then(() => {
       // acá va un feedback o algo
     });
   }
 
   async function editar(arg: IUpdateProfileDto) {
-    await edit.call(arg).then(() => {
+    await updateProfile(arg).then(() => {
       // acá va un feedback o algo
     });
   }
@@ -25,15 +22,15 @@ export const useProfile = () => {
     navigate('/profile', { replace: true });
   }
 
-  const mensajes = updatePassword.error?.response?.data.message;
-  const errores = mensajes;
+  const mensajes = [];
+  const errores: never[] = [];
 
   return {
     profile,
     editar,
     cambiarContraseña,
-    submittingEditar: edit.loading,
-    submittingCambiarContraseña: updatePassword.loading,
+    submittingEditar: false,
+    submittingCambiarContraseña: false,
     errores,
     onSuccess,
   };

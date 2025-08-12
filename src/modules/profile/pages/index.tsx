@@ -1,12 +1,8 @@
-import { useProfile } from '../hooks/useProfile.hook';
-import colors from '../../../styles/colors';
 import PerfilSections from '../components/ProfileSections.component';
-import { useLogout } from '../../auth/hooks/useLogout.hook';
 import { Button } from '../../../components/animated/button/Button.component';
 import { LogOut } from 'iconoir-react';
 import Section from '../../../components/animated/section/Section.component';
-import { Avatar } from '../../../components/common/avatar/Avatar.component';
-import { useAuth } from '../../../hooks/useAuth.hook';
+import { useAuth } from '../../auth/hooks/useAuth.hook';
 
 const ProfilePage = (): React.JSX.Element => {
   // const {
