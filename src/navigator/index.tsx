@@ -7,9 +7,6 @@ import PublicRoute from './PublicRoute';
 
 // Página protegida (ejemplo)
 import Dashboard from '../modules/dashboard/pages/Dashboard';
-import RegisterScreen from '../modules/auth/pages/Register';
-import ForgotPasswordScreen from '../modules/auth/pages/ForgotPassword';
-import LoginScreen from '../modules/auth/pages/Login';
 import CreateTransationPage from '../modules/transactions/pages/CreateTransaccion';
 import TransactionDetailPage from '../modules/transactions/pages/TransactionDetail';
 import TransactionsPage from '../modules/transactions/pages';
@@ -32,9 +29,6 @@ const AppRouter = () => {
         {/* Rutas públicas */}
         <Route element={<PublicRoute />}>
           <Route path="/init" element={<Onboarding />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/register" element={<RegisterScreen />} />
-          <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
         </Route>
 
         {/* Rutas protegidas */}
