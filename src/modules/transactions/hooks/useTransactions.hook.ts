@@ -1,31 +1,28 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  createTransaction,
-  deleteTransaction,
-  fetchAllTransactions,
-  getTransactionById,
-  updateTransaction,
-} from '../api/transactions.api';
+
 import { ICreateTransactionDto, IUpdateTransactionDto } from '../model/transaction.controller';
 
+/**
+ * Hook para manejar las transacciones. Acá manejamos la lista, el detalle, la creación, edición y eliminación de transacciones.
+ */
 export const useTransactions = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   let allTransactions: never[] = [];
 
   async function crear(transaction: ICreateTransactionDto) {
-    await createTransaction(transaction).then(() => navigate('/', { replace: true }));
+    // await createTransaction(transaction).then(() => navigate('/', { replace: true }));
   }
   async function editar(id: number, transaction: IUpdateTransactionDto) {
-    await updateTransaction(id, transaction).then(() => navigate('/', { replace: true }));
+    // await updateTransaction(id, transaction).then(() => navigate('/', { replace: true }));
   }
   async function borrar(id: number) {
-    await deleteTransaction(id).then(async () => {
-      if (pathname !== '/') {
-        navigate('/', { replace: true });
-      }
-      await fetchAllTransactions();
-    });
+    // await deleteTransaction(id).then(async () => {
+    //   if (pathname !== '/') {
+    //     navigate('/', { replace: true });
+    //   }
+    //   await fetchAllTransactions();
+    // });
   }
 
   const lastTransactions: never[] = [];
