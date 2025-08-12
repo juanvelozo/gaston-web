@@ -1,27 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  createCategory,
-  deleteCategory,
-  fetchAllCategories,
-  getCategoryById,
-  updateCategory,
-} from '../api/Category.api';
 import { ICreateCategoryDto, IUpdateCategoryDto } from '../model/category.controller';
 
+/**
+ * Este hook engloba todas las acciones que tienen que ver con categorías (Estados, listas, creación, edición y eliminación)
+ */
 export const useCategories = () => {
   const navigate = useNavigate();
 
   let fetchAll;
   async function crear(arg: ICreateCategoryDto) {
-    await createCategory(arg).then(() => {
-      navigate('/categories', { replace: true });
-    });
+    // await createCategory(arg).then(() => {
+    //   navigate('/categories', { replace: true });
+    // });
   }
   async function editar(id: number, arg: IUpdateCategoryDto) {
-    await updateCategory(id, arg);
+    // await updateCategory(id, arg);
   }
   async function borrar(id: number) {
-    await deleteCategory(id);
+    // await deleteCategory(id);
   }
 
   const categoriasPopulares: never[] = [];
