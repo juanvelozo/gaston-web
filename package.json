@@ -4,9 +4,6 @@
   "private": true,
   "dependencies": {
     "@dfinity/auth-client": "^3.1.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "axios": "^1.10.0",
     "browser-image-compression": "^2.0.2",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -31,7 +28,6 @@
     "start:prod": "cross-env REACT_APP_SERVER=prod react-scripts start",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": {
