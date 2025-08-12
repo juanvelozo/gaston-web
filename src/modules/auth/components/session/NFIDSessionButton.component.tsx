@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../../../components/animated/button/Button.component';
 import { Internet } from 'iconoir-react';
-import { useAuth } from '../../../../hooks/useAuth.hook';
+import { useAuth } from '../../hooks/useAuth.hook';
 
 export const NFIDButton: React.FC = () => {
   const { iniciarSesion: handleLogin, cargando } = useAuth();

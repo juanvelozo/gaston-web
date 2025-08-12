@@ -1,7 +1,4 @@
 import { ReactNode } from 'react';
-import { SessionActions } from '../components/onboarding/SessionButtons.component';
-import LoginForm from '../components/session/LoginForm.component';
-import RegisterForm from '../components/session/RegisterForm.component';
 import { Button } from '../../../components/animated/button/Button.component';
 import RotatingText from '../../../components/animated/RotatingText/RotatingText.component';
 import CurvedLoop from '../../../components/animated/CurvedLoop/CurvedLoop.component';
@@ -61,22 +58,6 @@ const Onboarding = (): React.JSX.Element => {
             gastón? ¡Gastón es para vos!
           </Text>
         </div>
-
-        <div className="md:hidden w-full flex flex-col gap-4 p-5">
-          <Button
-            onClick={() => navigate(SessionValues['LOGIN'].route)}
-            className="bg-brand-white text-brand-black hover:bg-white/90 border-none"
-          >
-            Iniciar sesión
-          </Button>
-          <Button
-            onClick={() => navigate(SessionValues['REGISTER'].route)}
-            variant="secondary"
-            className="bg-transparent border-brand-white text-brand-white hover:bg-transparent"
-          >
-            Quiero registrarme
-          </Button>
-        </div>
       </div>
       <div className="w-1/2 hidden md:flex flex-col justify-between gap-10 p-4">
         <NFIDButton />
@@ -95,24 +76,6 @@ const Onboarding = (): React.JSX.Element => {
       </div>
     </div>
   );
-};
-
-type SessionSelector = {
-  [x in SessionActions]: {
-    component: ReactNode;
-    route: string;
-  };
-};
-
-const SessionValues: SessionSelector = {
-  LOGIN: {
-    component: <LoginForm />,
-    route: '/login',
-  },
-  REGISTER: {
-    component: <RegisterForm />,
-    route: '/register',
-  },
 };
 
 export default Onboarding;
