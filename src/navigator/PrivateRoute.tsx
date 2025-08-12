@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/navigation/Navbar/Navbar.component';
 import Wrapper from './Wrapper';
-import { useAuth } from '../hooks/useAuth.hook';
+import { useAuth } from '../modules/auth/hooks/useAuth.hook';
 
 const PrivateRoute = () => {
   const { isAuthenticated } = useAuth();
