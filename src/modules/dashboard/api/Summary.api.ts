@@ -1,17 +1,15 @@
-import api from '../../../api/api';
-import { handleApiError } from '../../../api/apiError';
 import { IGetSummaryResponse } from '../model/dashboard.controller';
 
-export async function getSummary(): Promise<IGetSummaryResponse> {
+export async function getSummary(): Promise<IGetSummaryResponse | undefined> {
   try {
     console.log('Obteniendo resumen...');
 
-    const response = await api.get<IGetSummaryResponse>('/transactions/summary');
+    const response: IGetSummaryResponse | undefined = undefined;
 
     console.log('Resumen obtenido.');
-    return response.data;
+    return response;
   } catch (error) {
     console.log('Hubo un error al obtener resumen', error);
-    handleApiError(error);
+    // handleApiError(error);
   }
 }
