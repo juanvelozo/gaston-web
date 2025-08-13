@@ -22,7 +22,7 @@ const ItemList: FC<IItemList> = ({
     <motion.div
       ref={ref}
       className={cn(
-        'flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-100  w-full justify-between cursor-pointer',
+        'flex items-center gap-4 p-0 sm:p-4 rounded-2xl bg-transparent sm:bg-white sm:border border-gray-100  w-full justify-between cursor-pointer',
         className
       )}
       initial={{ opacity: 0, y: 20, scale: 0.95 }} // Entrada sutil desde abajo, con escala ligeramente pequeña
@@ -35,25 +35,27 @@ const ItemList: FC<IItemList> = ({
         delay: 0.1 * (key ? key / 10 : 0),
       }}
       onClick={onClick}
-      whileTap={{ scale: 0.97 }}
-      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.01 }}
     >
-      <div className="flex items-center justify-start gap-3 min-w-0 flex-1">
+      <div className="flex items-center justify-start gap-1 sm:gap-3 min-w-0 flex-1">
         <div
-          className={`rounded-2xl p-2 sm:p-3 flex items-center justify-center`}
+          className={`rounded-2xl py-2 pr-1 pl-0 sm:p-3 flex items-center justify-center`}
           style={{ backgroundColor: iconBgColor }}
         >
           {icon}
         </div>
         <div className=" flex-1 min-w-0 max-w-fit">
-          <p className="text-base sm:text-lg font-semibold truncate text-ellipsis ">{title}</p>
-          <p className="text-gray-600 text-sm truncate text-ellipsis">{label}</p>
+          <p className="text-sm sm:text-base md:text-lg font-semibold truncate text-ellipsis font-sora">
+            {title}
+          </p>
+          <p className="text-gray-600 text-xs truncate text-ellipsis font-work-sans">{label}</p>
         </div>
       </div>
       <div className="flex items-center gap-2 min-w-0 max-w-[50%] justify-end">
         {valueIcon}
         <p
-          className={`text-base sm:text-lg font-semibold text-ellipsis truncate`}
+          className={`text-sm sm:text-base md:text-lg font-semibold text-ellipsis truncate font-space-mono`}
           style={{ color: valueColor }}
         >
           {value}
