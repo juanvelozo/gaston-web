@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
-  max-width: 420px;
-}
 :root {
   --font-sora: 'Sora', sans-serif;
   --font-work-sans: 'Work Sans', sans-serif;
