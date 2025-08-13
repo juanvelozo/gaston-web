@@ -20,11 +20,13 @@ const PrivateRoute = () => {
 
   return (
     <Wrapper>
-      <div className="relative h-screen flex flex-col flex-1 overflow-x-hidden">
-        <main>
-          <Outlet />
-        </main>
-        {shouldShowNavbar && <Navbar />}
+      <div className="min-h-screen w-full overflow-x-hidden">
+        <div className="relative md:static md:w-full h-screen flex flex-col md:flex-row-reverse flex-1 md:justify-between overflow-x-hidden">
+          <main className="md:w-full">
+            <Outlet />
+          </main>
+          {shouldShowNavbar && <Navbar />}
+        </div>
       </div>
     </Wrapper>
   );
