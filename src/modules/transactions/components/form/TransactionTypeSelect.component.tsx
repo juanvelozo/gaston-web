@@ -12,7 +12,7 @@ export const TRANSACTION_TYPE = {
 } as const;
 
 const TransactionTypeSelect = ({ onChange, value }: ITransactionTypeSelect): React.JSX.Element => {
-  const [selected, setSelected] = useState<TransactionType>(TRANSACTION_TYPE.INCOME);
+  const [selected, setSelected] = useState<TransactionType>(TransactionType.EXPENSE);
 
   function handleChange(value: TransactionType) {
     onChange && onChange(value);
@@ -27,7 +27,7 @@ const TransactionTypeSelect = ({ onChange, value }: ITransactionTypeSelect): Rea
 
   return (
     <div className="flex items-center gap-4">
-      {Object.values(TRANSACTION_TYPE).map((key) => {
+      {Object.values(TransactionType).map((key) => {
         const isActive = selected === key;
         return (
           <div key={key} className="relative w-full flex items-center justify-center">

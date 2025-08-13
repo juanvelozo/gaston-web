@@ -11,8 +11,8 @@ const CategoryStats = ({ data }: ICategoryStats): React.JSX.Element => {
   }
 
   // const ahorros = getTotalByType('SAVING');
-  const gastos = getTotalByType('EXPENSE');
-  const ingresos = getTotalByType('INCOME');
+  const gastos = getTotalByType(TransactionType.EXPENSE);
+  const ingresos = getTotalByType(TransactionType.INCOME);
 
   return (
     <div className="flex justify-around pt-3 border-t border-gray-100">

@@ -10,7 +10,7 @@ import { ITransactionCardValues } from '../components/transactionCard/transactio
 import moment from 'moment';
 import Section from '../../../components/animated/section/Section.component';
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
-import { ITransaction } from '../model/transactions.model';
+import { ITransaction, TransactionType } from '../model/transactions.model';
 
 const TransactionDetailPage = (): React.JSX.Element => {
   const { id } = useParams();
@@ -26,7 +26,7 @@ const TransactionDetailPage = (): React.JSX.Element => {
     title: 'Comida en restaurante',
     description: '',
     amount: 10000,
-    type: 'EXPENSE',
+    type: TransactionType.EXPENSE,
     user: { fullName: 'John Doe', profileImage: '' },
     userId: 1,
     category: {
