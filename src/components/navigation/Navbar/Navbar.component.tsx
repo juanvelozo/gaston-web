@@ -10,12 +10,12 @@ const Navbar = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex m-3 rounded-3xl p-1 sm:p-3 items-center justify-around z-40 max-w-[390px]">
+    <nav className="fixed lg:static bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex lg:flex-col m-3 rounded-3xl lg:rounded-[32px] p-1 sm:p-3 items-center justify-around lg:justify-start z-40 lg:max-w-auto lg:flex-1">
       {Object.values(privateRouteConfig).map((route) => {
         const isActive = currentRoute === route.href;
 
         return (
-          <div key={route.href} className="relative">
+          <div key={route.href} className="relative w-full">
             {isActive && (
               <motion.div
                 layoutId="activeBackground"
@@ -38,7 +38,7 @@ const Navbar = (): React.JSX.Element => {
                 setCurrentRoute(route.href);
                 navigate(route.href);
               }}
-              className={`relative z-10 flex flex-col items-center p-2 sm:p-3 rounded-3xl text-sm sm:text-base transition-colors duration-200 ${
+              className={`relative z-10 w-full flex flex-col sm:flex-row sm:gap-2 justify-center lg:justify-start items-center p-2 sm:p-3 rounded-3xl text-sm sm:text-base transition-colors duration-200 ${
                 isActive ? 'text-white' : 'text-gray-600'
               } focus:ring-0 focus:outline-none`}
             >
