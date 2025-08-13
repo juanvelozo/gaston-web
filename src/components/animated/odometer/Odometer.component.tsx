@@ -140,7 +140,7 @@ export default function OdometerText({ text, className }: { text: string; classN
   // puedes renderizar un estado de carga o null.
   if (!letterHeight) {
     return (
-      <div ref={ref} className={cn('text-3xl flex items-center text-white font-mono', className)}>
+      <div ref={ref} className={cn('text-3xl flex items-center text-white font-space-mono', className)}>
         Cargando odómetro...
       </div>
     );
