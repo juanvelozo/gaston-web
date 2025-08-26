@@ -1,45 +1,29 @@
 import { useNavigate } from 'react-router-dom';
-import { useEndpoint } from '../../../hooks/useEndpoint';
-import {
-  createCategory,
-  deleteCategory,
-  fetchAllCategories,
-  getCategoryById,
-  updateCategory,
-} from '../api/Category.api';
 import { ICreateCategoryDto, IUpdateCategoryDto } from '../model/category.controller';
 
+/**
+ * Este hook engloba todas las acciones que tienen que ver con categorías (Estados, listas, creación, edición y eliminación)
+ */
 export const useCategories = () => {
   const navigate = useNavigate();
-  const fetchAll = useEndpoint({ endpoint: fetchAllCategories, immediate: true });
-  const create = useEndpoint({ endpoint: createCategory });
-  const update = useEndpoint({ endpoint: updateCategory });
-  const eliminate = useEndpoint({ endpoint: deleteCategory });
-  const search = useEndpoint({ endpoint: getCategoryById });
 
+  let fetchAll;
   async function crear(arg: ICreateCategoryDto) {
-    await create.call(arg).then(() => {
-      navigate('/categories', { replace: true });
-    });
+    // await createCategory(arg).then(() => {
+    //   navigate('/categories', { replace: true });
+    // });
   }
   async function editar(id: number, arg: IUpdateCategoryDto) {
-    await update.call(id, arg);
+    // await updateCategory(id, arg);
   }
   async function borrar(id: number) {
-    await eliminate.call(id).then(() => fetchAll.refetch());
+    // await deleteCategory(id);
   }
 
-  const categoriasPopulares = fetchAll.data?.data
-    .map((categoria) => ({
-      ...categoria,
-      cantidadTransacciones: categoria.transactions.length,
-    }))
-    .filter((c) => c.cantidadTransacciones > 0)
-    .sort((a, b) => b.cantidadTransacciones - a.cantidadTransacciones);
+  const categoriasPopulares: never[] = [];
+  const error = false;
 
-  const error = create.error || update.error || eliminate.error || search.error;
+  const loading = false;
 
-  const loading = create.loading || update.loading || eliminate.loading || search.loading;
-
-  return { fetchAll, crear, editar, borrar, search, categoriasPopulares, error, loading };
+  return { fetchAll, crear, editar, borrar, categoriasPopulares, error, loading };
 };

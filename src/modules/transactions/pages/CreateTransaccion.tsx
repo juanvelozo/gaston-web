@@ -34,50 +34,50 @@ const CreateTransationPage = (): React.JSX.Element => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
   const { fetchAll: allCategories } = useCategories();
-  const { crear, submitting, search, cargando, error, editar } = useTransactions();
+  // const { crear, submitting, search, cargando, error, editar } = useTransactions();
   const navigate = useNavigate();
   const { mapToSelectOptions } = useSelectOptions<ICategory>();
 
-  const ocurrioUnError = Boolean(error);
+  // const ocurrioUnError = Boolean(error);
   const estamosEditando = Boolean(id);
   const listaDeCategorías = useMemo(() => {
     return mapToSelectOptions(
-      allCategories.data?.data ?? [],
+      [],
       (cat) => ({
         value: cat.id.toString(),
         label: `${cat.icon} ${cat.name}`,
       }),
       { value: 'null', label: 'Sin categoría' }
     );
-  }, [allCategories.data?.data]);
+  }, []);
 
   const categoríaYaAsignada = (listaDeCategorías as { value: string; label: string }[])?.find(
     (cat) => cat.value === formData.categoryId?.toString()
   );
 
-  async function fetchDetail() {
-    await search.call(Number(id));
-    if (search.data?.data) {
-      setFormData({
-        amount: search?.data?.data?.amount,
-        title: search?.data?.data?.title,
-        description: search?.data?.data?.description,
-        type: search?.data?.data?.type,
-      });
-    }
-  }
+  // async function fetchDetail() {
+  //   await search.call(Number(id));
+  //   if (search.data?.data) {
+  //     setFormData({
+  //       amount: search?.data?.data?.amount,
+  //       title: search?.data?.data?.title,
+  //       description: search?.data?.data?.description,
+  //       type: search?.data?.data?.type,
+  //     });
+  //   }
+  // }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    if (formData.amount === 0) {
-      return;
-    }
-    e.preventDefault();
-    if (estamosEditando) {
-      editar(Number(id), formData);
-    } else {
-      crear(formData);
-    }
-  }
+  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  //   if (formData.amount === 0) {
+  //     return;
+  //   }
+  //   e.preventDefault();
+  //   if (estamosEditando) {
+  //     editar(Number(id), formData);
+  //   } else {
+  //     crear(formData);
+  //   }
+  // }
 
   function enfocarInputMonto() {
     if (inputRef?.current) inputRef?.current?.focus();
@@ -87,35 +87,34 @@ const CreateTransationPage = (): React.JSX.Element => {
     if (inputRef?.current) inputRef?.current?.focus();
   }, []);
 
-  useEffect(() => {
-    if (estamosEditando) fetchDetail();
-  }, [estamosEditando]);
+  // useEffect(() => {
+  //   if (estamosEditando) fetchDetail();
+  // }, [estamosEditando]);
 
-  useEffect(() => {
-    if (search.data?.data) {
-      setFormData({
-        amount: search?.data?.data?.amount,
-        title: search?.data?.data?.title,
-        description: search?.data?.data?.description,
-        type: search?.data?.data?.type,
-        categoryId: search?.data?.data?.category?.id,
-      });
-    }
-  }, [search.data?.data]);
+  // useEffect(() => {
+  //   if (search.data?.data) {
+  //     setFormData({
+  //       amount: search?.data?.data?.amount,
+  //       title: search?.data?.data?.title,
+  //       description: search?.data?.data?.description,
+  //       type: search?.data?.data?.type,
+  //       categoryId: search?.data?.data?.category?.id,
+  //     });
+  //   }
+  // }, [search.data?.data]);
 
   return (
     <div className=" flex-1 min-h-screen overflow-y-scroll">
       {/* Header */}
       <Section
-        // tall
-        loading={cargando}
+        // loading={cargando}
         title={
           estamosEditando ? 'Editar' : formData.type === 'EXPENSE' ? 'Nuevo gasto' : 'Nuevo ingreso'
         }
         bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={
-          ocurrioUnError ? undefined : (
+          false ? undefined : (
             <div
               className="flex flex-col items-center justify-center"
               onClick={() => inputRef.current?.focus()}
@@ -139,8 +138,8 @@ const CreateTransationPage = (): React.JSX.Element => {
           )
         }
       >
-        {ocurrioUnError ? (
-          <ErrorCard errors={error?.response?.data.message} />
+        {false ? (
+          <ErrorCard errors={[]} />
         ) : (
           <Formulario
             buttonProps={{
@@ -150,10 +149,10 @@ const CreateTransationPage = (): React.JSX.Element => {
               },
               iconRight: <FloppyDisk />,
             }}
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
             className="space-y-5"
-            loading={submitting}
-            disabled={submitting || !formData.type || !formData.title}
+            loading={false}
+            disabled={false || !formData.type || !formData.title}
             idleText="Guardar"
           >
             <p>Elegí el tipo de transacción:</p>
@@ -172,7 +171,7 @@ const CreateTransationPage = (): React.JSX.Element => {
             />
             <CustomSelect
               label="Categoría (Opcional)"
-              loading={allCategories.loading}
+              loading={false}
               options={listaDeCategorías}
               onChange={(e) => {
                 const selected = e.value;

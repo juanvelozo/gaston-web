@@ -10,9 +10,6 @@ export default {
       pattern: /toast-base/,
     },
     {
-      pattern: /data-type=.*/,
-    },
-    {
       pattern: /(backdrop|bg|text|border)-(.*)/,
     },
   ],

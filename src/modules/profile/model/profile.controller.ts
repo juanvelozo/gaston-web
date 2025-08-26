@@ -1,5 +1,4 @@
 import { IBaseResponse } from '../../../types/proyect.model';
-import { IUser } from '../../auth/model/auth.model';
 
 /**
  * Editar perfil
@@ -20,4 +19,4 @@ export type IUpdatePasswordDto = {
 /**
  * Perfil
  */
-export type IGetProfileResponse = IBaseResponse<IUser>;
+// export type IGetProfileResponse = IBaseResponse<IUser>;
