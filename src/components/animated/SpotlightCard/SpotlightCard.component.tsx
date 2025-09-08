@@ -17,7 +17,7 @@ interface SpotlightCardProps extends React.PropsWithChildren {
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(255, 255, 255, 0.25)',
+  spotlightColor = 'rgba(255, 255, 255, 0.5)',
   backgroundColor = 'black',
   onClick,
 }) => {
@@ -61,7 +61,7 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{ backgroundColor: colors[backgroundColor] }}
-      className={cn('relative rounded-4xl overflow-hidden p-8', className)}
+      className={cn('relative rounded-[32px] overflow-hidden px-5 py-4 md:p-8', className)}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"

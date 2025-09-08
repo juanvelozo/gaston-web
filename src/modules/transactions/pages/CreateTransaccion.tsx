@@ -18,10 +18,11 @@ import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component'
 import { useSelectOptions } from '../../../hooks/useSelectOptions.hook';
 import { ICategory } from '../../category/model/category.model';
 import { Colors } from '../../../styles/colors';
+import { TransactionType } from '../model/transactions.model';
 
 const CreateTransationPage = (): React.JSX.Element => {
   const [formData, setFormData] = useState<ICreateTransactionDto>({
-    type: 'INCOME',
+    type: TransactionType.EXPENSE,
     amount: 0,
     title: '',
     description: '',

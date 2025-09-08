@@ -14,4 +14,7 @@ export interface ITransaction {
   category: ICategory;
 }
 
-export type TransactionType = 'INCOME' | 'EXPENSE';
+export enum TransactionType {
+  INCOME = 'INCOME',
+  EXPENSE = 'EXPENSE',
+}
