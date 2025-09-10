@@ -10,7 +10,30 @@ const Navbar = (): React.JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed lg:static bottom-0 left-0 right-0 bg-white border-t bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex lg:flex-col m-3 rounded-3xl lg:rounded-[32px] p-1 sm:p-3 items-center justify-around lg:justify-start z-40 lg:max-w-auto lg:flex-1">
+    <nav className="fixed lg:static bottom-0 left-0 right-0 bg-white !md:bg-transparent border-t lg:border-none bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40 border border-gray-200 flex lg:flex-col m-3 lg:m-0 lg:rounded-ss-none lg:rounded-es-none rounded-3xl lg:rounded-[32px] p-1 sm:p-3 items-center justify-around lg:justify-start z-40 lg:max-w-auto lg:flex-1">
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+          pointerEvents: 'none',
+          borderRadius: 'inherit',
+          overflow: 'hidden',
+        }}
+      >
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            background: 'linear-gradient(120deg, #2ad6a3 40%, #f7cdf7 30%, #D95D39 30%)',
+            filter: 'blur(64px)',
+            opacity: 0.8,
+          }}
+        />
+      </div>
       {Object.values(privateRouteConfig).map((route) => {
         const isActive = currentRoute === route.href;
 
