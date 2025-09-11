@@ -25,13 +25,9 @@ const Section = ({
   loading,
 }: SectionProps): React.JSX.Element => {
   return (
-    <div
-      className="min-h-screen w-full flex flex-col transition-colors duration-500 ease-in-out"
-      style={{ background: colors[bgColor] }}
-    >
-      {/* HEADER sticky */}
+    <div className="w-full p-2 md:p-4 min-h-screen gap-4 flex flex-col transition-colors duration-500 ease-in-out mb-20 lg:mb-0">
       <div
-        className="sticky top-0 z-20 px-6 pt-6 pb-4 transition-colors duration-500 ease-in-out "
+        className="p-6 transition-colors duration-500 ease-in-out rounded-3xl"
         style={{ background: colors[bgColor] }}
       >
         <div className="flex justify-between items-center mb-4">
@@ -49,13 +45,7 @@ const Section = ({
       </div>
 
       {/* BODY */}
-      <div
-        className={clsx(
-          'w-full z-30 bg-white rounded-t-3xl px-6 pt-6 pb-32',
-          tall ? 'flex-grow' : 'h-[75%]',
-          'min-h-screen '
-        )}
-      >
+      <div className={clsx('w-full h-full z-30 bg-brand-white rounded-3xl p-6')}>
         {loading ? (
           <div className="w-full h-full flex items-center justify-center p-16">
             <IOSSpinner color={bgColor} />
