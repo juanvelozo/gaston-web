@@ -15,7 +15,7 @@ import { openReceiveModal } from '../../../components/common/ReceiveModal/Receiv
 
 const DashboardPages = (): React.JSX.Element => {
   return (
-    <div className="bg-brand-white space-y-2 !w-full">
+    <div className="bg-brand-white space-y-2 !w-full min-h-screen mb-20 lg:mb-0">
       <div
         className="
           grid gap-4 md:gap-5 p-4 h-screen w-full
