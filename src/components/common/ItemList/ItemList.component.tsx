@@ -22,7 +22,7 @@ const ItemList: FC<IItemList> = ({
     <motion.div
       ref={ref}
       className={cn(
-        'flex items-center gap-4 p-0 sm:p-4 rounded-2xl bg-transparent sm:bg-white sm:border border-gray-100  w-full justify-between cursor-pointer',
+        'flex items-center gap-4 p-0 sm:p-4 rounded-2xl bg-transparent sm:bg-white  w-full justify-between cursor-pointer',
         className
       )}
       initial={{ opacity: 0, y: 20, scale: 0.95 }} // Entrada sutil desde abajo, con escala ligeramente pequeña
