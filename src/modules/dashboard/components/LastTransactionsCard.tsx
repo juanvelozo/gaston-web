@@ -4,6 +4,7 @@ import { Label, Text, Title } from '../../../components/common/Typography/Typogr
 import { formatearMonto } from '../../../types/formatearMonto';
 import ItemList from '../../../components/common/ItemList/ItemList.component';
 import { TransactionType } from '../../transactions/model/transactions.model';
+import { ITransactionCardValues } from '../../transactions/components/transactionCard/transactionCard.component';
 import { ReactNode } from 'react';
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from 'iconoir-react';
 import moment from 'moment';
@@ -11,7 +12,7 @@ import colors from '../../../styles/colors';
 import { Button } from '../../../components/animated/button/Button.component';
 
 const LastTransactions = (): React.JSX.Element => {
-  const { lastTransactions, error } = useTransactions();
+  const { transactions, error } = useTransactions();
   return (
     <ResponsiveCard
       backgroundColor="white"
@@ -34,15 +35,17 @@ const LastTransactions = (): React.JSX.Element => {
       </div>
 
       <div className="space-y-1 w-full">
-        {lastTransactions.map((transaction) => (
+        {transactions.slice(0, 5).map((transaction) => (
           <ItemList
             key={transaction.id}
             title={transaction.title}
-            icon={Values[transaction.type].icon}
-            label={moment(transaction?.createdAt).format('DD/MM/YYYY [a las] HH:mm')}
-            value={formatearMonto(transaction.amount)}
+            icon={ITransactionCardValues[transaction.type].icon}
+            label={moment(Number(transaction?.createdAt) / 1_000_000).format(
+              'DD/MM/YYYY [a las] HH:mm'
+            )}
+            value={formatearMonto(Number(transaction.amount))}
             className="!bg-transparent !border-0 !px-0 !py-1"
-            valueColor={Values[transaction.type].color}
+            valueColor={ITransactionCardValues[transaction.type].color}
           />
         ))}
       </div>
