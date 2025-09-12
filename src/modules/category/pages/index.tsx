@@ -10,7 +10,7 @@ import Input from '../../../components/common/input/input.component';
 import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component';
 
 const CategoriesPage = (): React.JSX.Element => {
-  const { fetchAll, categoriasPopulares } = useCategories();
+  const { fetch, categories } = useCategories();
   const navigate = useNavigate();
 
   let data: any[] | undefined = [];

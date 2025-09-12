@@ -21,18 +21,22 @@ const CreateCategoryPage = (): React.JSX.Element => {
   });
   const [mostrarEmojis, setMostrarEmojis] = useState<boolean>(false);
 
-  const { crear, loading } = useCategories();
+  const { create, submitting } = useCategories();
   const navigate = useNavigate();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    if (!formData.name) {
+    if (!formData.name || !formData.color) {
       return;
     }
     e.preventDefault();
     // if (estamosEditando) {
     //   editar(Number(id), formData);
     // } else {
-    crear(formData);
+    create({
+      ...formData,
+      color: formData.color, // Ya sabemos que no es undefined por la validación
+      description: formData.description || '', // Convertir undefined a string vacío
+    });
     // }
   }
 
@@ -65,7 +69,7 @@ const CreateCategoryPage = (): React.JSX.Element => {
           onSubmit={handleSubmit}
           buttonProps={{
             style: { background: bgColor },
-            loading: loading,
+            loading: submitting,
           }}
           disabled={formData.name === '' || !formData.color || formData.icon === ''}
         >

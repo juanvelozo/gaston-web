@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useCategories } from '../hooks/useCategories.hook';
 import { useEffect } from 'react';
 import { ArrowLeft, EditPencil, Trash, Xmark } from 'iconoir-react';
+import { Principal } from '@dfinity/principal';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import ItemList from '../../../components/common/ItemList/ItemList.component';
 import Card from '../../../components/common/Card/Card.component';
@@ -24,28 +25,28 @@ const CategoryDetailPage = (): React.JSX.Element => {
   // }
 
   let search: ICategory | undefined = {
-    id: 0,
+    id: BigInt(0),
     name: '',
     description: '',
     color: 'blue',
     icon: '',
     transactions: [],
-    createdAt: '',
-    updatedAt: '',
-    userId: 0,
+    createdAt: BigInt(0),
+    updatedAt: BigInt(0),
+    userId: Principal.anonymous(),
   };
 
   // useEffect(() => {
   //   fetchCategory();
   // }, []);
 
-  const total = search?.transactions?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
+  const total = search?.transactions?.reduce((acc, curr) => acc + Number(curr.amount), 0) || 0;
 
   return (
     <div className="flex-1 min-h-screen overflow-y-scroll">
       <Section
         title={search?.name ?? 'Categoría'}
-        bgColor={search?.color ?? 'coral'}
+        bgColor={(search?.color as any) ?? 'coral'}
         loading={loading}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         right={
@@ -93,15 +94,15 @@ const CategoryDetailPage = (): React.JSX.Element => {
             <Card
               title="Transacciones"
               body={
-                search?.transactions.length ? (
+                search?.transactions?.length ? (
                   search?.transactions.map((t) => (
                     <ItemList
                       onClick={() => navigate(`/transactions/${t.id}`)}
                       key={t.id}
-                      index={t.id}
+                      index={Number(t.id)}
                       icon={ITransactionCardValues[t.type].icon}
                       title={t.title}
-                      value={formatearMonto(t.amount)}
+                      value={formatearMonto(Number(t.amount))}
                       valueColor={ITransactionCardValues[t.type].color}
                       iconBgColor={ITransactionCardValues[t.type].color + '40'}
                     />
@@ -114,7 +115,7 @@ const CategoryDetailPage = (): React.JSX.Element => {
                 )
               }
               footer={
-                !search?.transactions.length ? (
+                !search?.transactions?.length ? (
                   <Button onClick={() => navigate(`/transactions/create`)} className="w-full">
                     Crear una transacción
                   </Button>
