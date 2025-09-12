@@ -11,9 +11,9 @@ const CategoryCard = ({ data }: ICategoryCard): React.JSX.Element => {
       icon={data?.icon}
       title={data?.name}
       label={
-        data?.transactions?.length > 1
+        (data?.transactions?.length ?? 0) > 1
           ? `${data?.transactions?.length} transacciones`
-          : data?.transactions?.length
+          : (data?.transactions?.length ?? 0) > 0
             ? `${data?.transactions?.length} transacción`
             : 'No hay transacciones en esta categoría'
       }

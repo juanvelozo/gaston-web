@@ -7,7 +7,7 @@ const CategoryStats = ({ data }: ICategoryStats): React.JSX.Element => {
   function getTotalByType(type: TransactionType) {
     return data?.transactions
       ?.filter((t) => t.type === type)
-      .reduce((acc, curr) => acc + curr.amount, 0);
+      .reduce((acc, curr) => acc + Number(curr.amount), 0);
   }
 
   // const ahorros = getTotalByType('SAVING');
