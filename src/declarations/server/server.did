@@ -1,0 +1,104 @@
+type UpdateTransactionRequest = 
+ record {
+   amount: opt nat;
+   categoryId: opt nat;
+   description: opt text;
+   id: nat;
+   title: opt text;
+   "type": opt TransactionType;
+ };
+type UpdateCategoryRequest = 
+ record {
+   color: opt text;
+   description: opt text;
+   icon: opt text;
+   id: nat;
+   name: opt text;
+ };
+type TransferResult = 
+ variant {
+   err: text;
+   ok: nat;
+ };
+type TransactionType = 
+ variant {
+   EXPENSE;
+   INCOME;
+ };
+type Transaction = 
+ record {
+   amount: nat;
+   categoryId: opt nat;
+   createdAt: int;
+   description: opt text;
+   id: nat;
+   title: text;
+   "type": TransactionType;
+   updatedAt: int;
+   userId: principal;
+ };
+type Result_3 = 
+ variant {
+   err: ApiError;
+   ok: vec Category;
+ };
+type Result_2 = 
+ variant {
+   err: ApiError;
+   ok: vec Transaction;
+ };
+type Result_1 = 
+ variant {
+   err: ApiError;
+   ok: Category;
+ };
+type Result = 
+ variant {
+   err: ApiError;
+   ok: Transaction;
+ };
+type CreateTransactionRequest = 
+ record {
+   amount: nat;
+   categoryId: opt nat;
+   description: opt text;
+   title: text;
+   "type": TransactionType;
+ };
+type CreateCategoryRequest = 
+ record {
+   color: text;
+   description: text;
+   icon: text;
+   name: text;
+ };
+type Category = 
+ record {
+   color: text;
+   createdAt: int;
+   description: text;
+   icon: text;
+   id: nat;
+   name: text;
+   updatedAt: int;
+   userId: principal;
+ };
+type ApiError = 
+ variant {
+   BadRequest: text;
+   InternalError: text;
+   NotFound;
+   Unauthorized;
+ };
+service : {
+  createCategory: (request: CreateCategoryRequest) -> (Result_1);
+  createTransaction: (request: CreateTransactionRequest) -> (Result);
+  getBalance: (p: principal) -> (nat);
+  getCategories: () -> (Result_3);
+  getFee: () -> (nat);
+  getTransactions: () -> (Result_2);
+  sendICP: (from_principal: principal, to_principal: principal, amount:
+   nat) -> (TransferResult);
+  updateCategory: (request: UpdateCategoryRequest) -> (Result_1);
+  updateTransaction: (request: UpdateTransactionRequest) -> (Result);
+}
