@@ -25,9 +25,11 @@ const TransactionTypeSelect = ({ onChange, value }: ITransactionTypeSelect): Rea
     }
   }, [value]);
 
+  const transactionTypes: TransactionType[] = [TransactionType.EXPENSE, TransactionType.INCOME];
+
   return (
     <div className="flex items-center gap-4">
-      {Object.values(TransactionType).map((key) => {
+      {transactionTypes.map((key) => {
         const isActive = selected === key;
         return (
           <div key={key} className="relative w-full flex items-center justify-center">
@@ -72,25 +74,21 @@ interface ITransactionTypeSelect {
 }
 
 export type TypeConfig = {
-  [x in TransactionType]: {
+  [key in TransactionType]: {
     color: keyof Colors;
     icon: (isSelected: boolean) => React.ReactNode;
   };
 };
 
 export const ITransactionButtonValues: TypeConfig = {
-  EXPENSE: {
+  [TransactionType.EXPENSE]: {
     color: 'coral',
-    icon: (isSelected) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#FE5F55'} />,
+    icon: (isSelected: boolean) => <ArrowDownRightCircle color={isSelected ? '#fff' : '#FE5F55'} />,
   },
-  INCOME: {
+  [TransactionType.INCOME]: {
     color: 'green',
-    icon: (isSelected) => <ArrowUpRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
+    icon: (isSelected: boolean) => <ArrowUpRightCircle color={isSelected ? '#fff' : '#3A7D44'} />,
   },
-  // SAVING: {
-  //   color: '#F2AF29',
-  //   icon: (isSelected) => <PiggyBank color={isSelected ? '#fff' : '#F2AF29'} />,
-  // },
 };
 
 export default TransactionTypeSelect;

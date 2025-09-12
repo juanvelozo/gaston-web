@@ -12,9 +12,9 @@ const TransactionCard = ({ data }: ITransactionCard): React.JSX.Element => {
       onClick={() => navigate(`/transactions/${data.id}`)}
       icon={ITransactionCardValues[data.type].icon}
       title={data.title}
-      index={data.id}
+      index={Number(data.id)}
       label={data?.category?.name ?? 'Sin categoría'}
-      value={formatearMonto(data.amount)}
+      value={formatearMonto(Number(data.amount))}
       valueColor={ITransactionCardValues[data.type].color}
       iconBgColor={ITransactionCardValues[data.type].color + '40'}
     />
@@ -25,7 +25,7 @@ interface ITransactionCard {
 }
 
 export type TypeConfig = {
-  [x in TransactionType]: {
+  [key in TransactionType]: {
     icon?: ReactNode;
     title: string;
     color?: string;
@@ -33,9 +33,16 @@ export type TypeConfig = {
 };
 
 export const ITransactionCardValues: TypeConfig = {
-  EXPENSE: { title: 'Gasto', icon: <ArrowDownRightCircle color="#FE5F55" />, color: '#FE5F55' },
-  INCOME: { title: 'Ingreso', icon: <ArrowUpRightCircle color="#3A7D44" />, color: '#3A7D44' },
-  // SAVING: { title: 'Ahorro', icon: <PiggyBank color="#F2AF29" />, color: '#F2AF29' },
+  [TransactionType.EXPENSE]: {
+    title: 'Gasto',
+    icon: <ArrowDownRightCircle color="#FE5F55" />,
+    color: '#FE5F55',
+  },
+  [TransactionType.INCOME]: {
+    title: 'Ingreso',
+    icon: <ArrowUpRightCircle color="#3A7D44" />,
+    color: '#3A7D44',
+  },
 };
 
 export default TransactionCard;
