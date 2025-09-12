@@ -1,13 +1,12 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useTransition } from 'react';
 import { useTransactions } from '../hooks/useTransactions.hook';
-import { ICreateTransactionDto } from '../model/transaction.controller';
+import { CreateTransactionRequest, TransactionType } from '../model/transactions.model';
+import { ITransactionButtonValues } from '../components/form/TransactionTypeSelect.component';
 import { useCategories } from '../../category/hooks/useCategories.hook';
 import { ArrowLeft, FloppyDisk } from 'iconoir-react';
 import IconButton from '../../../components/common/iconButton/iconButton.component';
 import Input from '../../../components/common/input/input.component';
-import TransactionTypeSelect, {
-  ITransactionButtonValues,
-} from '../components/form/TransactionTypeSelect.component';
+import TransactionTypeSelect from '../components/form/TransactionTypeSelect.component';
 import CustomSelect from '../../../components/common/select/select.component';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -18,15 +17,14 @@ import ErrorCard from '../../../components/common/ErrorCard/ErrorCard.component'
 import { useSelectOptions } from '../../../hooks/useSelectOptions.hook';
 import { ICategory } from '../../category/model/category.model';
 import { Colors } from '../../../styles/colors';
-import { TransactionType } from '../model/transactions.model';
 
 const CreateTransationPage = (): React.JSX.Element => {
-  const [formData, setFormData] = useState<ICreateTransactionDto>({
+  const [formData, setFormData] = useState({
     type: TransactionType.EXPENSE,
     amount: 0,
     title: '',
     description: '',
-    categoryId: undefined,
+    categoryId: undefined as bigint | undefined,
   });
   const [bgColor, setBgColor] = useState<keyof Colors>(
     ITransactionButtonValues[formData.type].color
@@ -34,51 +32,51 @@ const CreateTransationPage = (): React.JSX.Element => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const { id } = useParams();
-  const { fetchAll: allCategories } = useCategories();
-  // const { crear, submitting, search, cargando, error, editar } = useTransactions();
+  const { categories, loading: categoriesLoading, fetch: fetchCategories } = useCategories();
+  const { create, submitting, error } = useTransactions();
   const navigate = useNavigate();
   const { mapToSelectOptions } = useSelectOptions<ICategory>();
+  const [isPending, startTransition] = useTransition();
 
-  // const ocurrioUnError = Boolean(error);
+  const ocurrioUnError = Boolean(error);
   const estamosEditando = Boolean(id);
+
   const listaDeCategorías = useMemo(() => {
     return mapToSelectOptions(
-      [],
+      categories,
       (cat) => ({
         value: cat.id.toString(),
         label: `${cat.icon} ${cat.name}`,
       }),
       { value: 'null', label: 'Sin categoría' }
     );
-  }, []);
+  }, [categories, mapToSelectOptions]);
 
   const categoríaYaAsignada = (listaDeCategorías as { value: string; label: string }[])?.find(
     (cat) => cat.value === formData.categoryId?.toString()
   );
 
-  // async function fetchDetail() {
-  //   await search.call(Number(id));
-  //   if (search.data?.data) {
-  //     setFormData({
-  //       amount: search?.data?.data?.amount,
-  //       title: search?.data?.data?.title,
-  //       description: search?.data?.data?.description,
-  //       type: search?.data?.data?.type,
-  //     });
-  //   }
-  // }
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    if (formData.amount === 0 || !formData.title.trim()) {
+      return;
+    }
+    e.preventDefault();
 
-  // function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-  //   if (formData.amount === 0) {
-  //     return;
-  //   }
-  //   e.preventDefault();
-  //   if (estamosEditando) {
-  //     editar(Number(id), formData);
-  //   } else {
-  //     crear(formData);
-  //   }
-  // }
+    const transactionData: CreateTransactionRequest = {
+      categoryId: formData.categoryId || undefined,
+      title: formData.title,
+      type: formData.type,
+      description: formData.description,
+      amount: BigInt(formData.amount * 100), // Convertir a centavos
+    };
+
+    startTransition(async () => {
+      const result = await create(transactionData);
+      if (result) {
+        navigate('/transactions');
+      }
+    });
+  }
 
   function enfocarInputMonto() {
     if (inputRef?.current) inputRef?.current?.focus();
@@ -88,34 +86,28 @@ const CreateTransationPage = (): React.JSX.Element => {
     if (inputRef?.current) inputRef?.current?.focus();
   }, []);
 
-  // useEffect(() => {
-  //   if (estamosEditando) fetchDetail();
-  // }, [estamosEditando]);
-
-  // useEffect(() => {
-  //   if (search.data?.data) {
-  //     setFormData({
-  //       amount: search?.data?.data?.amount,
-  //       title: search?.data?.data?.title,
-  //       description: search?.data?.data?.description,
-  //       type: search?.data?.data?.type,
-  //       categoryId: search?.data?.data?.category?.id,
-  //     });
-  //   }
-  // }, [search.data?.data]);
+  useEffect(() => {
+    startTransition(() => {
+      fetchCategories();
+    });
+  }, [fetchCategories]);
 
   return (
     <div className=" flex-1 min-h-screen overflow-y-scroll">
       {/* Header */}
       <Section
-        // loading={cargando}
+        loading={submitting || isPending}
         title={
-          estamosEditando ? 'Editar' : formData.type === 'EXPENSE' ? 'Nuevo gasto' : 'Nuevo ingreso'
+          estamosEditando
+            ? 'Editar'
+            : formData.type === TransactionType.EXPENSE
+              ? 'Nuevo gasto'
+              : 'Nuevo ingreso'
         }
         bgColor={bgColor}
         left={<IconButton icon={<ArrowLeft />} onClick={() => navigate(-1)} />}
         bottom={
-          false ? undefined : (
+          ocurrioUnError ? undefined : (
             <div
               className="flex flex-col items-center justify-center"
               onClick={() => inputRef.current?.focus()}
@@ -139,8 +131,8 @@ const CreateTransationPage = (): React.JSX.Element => {
           )
         }
       >
-        {false ? (
-          <ErrorCard errors={[]} />
+        {ocurrioUnError ? (
+          <ErrorCard errors={[error || 'Error desconocido']} />
         ) : (
           <Formulario
             buttonProps={{
@@ -150,10 +142,12 @@ const CreateTransationPage = (): React.JSX.Element => {
               },
               iconRight: <FloppyDisk />,
             }}
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className="space-y-5"
-            loading={false}
-            disabled={false || !formData.type || !formData.title}
+            loading={submitting || isPending}
+            disabled={
+              submitting || isPending || !formData.type || !formData.title || formData.amount === 0
+            }
             idleText="Guardar"
           >
             <p>Elegí el tipo de transacción:</p>
@@ -172,13 +166,13 @@ const CreateTransationPage = (): React.JSX.Element => {
             />
             <CustomSelect
               label="Categoría (Opcional)"
-              loading={false}
+              loading={categoriesLoading}
               options={listaDeCategorías}
               onChange={(e) => {
                 const selected = e.value;
                 setFormData((prev) => ({
                   ...prev,
-                  categoryId: selected === '' || selected === 'null' ? undefined : Number(selected),
+                  categoryId: selected === '' || selected === 'null' ? undefined : BigInt(selected),
                 }));
               }}
               value={categoríaYaAsignada || null}
