@@ -11,3 +11,17 @@ export interface ICustomError {
   error: string;
   statusCode: number;
 }
+
+/**
+ * Tipos de error de la API del canister
+ */
+export type ApiError =
+  | { NotFound: null }
+  | { Unauthorized: null }
+  | { InternalError: string }
+  | { BadRequest: string };
+
+/**
+ * Tipo genérico para resultados de la API del canister
+ */
+export type Result<T> = { ok: T } | { err: ApiError };
